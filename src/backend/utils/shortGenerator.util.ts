@@ -1,3 +1,3 @@
-import shortid from 'shortid';
+import { nanoid } from 'nanoid';
 
-export default () => shortid.generate();
+export default () => nanoid();
