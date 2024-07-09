@@ -1,7 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { ObjectId } from 'mongodb';
-import urlModel from '../models/urlModel';
-import shortIdGenerator from '../utils/shortIdGenerator';
+import urlModel from '../models/url.model';
+import shortIdGenerator from '../utils/shortGenerator.util';
 
 interface CreateShortUrlBody {
   originalUrl: string;
@@ -43,7 +42,6 @@ export async function redirectToOriginalUrl(
       return reply.code(404).send({ message: 'URL not found' });
     }
 
-    // Update access count and log request details
     await urlCollection.updateOne(
       { shortUrl },
       {

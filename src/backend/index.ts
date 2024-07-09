@@ -1,15 +1,17 @@
 import Fastify from 'fastify';
 import dotenv from 'dotenv';
 
+import URLRoute from './routes/url.route';
+// import DBConnector from './utils/db-connector.util';
+
 dotenv.config();
 
 const fastify = Fastify({
   logger: true,
 });
 
-fastify.get('/', async (req, res) => {
-  return { hello: 'world' };
-});
+//fastify.register(DBConnector);
+fastify.register(URLRoute);
 
 const start = async () => {
   try {

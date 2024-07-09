@@ -1,6 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { ObjectId } from 'mongodb';
-import userModel from '../models/userModel';
+import userModel from '../models/user.model';
 
 interface RegisterBody {
   username: string;
