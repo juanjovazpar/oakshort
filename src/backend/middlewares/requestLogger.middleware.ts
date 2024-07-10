@@ -1,18 +1,27 @@
-import { FastifyRequest, FastifyReply, DoneFuncWithErrOrRes } from 'fastify';
+import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify';
 import geoip from 'geoip-lite';
 
-async function requestLogger(
-  req: FastifyRequest,
-  reply: FastifyReply,
-  done: DoneFuncWithErrOrRes
-) {
-  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  const geo = geoip.lookup(ip as string);
+interface RequestDetails {
+  ip: string;
+  userAgent: string;
+  referrer: string;
+  geoLocation: string;
+  timestamp: Date;
+  deviceType: string;
+  language: string;
+}
 
-  req.requestDetails = {
+async function requestLogger(req: FastifyRequest, _: FastifyReply) {
+  const ip = req.headers['x-forwarded-for'] || req.ip;
+  const geo = geoip.lookup(ip as string);
+  const referrer = Array.isArray(req.headers['referer'])
+    ? req.headers['referer'][0]
+    : req.headers['referer'] || req.headers['referrer'] || '';
+
+  const requestDetails: RequestDetails = {
     ip: ip as string,
     userAgent: req.headers['user-agent'] || '',
-    referrer: req.headers['referer'] || req.headers['referrer'] || '',
+    referrer: referrer as string,
     geoLocation: geo ? `${geo.city}, ${geo.region}, ${geo.country}` : 'N/A',
     timestamp: new Date(),
     deviceType: /mobile|tablet/i.test(req.headers['user-agent'] || '')
@@ -21,7 +30,10 @@ async function requestLogger(
     language: req.headers['accept-language'] || '',
   };
 
-  done();
+  (req as any).requestDetails = requestDetails;
+
+  // Store calls
+  console.log('RequestDetails:', requestDetails);
 }
 
-module.exports = requestLogger;
+export default requestLogger;

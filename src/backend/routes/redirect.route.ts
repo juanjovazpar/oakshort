@@ -1,11 +1,15 @@
 import { FastifyInstance } from 'fastify';
-import { register, login } from '../controllers/auth.controller';
 
 import { ROUTES } from './routes';
 
 async function routes(fastify: FastifyInstance) {
-  fastify.post(ROUTES.SIGNUP, register);
-  fastify.post(ROUTES.SIGNIN, login);
+  fastify.get('/', async () => {
+    return { hello: 'world' };
+  });
+
+  fastify.get(ROUTES.REDIRECT, async () => {
+    return { hello: 'redirect' };
+  });
 }
 
 export default routes;

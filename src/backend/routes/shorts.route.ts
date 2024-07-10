@@ -1,14 +1,23 @@
 import { FastifyInstance } from 'fastify';
 
-import {
-  createShortUrl,
-  redirectToOriginalUrl,
-} from 'backend/controllers/url.controller';
-import authMiddleware from 'backend/middlewares/auth.middleware';
+import { ROUTES } from './routes';
 
 async function routes(fastify: FastifyInstance) {
-  fastify.post('/shorten', { preHandler: authMiddleware }, createShortUrl);
-  fastify.get('/:shortUrl', redirectToOriginalUrl);
+  fastify.get(ROUTES.SHORTS, async () => {
+    return { hello: 'shorts' };
+  });
+
+  fastify.post(ROUTES.SHORTS, async () => {
+    return { hello: 'shorts' };
+  });
+
+  fastify.patch(ROUTES.SHORTS, async () => {
+    return { hello: 'shorts' };
+  });
+
+  fastify.delete(ROUTES.SHORTS, async () => {
+    return { hello: 'shorts' };
+  });
 }
 
 /* async function routes(fastify: FastifyInstance) {
