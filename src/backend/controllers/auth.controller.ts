@@ -18,7 +18,7 @@ export async function register(
   const { username, password } = req.body;
 
   try {
-    const userCollection = await userModel(req.fastify);
+    const userCollection = new userModel(req.fastify);
     const hashedPassword = await req.fastify.bcrypt.hash(password);
     await userCollection.insertOne({ username, password: hashedPassword });
     reply.code(201).send({ message: 'User registered successfully' });
@@ -35,7 +35,7 @@ export async function login(
   const { username, password } = req.body;
 
   try {
-    const userCollection = await userModel(req.fastify);
+    const userCollection = await new userModel(req.fastify);
     const user = await userCollection.findOne({ username });
 
     if (!user || !(await req.fastify.bcrypt.compare(password, user.password))) {

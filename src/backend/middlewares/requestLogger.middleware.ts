@@ -32,7 +32,7 @@ async function requestLogger(req: FastifyRequest, _: FastifyReply) {
 
   (req as any).requestDetails = requestDetails;
 
-  // Store calls
+  // TODO: Store calls
   console.log('RequestDetails:', requestDetails);
 }
 

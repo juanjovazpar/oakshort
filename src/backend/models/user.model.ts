@@ -17,4 +17,4 @@ schema.methods.comparePassword = function (candidatePassword: string) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('User', schema);
