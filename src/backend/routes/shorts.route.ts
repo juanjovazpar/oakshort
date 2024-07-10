@@ -1,26 +1,25 @@
-import { FastifyInstance } from 'fastify';
-
+import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { ROUTES } from './routes';
-import getShort from '../utils/shortGenerator.util';
+import { Short } from '../models/short.model';
 
-async function routes(fastify: FastifyInstance) {
-  if (!fastify.mongo || !fastify.mongo.db) {
+async function routes(app: FastifyInstance) {
+  if (!app.mongo || !app.mongo.db) {
     throw new Error('MongoDB plugin not registered');
   }
 
-  const collection = fastify.mongo.db.collection('shorts');
+  const collection = app.mongo.db?.collection('shorts');
 
   type ShortBody = {
     Body: {
-      url: string;
+      target: string;
     };
   };
 
   const shortBodyJsonSchema = {
     type: 'object',
-    required: ['url'],
+    required: ['target'],
     properties: {
-      url: { type: 'string' },
+      target: { type: 'string' },
     },
   };
 
@@ -28,32 +27,42 @@ async function routes(fastify: FastifyInstance) {
     body: shortBodyJsonSchema,
   };
 
-  fastify.get(ROUTES.SHORTS, async () => {
-    const payload = await collection.find().toArray();
+  app.get(ROUTES.SHORTS, async () => {
+    const documents = await collection.find({}).toArray();
 
     return {
-      msg:
-        payload.length === 0
-          ? 'No shorts found'
-          : `${payload.length} shorts found`,
-      payload,
+      message: `${documents.length} shorts in the collection`,
+      payload: documents,
     };
   });
 
-  fastify.post<ShortBody>(ROUTES.SHORTS, { schema }, async (request) => {
-    const payload = await collection.insertOne({
-      target: request.body.url,
-      short: getShort(),
-    });
+  app.post<ShortBody>(
+    ROUTES.SHORTS,
+    { schema },
+    async (request: FastifyRequest<ShortBody>, reply: FastifyReply) => {
+      try {
+        const { target } = request.body;
+        const newShort = new Short({ target });
 
-    return { msg: 'Short created', payload };
-  });
+        await newShort.save();
 
-  fastify.patch(ROUTES.SHORTS, async () => {
+        return reply.send({ message: 'Short created', payload: newShort });
+      } catch (error: any) {
+        if (error.code === 11000) {
+          return reply
+            .status(400)
+            .send({ error: 'Short ID already exists. Please try again.' });
+        }
+        return reply.status(500).send(error);
+      }
+    }
+  );
+
+  app.patch(ROUTES.SHORTS, async () => {
     return { hello: 'shorts' };
   });
 
-  fastify.delete(ROUTES.SHORTS, async () => {
+  app.delete(ROUTES.SHORTS, async () => {
     return { hello: 'shorts' };
   });
 }
