@@ -48,15 +48,12 @@ const envOptions = {
 };
 
 mongoose
-  .connect(process.env.DB_URI!, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  } as mongoose.ConnectOptions)
+  .connect(process.env.DB_URI!)
   .then(() => {
-    console.log('Connected to MongoDB');
+    app.log.info('Connected to MongoDB');
   })
   .catch((error) => {
-    console.error('Error  connecting to MongoDB:', error);
+    app.log.info('Error  connecting to MongoDB:', error);
   });
 
 app.register(fastifyEnv, envOptions);

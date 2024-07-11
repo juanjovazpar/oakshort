@@ -3,10 +3,6 @@ import { ROUTES } from './routes';
 import { createShortUrl, getShorts } from '../controllers/shorts.controller';
 
 async function routes(app: FastifyInstance) {
-  if (!app.mongo || !app.mongo.db) {
-    throw new Error('MongoDB plugin not registered');
-  }
-
   type ShortBody = {
     Body: {
       target: string;
