@@ -1,20 +1,60 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+import mongoose, { Document, Schema, Model, CallbackError } from 'mongoose';
 
-const schema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-});
+interface IUser extends Document {
+  email: string;
+  password: string;
+  name: string;
+  isVerified: boolean;
+  verificationToken?: string;
+  resetPasswordToken?: string;
+  last_login?: Date;
+}
 
-schema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, 10);
+const userSchema: Schema<IUser> = new Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+    },
+    name: {
+      type: String,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    isVerified: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+    },
+    resetPasswordToken: {
+      type: String,
+    },
+    last_login: {
+      type: Date,
+    },
+  },
+  { timestamps: true, versionKey: false }
+);
+
+userSchema.pre<IUser>('save', async function (next) {
+  try {
+    if (!this.name) {
+      this.name = 'Unknown';
+    }
+
+    next();
+  } catch (error) {
+    next(error as CallbackError);
   }
-  next();
 });
 
-schema.methods.comparePassword = function (candidatePassword: string) {
-  return bcrypt.compare(candidatePassword, this.password);
-};
+const User: Model<IUser> = mongoose.model<IUser>('User', userSchema);
 
-export default mongoose.model('User', schema);
+export { User, IUser };

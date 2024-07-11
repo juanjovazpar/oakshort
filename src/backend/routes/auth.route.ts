@@ -1,11 +1,11 @@
 import { FastifyInstance } from 'fastify';
-import { register, login } from '../controllers/auth.controller';
+import { signup, signin } from '../controllers/auth.controller';
 
 import { ROUTES } from './routes';
 
 async function routes(fastify: FastifyInstance) {
-  fastify.post(ROUTES.SIGNUP, register);
-  fastify.post(ROUTES.SIGNIN, login);
+  fastify.post(ROUTES.SIGNUP, signup);
+  fastify.post(ROUTES.SIGNIN, signin);
 }
 
 export default routes;

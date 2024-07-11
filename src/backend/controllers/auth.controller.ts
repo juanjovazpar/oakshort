@@ -1,54 +1,115 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import userModel from '../models/user.model';
+import { IUser, User } from '../models/user.model';
+import { isValidEmail } from '../utils/isValidEmail.util';
+import {
+  isValidPassword,
+  PASSWORD_RULES,
+  hashPassword,
+  comparePasswords,
+} from '../utils/password.util';
+import { getHashedToken, getJWToken } from '../utils/token.util';
 
-interface RegisterBody {
-  username: string;
+interface SignupBody {
+  email: string;
   password: string;
 }
 
-interface LoginBody {
-  username: string;
-  password: string;
-}
+type ShortBody = {
+  Body: {
+    target: string;
+  };
+};
 
-export async function register(
-  req: FastifyRequest<{ Body: RegisterBody }>,
-  reply: FastifyReply
-) {
-  const { username, password } = req.body;
+const shortBodyJsonSchema = {
+  type: 'object',
+  required: ['email', 'password'],
+  properties: {
+    email: { type: 'string' },
+    password: { type: 'string' },
+  },
+};
 
+const schema = {
+  body: shortBodyJsonSchema,
+};
+
+export const signup = async (
+  req: FastifyRequest<{ Body: SignupBody }>,
+  res: FastifyReply
+): Promise<Response | void> => {
   try {
-    const userCollection = new userModel(req.fastify);
-    const hashedPassword = await req.fastify.bcrypt.hash(password);
-    await userCollection.insertOne({ username, password: hashedPassword });
-    reply.code(201).send({ message: 'User registered successfully' });
-  } catch (error) {
-    req.fastify.log.error(error);
-    reply.code(500).send({ message: 'Error registering user' });
-  }
-}
+    const { email, password } = req.body;
+    const existingUser: IUser | null = await User.findOne({ email });
 
-export async function login(
-  req: FastifyRequest<{ Body: LoginBody }>,
-  reply: FastifyReply
-) {
-  const { username, password } = req.body;
-
-  try {
-    const userCollection = await new userModel(req.fastify);
-    const user = await userCollection.findOne({ username });
-
-    if (!user || !(await req.fastify.bcrypt.compare(password, user.password))) {
-      return reply.code(401).send({ message: 'Invalid credentials' });
+    if (existingUser) {
+      res.status(400).send({ message: 'Email already exists' });
+      return;
     }
 
-    const token = req.fastify.jwt.sign(
-      { userId: user._id.toString() },
-      { expiresIn: '1h' }
-    );
-    reply.send({ token });
+    if (!isValidEmail(email)) {
+      res.status(400).send({ message: 'Invalid email format' });
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      res
+        .status(400)
+        .send({ message: `Invalid password format. ${PASSWORD_RULES}` });
+      return;
+    }
+
+    const hashedPassword = await hashPassword(password);
+    const hashedVerificationToken = await getHashedToken();
+    const newUser: IUser = new User({
+      email,
+      password: hashedPassword,
+      verificationToken: hashedVerificationToken,
+    });
+
+    await newUser.save();
+    // await sendVerificationMail(email, hashedVerificationToken);
+
+    res.status(201).send({ message: 'User created successfully' });
   } catch (error) {
-    req.fastify.log.error(error);
-    reply.code(500).send({ message: 'Error logging in' });
+    req.log.error(error);
+    res.status(500).send({ message: 'Error creating user', error });
   }
-}
+};
+
+export const signin = async (
+  req: FastifyRequest<{ Body: SignupBody }>,
+  res: FastifyReply
+): Promise<Response | void> => {
+  try {
+    const { email, password } = req.body;
+    const user: IUser | null = await User.findOne({ email });
+
+    if (!user) {
+      res
+        .status(401)
+        .send({ message: 'Authentication failed. User not found.' });
+      return;
+    }
+
+    const passwordMatch: boolean = await comparePasswords(
+      password,
+      user.password
+    );
+
+    if (!passwordMatch) {
+      res
+        .status(401)
+        .send({ message: 'Authentication failed. Incorrect password.' });
+      return;
+    }
+    const token: string = getJWToken('user', user.email);
+
+    user.last_login = new Date();
+    await user.save();
+
+    res.status(200).send({ token, userId: user._id, email: user.email });
+  } catch (error) {
+    req.log.error(error);
+    res.status(500).send({ message: 'Error during login', error });
+  }
+};

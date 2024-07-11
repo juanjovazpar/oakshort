@@ -3,8 +3,6 @@ import getShort from '../utils/shortGenerator.util';
 
 interface IShort extends Document {
   owner: string;
-  created: Date;
-  updated: Date;
   firstRead: Date;
   lastRead: Date;
   active: boolean;
@@ -37,18 +35,19 @@ function edit(this: any, next: (err?: Error) => void) {
   });
 }
 
-const schema: Schema<IShort> = new mongoose.Schema({
-  owner: { type: String, required: true },
-  created: { type: Date, required: true, default: Date.now() },
-  updated: { type: Date },
-  firstRead: { type: Date },
-  lastRead: { type: Date },
-  active: { type: Boolean, required: true, default: true },
-  target: { type: String, required: true },
-  short: { type: String, required: true, unique: true, index: true },
-  accessCount: { type: Number, default: 0 },
-  deleted: { type: Boolean, required: true, default: false },
-});
+const schema: Schema<IShort> = new mongoose.Schema(
+  {
+    owner: { type: String, required: true },
+    firstRead: { type: Date },
+    lastRead: { type: Date },
+    active: { type: Boolean, required: true, default: true },
+    target: { type: String, required: true },
+    short: { type: String, required: true, unique: true, index: true },
+    accessCount: { type: Number, default: 0 },
+    deleted: { type: Boolean, required: true, default: false },
+  },
+  { timestamps: true, versionKey: false }
+);
 
 schema.pre('findOneAndUpdate', edit.bind(schema));
 schema.pre('updateOne', edit.bind(schema));

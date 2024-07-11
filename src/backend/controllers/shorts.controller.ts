@@ -1,34 +1,37 @@
-import { FastifyRequest, FastifyReply, FastifyInstance } from 'fastify';
-import urlModel from '../models/short.model';
-import shortIdGenerator from '../utils/shortGenerator.util';
+import { FastifyRequest, FastifyReply } from 'fastify';
+import { Short } from '../models/short.model';
 
 interface CreateShortUrlBody {
-  originalUrl: string;
+  target: string;
 }
 
 export async function createShortUrl(
   req: FastifyRequest<{ Body: CreateShortUrlBody }>,
-  reply: FastifyReply
+  res: FastifyReply
 ) {
-  const { originalUrl } = req.body;
-  const shortUrl = shortIdGenerator();
-
   try {
-    const urlCollection = await urlModel(req.server as FastifyInstance);
-    await urlCollection.insertOne({
-      originalUrl,
-      shortUrl,
-      accessCount: 0,
-      requestLogs: [],
-    });
-    reply.code(201).send({ originalUrl, shortUrl });
-  } catch (error) {
+    const { target } = req.body;
+    const newShort = new Short({ target });
+
+    await newShort.save();
+
+    return res.send({ message: 'Short created', payload: newShort });
+  } catch (error: any) {
     req.log.error(error);
-    reply.code(500).send({ message: 'Error creating short URL' });
+    return res.status(500).send(error);
   }
 }
 
-export async function redirectToOriginalUrl(
+export async function getShorts() {
+  const documents = await Short.find({});
+
+  return {
+    message: `${documents.length} shorts in the collection`,
+    payload: documents,
+  };
+}
+
+/* export async function redirectToOriginalUrl(
   req: FastifyRequest,
   reply: FastifyReply
 ) {
@@ -55,4 +58,4 @@ export async function redirectToOriginalUrl(
     req.log.error(error);
     reply.code(500).send({ message: 'Error redirecting to original URL' });
   }
-}
+} */

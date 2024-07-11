@@ -1,13 +1,11 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyInstance } from 'fastify';
 import { ROUTES } from './routes';
-import { Short } from '../models/short.model';
+import { createShortUrl, getShorts } from '../controllers/shorts.controller';
 
 async function routes(app: FastifyInstance) {
   if (!app.mongo || !app.mongo.db) {
     throw new Error('MongoDB plugin not registered');
   }
-
-  const collection = app.mongo.db?.collection('shorts');
 
   type ShortBody = {
     Body: {
@@ -27,42 +25,15 @@ async function routes(app: FastifyInstance) {
     body: shortBodyJsonSchema,
   };
 
-  app.get(ROUTES.SHORTS, async () => {
-    const documents = await collection.find({}).toArray();
+  app.get(ROUTES.SHORTS, getShorts);
 
-    return {
-      message: `${documents.length} shorts in the collection`,
-      payload: documents,
-    };
-  });
+  app.post<ShortBody>(ROUTES.SHORTS, { schema }, createShortUrl);
 
-  app.post<ShortBody>(
-    ROUTES.SHORTS,
-    { schema },
-    async (request: FastifyRequest<ShortBody>, reply: FastifyReply) => {
-      try {
-        const { target } = request.body;
-        const newShort = new Short({ target });
-
-        await newShort.save();
-
-        return reply.send({ message: 'Short created', payload: newShort });
-      } catch (error: any) {
-        if (error.code === 11000) {
-          return reply
-            .status(400)
-            .send({ error: 'Short ID already exists. Please try again.' });
-        }
-        return reply.status(500).send(error);
-      }
-    }
-  );
-
-  app.patch(ROUTES.SHORTS, async () => {
+  app.patch<ShortBody>(ROUTES.SHORT, async () => {
     return { hello: 'shorts' };
   });
 
-  app.delete(ROUTES.SHORTS, async () => {
+  app.delete(ROUTES.SHORT, async () => {
     return { hello: 'shorts' };
   });
 }

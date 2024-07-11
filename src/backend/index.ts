@@ -3,13 +3,14 @@ import { AddressInfo } from 'net';
 import cors from '@fastify/cors';
 import dotenv from 'dotenv';
 import fastifyEnv from '@fastify/env';
-import mongodb from '@fastify/mongodb';
 import jwt from '@fastify/jwt';
 import bcrypt from 'fastify-bcrypt';
 
+import AuthRoute from './routes/auth.route';
 import RedirectRoute from './routes/redirect.route';
 import ShortsRoute from './routes/shorts.route';
 import requestLogger from './middlewares/requestLogger.middleware';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ declare module 'fastify' {
   interface FastifyInstance {
     config: {
       PORT: string;
-      MONGO_URI: string;
+      DB_URI: string;
       JWT_SECRET: string;
     };
   }
@@ -35,7 +36,7 @@ const schema = {
       type: 'string',
       default: '3000',
     },
-    MONGO_URI: { type: 'string' },
+    DB_URI: { type: 'string' },
     JWT_SECRET: { type: 'string' },
   },
 };
@@ -46,13 +47,21 @@ const envOptions = {
   data: process.env,
 };
 
+mongoose
+  .connect(process.env.DB_URI!, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  } as mongoose.ConnectOptions)
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('Error  connecting to MongoDB:', error);
+  });
+
 app.register(fastifyEnv, envOptions);
 app.register(cors);
 app.register(bcrypt, { saltWorkFactor: 12 });
-app.register(mongodb, {
-  forceClose: true,
-  url: process.env.MONGO_URI,
-});
 app.register(jwt, {
   secret: process.env.JWT_SECRET!,
 });
@@ -61,6 +70,7 @@ app.register(jwt, {
 app.addHook('preHandler', requestLogger);
 
 // Routes
+app.register(AuthRoute);
 app.register(ShortsRoute);
 app.register(RedirectRoute);
 
