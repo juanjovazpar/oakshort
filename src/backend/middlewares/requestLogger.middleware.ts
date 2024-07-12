@@ -1,4 +1,4 @@
-import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify';
+import { FastifyRequest, FastifyReply } from 'fastify';
 import geoip from 'geoip-lite';
 
 interface RequestDetails {
@@ -11,7 +11,7 @@ interface RequestDetails {
   language: string;
 }
 
-async function requestLogger(req: FastifyRequest, _: FastifyReply) {
+export const requestLogger = async (req: FastifyRequest, _: FastifyReply) => {
   const ip = req.headers['x-forwarded-for'] || req.ip;
   const geo = geoip.lookup(ip as string);
   const referrer = Array.isArray(req.headers['referer'])
@@ -33,7 +33,5 @@ async function requestLogger(req: FastifyRequest, _: FastifyReply) {
   (req as any).requestDetails = requestDetails;
 
   // TODO: Store calls
-  console.log('RequestDetails:', requestDetails);
-}
-
-export default requestLogger;
+  // console.log('RequestDetails:', requestDetails);
+};

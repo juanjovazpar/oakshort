@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
-import getShort from '../utils/shortGenerator.util';
+import { idGenerator } from '../utils/idGenerator';
+import { isValidURL } from '../utils/url.utils';
 
 interface IShort extends Document {
   owner: string;
@@ -37,32 +38,28 @@ function edit(this: any, next: (err?: Error) => void) {
 
 const schema: Schema<IShort> = new mongoose.Schema(
   {
-    owner: { type: String, required: true },
+    // owner: { type: String, required: true },
     firstRead: { type: Date },
     lastRead: { type: Date },
     active: { type: Boolean, required: true, default: true },
-    target: { type: String, required: true },
-    short: { type: String, required: true, unique: true, index: true },
+    target: {
+      type: String,
+      required: [true, 'Target is required'],
+      validate: {
+        validator: isValidURL,
+        message: (props) => `${props.value} is not a valid URL`,
+      },
+    },
+    short: { type: String, unique: true, index: true, default: idGenerator },
     accessCount: { type: Number, default: 0 },
     deleted: { type: Boolean, required: true, default: false },
   },
   { timestamps: true, versionKey: false }
 );
 
-schema.pre('findOneAndUpdate', edit.bind(schema));
+// schema.pre('findOneAndUpdate', edit.bind(schema));
 schema.pre('updateOne', edit.bind(schema));
 schema.pre('updateMany', edit.bind(schema));
-schema.pre('save', function (next) {
-  if (!this.isNew) {
-    return edit.bind(schema)(next);
-  }
-
-  if (!this.short) {
-    this.short = getShort();
-  }
-
-  next();
-});
 
 const Short: Model<IShort> = mongoose.model<IShort>('Short', schema);
 

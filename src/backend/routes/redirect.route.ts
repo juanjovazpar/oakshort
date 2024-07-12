@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { IShort, Short } from '../models/short.model';
+import { Short } from '../models/short.model';
 import { ROUTES, PARAMS } from './routes';
 
 async function routes(fastify: FastifyInstance) {
@@ -11,13 +11,17 @@ async function routes(fastify: FastifyInstance) {
           [PARAMS.SHORTEN_ID]: string;
         };
 
-        const { target } = (await Short.findByIdAndUpdate(
+        const short = await Short.findByIdAndUpdate(
           { short: shorten_id },
-          { $inc: { accessCount: 1 } },
+          { $inc: { accessCount: 1, lastRead: Date.now() } },
           { new: true }
-        )) as IShort;
+        );
 
-        reply.redirect(target);
+        if (!short || !short.target || !short.active || short.deleted) {
+          return reply.status(404).send({ message: 'Invalid short' });
+        }
+
+        reply.redirect(short.target);
       } catch (error: any) {
         return reply.status(500).send(error);
       }

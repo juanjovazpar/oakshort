@@ -5,12 +5,13 @@ import dotenv from 'dotenv';
 import fastifyEnv from '@fastify/env';
 import jwt from '@fastify/jwt';
 import bcrypt from 'fastify-bcrypt';
+import mongoose from 'mongoose';
 
 import AuthRoute from './routes/auth.route';
 import RedirectRoute from './routes/redirect.route';
 import ShortsRoute from './routes/shorts.route';
-import requestLogger from './middlewares/requestLogger.middleware';
-import mongoose from 'mongoose';
+import { errorHandler } from './middlewares/error.middleware';
+import { requestLogger } from './middlewares/requestLogger.middleware';
 
 dotenv.config();
 
@@ -64,7 +65,8 @@ app.register(jwt, {
 });
 
 // Middlewares
-app.addHook('preHandler', requestLogger);
+// app.addHook('preHandler', requestLogger);
+app.setErrorHandler(errorHandler);
 
 // Routes
 app.register(AuthRoute);

@@ -2,30 +2,24 @@ import { FastifyInstance } from 'fastify';
 import { ROUTES } from './routes';
 import { createShortUrl, getShorts } from '../controllers/shorts.controller';
 
-async function routes(app: FastifyInstance) {
-  type ShortBody = {
-    Body: {
-      target: string;
-    };
-  };
-
-  const shortBodyJsonSchema = {
-    type: 'object',
-    required: ['target'],
-    properties: {
-      target: { type: 'string' },
+const opts = {
+  schema: {
+    body: {
+      type: 'object',
+      required: ['target'],
+      properties: {
+        target: { type: 'string' },
+      },
     },
-  };
+  },
+};
 
-  const schema = {
-    body: shortBodyJsonSchema,
-  };
-
+async function routes(app: FastifyInstance) {
   app.get(ROUTES.SHORTS, getShorts);
 
-  app.post<ShortBody>(ROUTES.SHORTS, { schema }, createShortUrl);
+  app.post(ROUTES.SHORTS, opts, createShortUrl);
 
-  app.patch<ShortBody>(ROUTES.SHORT, async () => {
+  app.patch(ROUTES.SHORT, async () => {
     return { hello: 'shorts' };
   });
 
