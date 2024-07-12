@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 import AuthRoute from './routes/auth.route';
 import RedirectRoute from './routes/redirect.route';
 import ShortsRoute from './routes/shorts.route';
+import ShortRoute from './routes/shorts.route';
 import { errorHandler } from './middlewares/error.middleware';
 import { requestLogger } from './middlewares/requestLogger.middleware';
 
@@ -70,6 +71,7 @@ app.setErrorHandler(errorHandler);
 
 // Routes
 app.register(AuthRoute);
+app.register(ShortRoute);
 app.register(ShortsRoute);
 app.register(RedirectRoute);
 

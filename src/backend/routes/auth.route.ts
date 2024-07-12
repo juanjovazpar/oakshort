@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
 
 import { signup, signin } from '../controllers/auth.controller';
-import { ROUTES } from './routes';
+import { ROUTES } from '../routes';
 
 const opts = {
   schema: {

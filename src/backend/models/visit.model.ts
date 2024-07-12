@@ -11,14 +11,35 @@ interface IVisit extends Document {
 
 const schema: Schema<IVisit> = new mongoose.Schema(
   {
-    ip: { type: String, required: true },
-    userAgent: { type: String, required: true },
-    referrer: { type: String, required: true },
-    geoLocation: { type: String, required: true },
-    deviceType: { type: String, required: true },
-    language: { type: String, required: true },
+    ip: {
+      type: String,
+      required: true,
+    },
+    userAgent: {
+      type: String,
+      required: true,
+    },
+    referrer: {
+      type: String,
+      required: true,
+    },
+    geoLocation: {
+      type: String,
+      required: true,
+    },
+    deviceType: {
+      type: String,
+      required: true,
+    },
+    language: {
+      type: String,
+      required: true,
+    },
   },
-  { timestamps: true, versionKey: false }
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
 
 const blockUpdates = (next: (err?: Error) => void) =>

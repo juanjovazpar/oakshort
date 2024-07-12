@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import { ROUTES } from './routes';
-import { createShortUrl, getShorts } from '../controllers/shorts.controller';
+import { ROUTES } from '../routes';
+import { createShort, getShorts } from '../controllers/shorts.controller';
 
 const opts = {
   schema: {
@@ -16,16 +16,7 @@ const opts = {
 
 async function routes(app: FastifyInstance) {
   app.get(ROUTES.SHORTS, getShorts);
-
-  app.post(ROUTES.SHORTS, opts, createShortUrl);
-
-  app.patch(ROUTES.SHORT, async () => {
-    return { hello: 'shorts' };
-  });
-
-  app.delete(ROUTES.SHORT, async () => {
-    return { hello: 'shorts' };
-  });
+  app.post(ROUTES.SHORTS, opts, createShort);
 }
 
 export default routes;

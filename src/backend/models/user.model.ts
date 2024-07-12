@@ -51,7 +51,10 @@ const schema: Schema<IUser> = new Schema(
       type: Date,
     },
   },
-  { timestamps: true, versionKey: false }
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
 
 schema.pre<IUser>('save', async function (next) {

@@ -39,9 +39,17 @@ function edit(this: any, next: (err?: Error) => void) {
 const schema: Schema<IShort> = new mongoose.Schema(
   {
     // owner: { type: String, required: true },
-    firstRead: { type: Date },
-    lastRead: { type: Date },
-    active: { type: Boolean, required: true, default: true },
+    firstRead: {
+      type: Date,
+    },
+    lastRead: {
+      type: Date,
+    },
+    active: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
     target: {
       type: String,
       required: [true, 'Target is required'],
@@ -50,11 +58,26 @@ const schema: Schema<IShort> = new mongoose.Schema(
         message: (props) => `${props.value} is not a valid URL`,
       },
     },
-    short: { type: String, unique: true, index: true, default: idGenerator },
-    accessCount: { type: Number, default: 0 },
-    deleted: { type: Boolean, required: true, default: false },
+    short: {
+      type: String,
+      unique: true,
+      index: true,
+      default: idGenerator,
+    },
+    accessCount: {
+      type: Number,
+      default: 0,
+    },
+    deleted: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
-  { timestamps: true, versionKey: false }
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
 
 // schema.pre('findOneAndUpdate', edit.bind(schema));

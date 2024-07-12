@@ -36,7 +36,7 @@ export const signup = async (
     await newUser.save();
     // await sendVerificationMail(email, hashedVerificationToken);
 
-    res.status(201).send({ message: 'User created successfully' });
+    res.send({ message: 'User created successfully' });
   } catch (error: any) {
     res.send(error);
   }

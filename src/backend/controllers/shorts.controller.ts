@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { Short } from '../models/short.model';
 
-interface CreateShortUrlBody {
+interface CreateShortBody {
   target: string;
 }
 
@@ -18,8 +18,8 @@ export const getShorts = async (req: FastifyRequest, res: FastifyReply) => {
   }
 };
 
-export const createShortUrl = async (
-  req: FastifyRequest<{ Body: CreateShortUrlBody }>,
+export const createShort = async (
+  req: FastifyRequest<{ Body: CreateShortBody }>,
   res: FastifyReply
 ) => {
   try {
