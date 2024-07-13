@@ -2,45 +2,42 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 
 import { Short } from '../models/short.model';
 
-export const updateShort = async (
-  req: FastifyRequest<{ Body: any }>,
-  res: FastifyReply
-) => {
+export const updateShort = async (req: FastifyRequest, res: FastifyReply) => {
   try {
-    const { _id } = (req as RequestProduct).product;
-    const { name, description } = req.body;
+    // @ts-ignore
+    const { _id } = req.short;
+    // @ts-ignore
+    const { target } = req.body;
 
-    const short = await Short.findByIdAndUpdate(
-      _id,
-      { name, description },
-      { new: true }
-    );
+    const short = await Short.findByIdAndUpdate(_id, { target }, { new: true });
 
     if (!short) {
       res.send({ message: 'Short not found' });
       return;
     }
 
-    res.send(short);
+    res.send({ payload: short });
   } catch (error) {
     res.send(error);
   }
 };
 
 export const deleteShort = async (
-  req: FastifyRequest<{ Body: any }>,
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { _id } = (req as RequestProduct).product;
-    const short = await Short.findByIdAndDelete(_id);
+    // @ts-ignore
+    const { _id } = req.short;
+
+    const short = await Short.findByIdAndUpdate(_id, { deleted: true });
 
     if (!short) {
       res.send({ message: 'Short not found' });
       return;
     }
 
-    res.send(short);
+    res.send({ message: 'Short deleted' });
   } catch (error) {
     res.send(error);
   }

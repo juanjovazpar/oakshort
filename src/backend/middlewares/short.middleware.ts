@@ -2,21 +2,22 @@ import { FastifyRequest, FastifyReply, DoneFuncWithErrOrRes } from 'fastify';
 import { Short } from '../models/short.model';
 import { PARAMS } from '../routes';
 
-export const getShortById = async (
+export const shortMiddleware = async (
   req: FastifyRequest,
-  res: FastifyReply,
-  done: DoneFuncWithErrOrRes
+  res: FastifyReply
 ) => {
-  const id = req.params[PARAMS.SHORTEN_ID];
+  const { shorten_id } = req.params as {
+    [PARAMS.SHORTEN_ID]: string;
+  };
 
   try {
-    const entity = await Short.findOne({ _id: id });
+    const entity = await Short.findOne({ _id: shorten_id });
     if (!entity) {
-      return res.code(404).send({ error: 'Entity not found' });
+      return res.code(404).send({ error: 'Short not found' });
     }
 
+    // @ts-ignore
     req.short = entity;
-    done();
   } catch (error) {
     res.send(error);
   }

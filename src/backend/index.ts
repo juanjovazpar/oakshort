@@ -1,4 +1,4 @@
-import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
+import Fastify from 'fastify';
 import { AddressInfo } from 'net';
 import cors from '@fastify/cors';
 import dotenv from 'dotenv';
@@ -10,10 +10,11 @@ import mongoose from 'mongoose';
 import AuthRoute from './routes/auth.route';
 import RedirectRoute from './routes/redirect.route';
 import ShortsRoute from './routes/shorts.route';
-import ShortRoute from './routes/shorts.route';
+import ShortRoute from './routes/short.route';
 import { errorHandler } from './middlewares/error.middleware';
 import { requestLogger } from './middlewares/requestLogger.middleware';
 import { authMiddleware } from './middlewares/auth.middleware';
+import { shortMiddleware } from './middlewares/short.middleware';
 
 dotenv.config();
 
@@ -24,6 +25,8 @@ declare module 'fastify' {
       DB_URI: string;
       JWT_SECRET: string;
     };
+    authenticate: typeof authMiddleware;
+    short: typeof shortMiddleware;
   }
 }
 
@@ -67,15 +70,16 @@ app.register(jwt, {
 });
 
 // Middlewares
+app.decorate('authenticate', authMiddleware);
+app.decorate('short', shortMiddleware);
 // app.addHook('preHandler', requestLogger);
 app.setErrorHandler(errorHandler);
-// app.decorate('authenticate', authMiddleware);
 
 // Routes
 app.register(AuthRoute);
 app.register(ShortsRoute);
+app.register(ShortRoute);
 app.register(RedirectRoute);
-/* app.register(ShortRoute);*/
 
 const start = async () => {
   try {

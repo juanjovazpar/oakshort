@@ -35,7 +35,6 @@ export const signup = async (
     });
 
     await newUser.save();
-    // await sendVerificationMail(email, hashedVerificationToken);
 
     res.send({ message: 'User created successfully' });
   } catch (error: any) {
@@ -71,6 +70,7 @@ export const signin = async (
     }
 
     const token: string = getJWToken({ email, id: user._id });
+    // TODO use fastify plugin: const token = req.jwt.sign({ email, id: user._id });
 
     user.last_login = new Date();
     await user.save();
