@@ -1,4 +1,4 @@
-import Fastify from 'fastify';
+import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import { AddressInfo } from 'net';
 import cors from '@fastify/cors';
 import dotenv from 'dotenv';
@@ -13,6 +13,7 @@ import ShortsRoute from './routes/shorts.route';
 import ShortRoute from './routes/shorts.route';
 import { errorHandler } from './middlewares/error.middleware';
 import { requestLogger } from './middlewares/requestLogger.middleware';
+import { authMiddleware } from './middlewares/auth.middleware';
 
 dotenv.config();
 
@@ -68,12 +69,13 @@ app.register(jwt, {
 // Middlewares
 // app.addHook('preHandler', requestLogger);
 app.setErrorHandler(errorHandler);
+// app.decorate('authenticate', authMiddleware);
 
 // Routes
 app.register(AuthRoute);
-app.register(ShortRoute);
 app.register(ShortsRoute);
 app.register(RedirectRoute);
+/* app.register(ShortRoute);*/
 
 const start = async () => {
   try {

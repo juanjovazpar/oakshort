@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
+
 import { idGenerator } from '../utils/idGenerator';
 import { isValidURL } from '../utils/url.utils';
 
@@ -38,7 +39,9 @@ function edit(this: any, next: (err?: Error) => void) {
 
 const schema: Schema<IShort> = new mongoose.Schema(
   {
-    // owner: { type: String, required: true },
+    owner: {
+      type: String,
+    },
     firstRead: {
       type: Date,
     },

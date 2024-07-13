@@ -1,4 +1,4 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyRequest, FastifyReply, DoneFuncWithErrOrRes } from 'fastify';
 import geoip from 'geoip-lite';
 
 interface RequestDetails {
@@ -11,7 +11,11 @@ interface RequestDetails {
   language: string;
 }
 
-export const requestLogger = async (req: FastifyRequest, _: FastifyReply) => {
+export const requestLogger = async (
+  req: FastifyRequest,
+  _: FastifyReply,
+  done: DoneFuncWithErrOrRes
+) => {
   const ip = req.headers['x-forwarded-for'] || req.ip;
   const geo = geoip.lookup(ip as string);
   const referrer = Array.isArray(req.headers['referer'])
@@ -34,4 +38,5 @@ export const requestLogger = async (req: FastifyRequest, _: FastifyReply) => {
 
   // TODO: Store calls
   // console.log('RequestDetails:', requestDetails);
+  done();
 };

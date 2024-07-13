@@ -1,14 +1,12 @@
-import { FastifyRequest, FastifyReply, DoneFuncWithErrOrRes } from 'fastify';
+import { FastifyRequest, FastifyReply } from 'fastify';
 
 export const authMiddleware = async (
   req: FastifyRequest,
-  reply: FastifyReply,
-  done: DoneFuncWithErrOrRes
+  res: FastifyReply
 ) => {
   try {
     await req.jwtVerify();
-    done();
   } catch (err) {
-    reply.send(err);
+    res.send(err);
   }
 };

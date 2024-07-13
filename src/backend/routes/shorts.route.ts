@@ -1,4 +1,5 @@
 import { FastifyInstance } from 'fastify';
+
 import { ROUTES } from '../routes';
 import { createShort, getShorts } from '../controllers/shorts.controller';
 

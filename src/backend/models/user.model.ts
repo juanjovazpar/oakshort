@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema, Model, CallbackError } from 'mongoose';
+
 import { isValidEmail } from '../utils/email';
 import { getHashedToken } from '../utils/token.util';
-import { isValidPassword, PASSWORD_RULES } from '../utils/password.util';
 
 interface IUser extends Document {
   email: string;
@@ -41,11 +41,9 @@ const schema: Schema<IUser> = new Schema(
     },
     verificationToken: {
       type: String,
-      unique: true,
     },
     resetPasswordToken: {
       type: String,
-      unique: true,
     },
     last_login: {
       type: Date,

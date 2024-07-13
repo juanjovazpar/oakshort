@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
+
 import { Short } from '../models/short.model';
 
 export const updateShort = async (
@@ -27,7 +28,7 @@ export const updateShort = async (
 };
 
 export const deleteShort = async (
-  _: FastifyRequest<{ Body: any }>,
+  req: FastifyRequest<{ Body: any }>,
   res: FastifyReply
 ): Promise<void> => {
   try {

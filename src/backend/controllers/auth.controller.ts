@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
+
 import { IUser, User } from '../models/user.model';
 import {
   hashPassword,
@@ -68,12 +69,13 @@ export const signin = async (
         .send({ message: 'Authentication failed. Incorrect password.' });
       return;
     }
-    const token: string = getJWToken('user', user.email);
+
+    const token: string = getJWToken({ email, id: user._id });
 
     user.last_login = new Date();
     await user.save();
 
-    res.send({ token, userId: user._id, email: user.email });
+    res.send({ token });
   } catch (error) {
     res.send(error);
   }

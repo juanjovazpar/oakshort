@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
+
 import { Short } from '../models/short.model';
 import { PARAMS } from '../routes';
 
@@ -8,9 +9,11 @@ export const redirectShort = async (req: FastifyRequest, res: FastifyReply) => {
       [PARAMS.SHORTEN_ID]: string;
     };
 
-    const short = await Short.findByIdAndUpdate(
+    console.log('SHORTEN_ID', req.params);
+
+    const short = await Short.findOneAndUpdate(
       { short: shorten_id },
-      { $inc: { accessCount: 1, lastRead: Date.now() } },
+      { $inc: { accessCount: 1 }, lastRead: Date.now() },
       { new: true }
     );
 

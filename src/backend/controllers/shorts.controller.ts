@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
+
 import { Short } from '../models/short.model';
 
 interface CreateShortBody {
@@ -10,7 +11,6 @@ export const getShorts = async (req: FastifyRequest, res: FastifyReply) => {
     const documents = await Short.find({});
 
     res.send({
-      message: `${documents.length} shorts in the collection`,
       payload: documents,
     });
   } catch (error: any) {
@@ -28,7 +28,7 @@ export const createShort = async (
 
     await newShort.save();
 
-    res.send({ message: 'Short created', payload: newShort });
+    res.send({ payload: newShort });
   } catch (error: any) {
     res.send(error);
   }

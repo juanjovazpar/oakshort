@@ -1,8 +1,12 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyRequest, FastifyReply, DoneFuncWithErrOrRes } from 'fastify';
 import { Short } from '../models/short.model';
 import { PARAMS } from '../routes';
 
-export const getShortById = async (req: FastifyRequest, res: FastifyReply) => {
+export const getShortById = async (
+  req: FastifyRequest,
+  res: FastifyReply,
+  done: DoneFuncWithErrOrRes
+) => {
   const id = req.params[PARAMS.SHORTEN_ID];
 
   try {
@@ -12,6 +16,7 @@ export const getShortById = async (req: FastifyRequest, res: FastifyReply) => {
     }
 
     req.short = entity;
+    done();
   } catch (error) {
     res.send(error);
   }

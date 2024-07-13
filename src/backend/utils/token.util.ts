@@ -14,9 +14,9 @@ export const getHashedToken = async (
   return await bcrypt.hash(verificationToken, salt);
 };
 
-export const getJWToken = (userId: string, email: string): string => {
+export const getJWToken = (payload: object): string => {
   const jwtSecret = process.env.JWT_SECRET || 'default-secret';
-  const token: string = jwt.sign({ userId, email }, jwtSecret, {
+  const token: string = jwt.sign(payload, jwtSecret, {
     expiresIn: '1h',
   });
 
