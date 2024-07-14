@@ -1,5 +1,9 @@
 import axiosInstance from './axios';
 
-const getShorts = async () => await axiosInstance.get('/data-endpoint');
+import { ROUTES } from '../../../routes';
 
-export default { getShorts };
+const getShorts = async () => await axiosInstance.get(ROUTES.SHORTS);
+
+const createShort = async () => await axiosInstance.post(ROUTES.SHORTS);
+
+export default { getShorts, createShort };

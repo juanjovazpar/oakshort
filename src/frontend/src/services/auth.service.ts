@@ -1,9 +1,12 @@
 import axiosInstance from './axios';
 
-const signin = async () => await axiosInstance.get('/data-endpoint');
+import { ROUTES } from '../../../routes';
 
-const signup = async () => await axiosInstance.get('/data-endpoint');
+const signin = async () => await axiosInstance.post(ROUTES.SIGNIN);
 
-const forgotPassword = async () => await axiosInstance.get('/data-endpoint');
+const signup = async () => await axiosInstance.post(ROUTES.SIGNUP);
+
+const forgotPassword = async () =>
+  await axiosInstance.post(ROUTES.FORGOT_PASSWORD);
 
 export default { signin, signup, forgotPassword };

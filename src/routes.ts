@@ -1,5 +1,6 @@
 const enum ENDPOINTS {
   AUTH = '/auth',
+  SHORTS = '/shorts',
 }
 
 export enum PARAMS {
@@ -12,7 +13,8 @@ export enum ROUTES {
   SIGNIN = `${ENDPOINTS.AUTH}/signin`,
   SIGNUP = `${ENDPOINTS.AUTH}/signup`,
   FORGOT_PASSWORD = `${ENDPOINTS.AUTH}/forgot`,
-  SHORT = `/shorts/:${PARAMS.SHORTEN_ID}`,
-  SHORTS = '/shorts',
+  SHORT = `${ENDPOINTS.SHORTS}/:${PARAMS.SHORTEN_ID}`,
+  SHORTS = ENDPOINTS.SHORTS,
   REDIRECT = `/:${PARAMS.SHORTEN_ID}`,
+  DASHBOARD = `/:${PARAMS.SHORTEN_ID}/dashboard`,
 }

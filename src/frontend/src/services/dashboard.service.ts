@@ -1,5 +1,7 @@
 import axiosInstance from './axios';
 
-const getDashboard = async () => await axiosInstance.get('/data-endpoint');
+import { ROUTES } from '../../../routes';
+
+const getDashboard = async () => await axiosInstance.get(ROUTES.DASHBOARD);
 
 export default { getDashboard };

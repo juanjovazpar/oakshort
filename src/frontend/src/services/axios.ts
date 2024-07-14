@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import RequestInterceptor from './requestFullfil.interceptor';
-import ResponseInterceptor from './responseFail.interceptor';
+import RequestInterceptor from './interceptors/requestFullfil.interceptor';
+import ResponseInterceptor from './interceptors/responseFail.interceptor';
 
 const axiosInstance = axios.create({
   baseURL: 'https://api.example.com',

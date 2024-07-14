@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
 import { Short } from '../models/short.model';
-import { PARAMS } from '../routes';
+import { PARAMS } from '../../routes';
 import { isFutureDate, isPastDate } from '../utils/dates.utils';
 import { comparePasswords } from '../utils/password.util';
 
