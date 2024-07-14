@@ -7,7 +7,7 @@ import Sidebar from './sidebar/Sidebar';
 
 function Layout() {
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const [isCollapsedSide, setIsCollapsedSide] = useState(true);
+  const [isCollapsedSide, setIsCollapsedSide] = useState(false);
 
   return (
     <div className={`layout ${isCollapsed ? 'collapse' : ''}`}>
