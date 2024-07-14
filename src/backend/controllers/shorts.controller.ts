@@ -1,12 +1,14 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { IShort, Short } from '../models/short.model';
+import { Short } from '../models/short.model';
+import { hashPassword } from '../utils/password.util';
 
 interface CreateShortBody {
   short: string;
   target: string;
   expires: string;
   activation: string;
+  password: string;
 }
 
 export const getShorts = async (_: FastifyRequest, res: FastifyReply) => {
@@ -29,14 +31,26 @@ export const createShort = async (
   res: FastifyReply
 ) => {
   try {
-    const { short, target, expires, activation } = req.body;
-    let newshort = new Short({ short, target, expires, activation });
+    let { short, target, expires, activation, password } = req.body;
+
+    if (password) {
+      password = await hashPassword(password);
+    }
+
+    let newshort = new Short({
+      short,
+      target,
+      expires,
+      activation,
+      password,
+    });
 
     await newshort.save();
 
     newshort = newshort.toObject();
     delete newshort.deleted;
     delete newshort._id;
+    delete newshort.password;
 
     res.send({ payload: newshort });
   } catch (error: any) {

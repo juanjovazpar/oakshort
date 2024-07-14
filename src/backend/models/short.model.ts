@@ -15,6 +15,7 @@ interface IShort extends Document {
   deleted?: boolean;
   expires?: Date;
   activation?: Date;
+  password?: string;
 }
 
 interface IShortUpdate extends Omit<IShort, 'owner' | 'created' | 'short'> {}
@@ -73,6 +74,9 @@ const schema: Schema<IShort> = new mongoose.Schema(
         validator: isFutureDate,
         message: (props) => `${props.value} data has past already`,
       },
+    },
+    password: {
+      type: String,
     },
   },
   {

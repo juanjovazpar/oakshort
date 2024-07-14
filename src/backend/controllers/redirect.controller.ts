@@ -32,6 +32,14 @@ export const redirectShort = async (req: FastifyRequest, res: FastifyReply) => {
       return;
     }
 
+    if (short.password) {
+      // TODO: Redirect to protected shorts
+      res
+        .status(410)
+        .send({ message: 'This short is protected with a password' });
+      return;
+    }
+
     short.accessCount += 1;
     short.lastRead = new Date();
     await short.save();
