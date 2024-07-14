@@ -46,6 +46,16 @@ export const redirectShort = async (
       return;
     }
 
+    if (short.accessLimit && short.accessCount >= short.accessLimit) {
+      short.accessAttendsOverLimit += 1;
+      await short.save();
+      // TODO: Notify creator if someone reach the access limit
+      res.status(410).send({
+        message: `This short is limited to ${short.accessLimit} access`,
+      });
+      return;
+    }
+
     if (short.activation && isFutureDate(short.activation)) {
       // TODO: Redirect to non-active shorts page
       res

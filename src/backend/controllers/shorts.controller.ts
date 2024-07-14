@@ -9,6 +9,7 @@ interface CreateShortBody {
   expires: string;
   activation: string;
   password: string;
+  accessLimit: number;
 }
 
 export const getShorts = async (_: FastifyRequest, res: FastifyReply) => {
@@ -31,7 +32,7 @@ export const createShort = async (
   res: FastifyReply
 ) => {
   try {
-    const { short, target, expires, activation } = req.body;
+    const { short, target, expires, activation, accessLimit } = req.body;
     let { password } = req.body;
 
     if (password) {
@@ -43,6 +44,7 @@ export const createShort = async (
       target,
       expires,
       activation,
+      accessLimit,
       password,
     });
 

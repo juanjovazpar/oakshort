@@ -3,6 +3,7 @@ import mongoose, { Document, Schema, Model } from 'mongoose';
 import { idGenerator } from '../utils/idGenerator';
 import { isValidURL } from '../utils/url.utils';
 import { isFutureDate } from '../utils/dates.utils';
+import { isPositiveInteger } from '../utils/number.utils';
 
 interface IShort extends Document {
   owner?: string;
@@ -16,6 +17,8 @@ interface IShort extends Document {
   expires?: Date;
   activation?: Date;
   password?: string;
+  accessLimit?: number;
+  accessAttendsOverLimit: number;
 }
 
 interface IShortUpdate extends Omit<IShort, 'owner' | 'created' | 'short'> {}
@@ -77,6 +80,18 @@ const schema: Schema<IShort> = new mongoose.Schema(
     },
     password: {
       type: String,
+    },
+    accessLimit: {
+      type: Number,
+      validate: {
+        validator: isPositiveInteger,
+        message: (props) =>
+          `${props.value} is not a valid access limit. Define a positive integer limit`,
+      },
+    },
+    accessAttendsOverLimit: {
+      type: Number,
+      default: 0,
     },
   },
   {
