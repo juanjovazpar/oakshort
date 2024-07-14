@@ -3,18 +3,40 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import { Short } from '../models/short.model';
 import { PARAMS } from '../routes';
 import { isFutureDate, isPastDate } from '../utils/dates.utils';
+import { comparePasswords } from '../utils/password.util';
 
-export const redirectShort = async (req: FastifyRequest, res: FastifyReply) => {
+interface RedirectShortBody {
+  password: string;
+}
+
+export const redirectShort = async (
+  req: FastifyRequest<{ Body: RedirectShortBody }>,
+  res: FastifyReply
+) => {
   try {
     const { shorten_id } = req.params as {
       [PARAMS.SHORTEN_ID]: string;
     };
-
+    const password: string = req?.body?.password;
     const short = await Short.findOne({ short: shorten_id });
 
     if (!short || !short.target || !short.active || short.deleted) {
       res.status(404).send({ message: 'Invalid short' });
       return;
+    }
+
+    if (short.password) {
+      const passwordMatch: boolean = await (password
+        ? comparePasswords(password, short.password)
+        : false);
+
+      if (!passwordMatch) {
+        // TODO: Redirect to protected shorts and manage wrong password
+        res
+          .status(410)
+          .send({ message: 'This short is protected with a password' });
+        return;
+      }
     }
 
     if (short.expires && isPastDate(short.expires)) {
@@ -29,14 +51,6 @@ export const redirectShort = async (req: FastifyRequest, res: FastifyReply) => {
       res
         .status(410)
         .send({ message: `Short will be active at ${short.activation}` });
-      return;
-    }
-
-    if (short.password) {
-      // TODO: Redirect to protected shorts
-      res
-        .status(410)
-        .send({ message: 'This short is protected with a password' });
       return;
     }
 

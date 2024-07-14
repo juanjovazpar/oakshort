@@ -31,7 +31,8 @@ export const createShort = async (
   res: FastifyReply
 ) => {
   try {
-    let { short, target, expires, activation, password } = req.body;
+    const { short, target, expires, activation } = req.body;
+    let { password } = req.body;
 
     if (password) {
       password = await hashPassword(password);
