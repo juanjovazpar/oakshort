@@ -1,4 +1,4 @@
-import { getFingerPrint } from '../utils/fingerprint';
+import { getFingerPrint } from '../utils/fingerprint.util';
 
 export default (config: any) => {
   const token = localStorage.getItem('token');
