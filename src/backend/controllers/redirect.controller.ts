@@ -2,6 +2,7 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 
 import { Short } from '../models/short.model';
 import { PARAMS } from '../routes';
+import { isFutureDate, isPastDate } from '../utils/dates.utils';
 
 export const redirectShort = async (req: FastifyRequest, res: FastifyReply) => {
   try {
@@ -16,9 +17,18 @@ export const redirectShort = async (req: FastifyRequest, res: FastifyReply) => {
       return;
     }
 
-    if (short.expires && new Date(short.expires) < new Date()) {
+    if (short.expires && isPastDate(short.expires)) {
       // TODO: Redirect to expired shorts page
-      res.status(410).send({ message: 'Short URL has expired' });
+      // TODO: Notify creator if someone try to access an expired short
+      res.status(410).send({ message: `Short expired at ${short.expires}` });
+      return;
+    }
+
+    if (short.activation && isFutureDate(short.activation)) {
+      // TODO: Redirect to non-active shorts page
+      res
+        .status(410)
+        .send({ message: `Short will be active at ${short.activation}` });
       return;
     }
 

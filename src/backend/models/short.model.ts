@@ -14,6 +14,7 @@ interface IShort extends Document {
   accessCount: number;
   deleted?: boolean;
   expires?: Date;
+  activation?: Date;
 }
 
 interface IShortUpdate extends Omit<IShort, 'owner' | 'created' | 'short'> {}
@@ -64,6 +65,13 @@ const schema: Schema<IShort> = new mongoose.Schema(
       validate: {
         validator: isFutureDate,
         message: (props) => `${props.value} data has expired already`,
+      },
+    },
+    activation: {
+      type: Date,
+      validate: {
+        validator: isFutureDate,
+        message: (props) => `${props.value} data has past already`,
       },
     },
   },
