@@ -17,7 +17,7 @@ export const redirectShort = async (
     const { shorten_id } = req.params as {
       [PARAMS.SHORTEN_ID]: string;
     };
-    const password: string = req?.body?.password;
+    const password: string = req.body?.password;
     const short = await Short.findOne({ short: shorten_id });
 
     if (!short || !short.target || !short.active || short.deleted) {

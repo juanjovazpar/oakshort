@@ -41,6 +41,7 @@ const schema: Schema<IUser> = new Schema(
     },
     verificationToken: {
       type: String,
+      unique: true,
     },
     resetPasswordToken: {
       type: String,
@@ -57,8 +58,10 @@ const schema: Schema<IUser> = new Schema(
 
 schema.pre<IUser>('save', async function (next) {
   try {
-    const hashedVerificationToken = await getHashedToken();
-    this.verificationToken = hashedVerificationToken;
+    if (this.isNew) {
+      const hashedVerificationToken = await getHashedToken();
+      this.verificationToken = hashedVerificationToken;
+    }
 
     next();
   } catch (error) {

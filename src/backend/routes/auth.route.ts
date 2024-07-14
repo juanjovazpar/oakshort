@@ -17,6 +17,7 @@ const opts = {
 };
 
 async function routes(fastify: FastifyInstance) {
+  // fastify.get(ROUTES.VERIFY, verify);
   fastify.post(ROUTES.SIGNUP, opts, signup);
   fastify.post(ROUTES.SIGNIN, opts, signin);
 }

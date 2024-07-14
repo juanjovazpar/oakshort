@@ -75,7 +75,7 @@ const schema: Schema<IShort> = new mongoose.Schema(
       type: Date,
       validate: {
         validator: isFutureDate,
-        message: (props) => `${props.value} data has past already`,
+        message: (props) => `${props.value} date has past already`,
       },
     },
     password: {
