@@ -4,6 +4,7 @@ import { IShort, Short } from '../models/short.model';
 
 interface CreateShortBody {
   target: string;
+  expires: string;
 }
 
 export const getShorts = async (_: FastifyRequest, res: FastifyReply) => {
@@ -26,8 +27,8 @@ export const createShort = async (
   res: FastifyReply
 ) => {
   try {
-    const { target } = req.body;
-    let newShort = new Short({ target });
+    const { target, expires } = req.body;
+    let newShort = new Short({ target, expires });
 
     await newShort.save();
 

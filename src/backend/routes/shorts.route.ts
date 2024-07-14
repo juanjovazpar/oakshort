@@ -10,6 +10,7 @@ const opts = {
       required: ['target'],
       properties: {
         target: { type: 'string' },
+        expires: { type: 'date' },
       },
     },
   },
