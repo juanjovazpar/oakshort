@@ -7,11 +7,138 @@
 	},
 	"item": [
 		{
+			"name": "Sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test@email.org\",\n    \"password\": \"Passwordpassword@11\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test@email.org\",\n    \"password\": \"Passwordpassword@11\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect Short",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/_XBBb7cfCX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"_XBBb7cfCX"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect Short",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"pass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/JU3YNysFg4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"JU3YNysFg4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Shorts",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwub3JnIiwiaWQiOiI2NjkzYWE1MjlhOTU0ZWE1ZDBkNTFjYWEiLCJpYXQiOjE3MjA5NTgyOTYsImV4cCI6MTcyMDk2MTg5Nn0.PWdW9qd0wY29u7UWaV1POfUgYhCy-wloCGrLj92o17Y",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -44,7 +171,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"target\": \"www.google.com\"\n}\n",
+					"raw": "{\n    \"target\": \"http://expires.com\",\n    \"accessLimit\": 2\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,13 +193,23 @@
 			"response": []
 		},
 		{
-			"name": "Sign up",
+			"name": "Patch Short",
 			"request": {
-				"method": "POST",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwub3JnIiwiaWQiOiI2NjkzYWE1MjlhOTU0ZWE1ZDBkNTFjYWEiLCJpYXQiOjE3MjA5NTM0MzIsImV4cCI6MTcyMDk1NzAzMn0.GF6JEJE5hxWh8N37FNV6mXGqXsZ9WwjChLP7_SUveI8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"test@gmail.sd\",\n    \"password\": \"Passwordpassword@11\"\n}\n",
+					"raw": "{\n    \"target\": \"www.google.com\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -80,28 +217,38 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/auth/signup",
+					"raw": "http://localhost:3000/shorts/E9xTEbuw59",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"auth",
-						"signup"
+						"shorts",
+						"E9xTEbuw59"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Sign in",
+			"name": "Delete Short",
 			"request": {
-				"method": "POST",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwub3JnIiwiaWQiOiI2NjkzYWE1MjlhOTU0ZWE1ZDBkNTFjYWEiLCJpYXQiOjE3MjA5NTM0MzIsImV4cCI6MTcyMDk1NzAzMn0.GF6JEJE5hxWh8N37FNV6mXGqXsZ9WwjChLP7_SUveI8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\": \"Passwordpassword@11\"\n}\n",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,15 +256,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/auth/signin",
+					"raw": "http://localhost:3000/shorts/vy3Q1SwcBb",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"auth",
-						"signin"
+						"shorts",
+						"vy3Q1SwcBb"
 					]
 				}
 			},
