@@ -17,7 +17,7 @@ const opts = {
 
 async function routes(app: FastifyInstance) {
   app.get(ROUTES.SHORTS, { onRequest: [app.authenticate] }, getShorts);
-  app.post(ROUTES.SHORTS, opts, createShort);
+  app.post(ROUTES.SHORTS, createShort);
 }
 
 export default routes;

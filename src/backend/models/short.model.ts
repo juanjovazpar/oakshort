@@ -4,14 +4,14 @@ import { idGenerator } from '../utils/idGenerator';
 import { isValidURL } from '../utils/url.utils';
 
 interface IShort extends Document {
-  owner: string;
+  owner?: string;
   firstRead: Date;
   lastRead: Date;
   active: boolean;
   target: string;
   short: string;
   accessCount: number;
-  deleted: boolean;
+  deleted?: boolean;
 }
 
 interface IShortUpdate extends Omit<IShort, 'owner' | 'created' | 'short'> {}

@@ -11,8 +11,9 @@ export const shortMiddleware = async (
   };
 
   try {
-    const entity = await Short.findOne({ _id: shorten_id });
-    if (!entity) {
+    const entity = await Short.findOne({ short: shorten_id });
+
+    if (!entity || entity.deleted) {
       return res.code(404).send({ error: 'Short not found' });
     }
 

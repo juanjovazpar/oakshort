@@ -9,7 +9,11 @@ export const updateShort = async (req: FastifyRequest, res: FastifyReply) => {
     // @ts-ignore
     const { target } = req.body;
 
-    const short = await Short.findByIdAndUpdate(_id, { target }, { new: true });
+    const short = await Short.findByIdAndUpdate(
+      _id,
+      { target },
+      { new: true }
+    ).select(['-deleted', '-_id']);
 
     if (!short) {
       res.send({ message: 'Short not found' });

@@ -9,8 +9,6 @@ export const redirectShort = async (req: FastifyRequest, res: FastifyReply) => {
       [PARAMS.SHORTEN_ID]: string;
     };
 
-    console.log('SHORTEN_ID', req.params);
-
     const short = await Short.findOneAndUpdate(
       { short: shorten_id },
       { $inc: { accessCount: 1 }, lastRead: Date.now() },
