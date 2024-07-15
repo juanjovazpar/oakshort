@@ -1,8 +1,6 @@
 import React from 'react';
 import './Hello.css';
 
-function Hello() {
+export default function Hello() {
   return <p>HELLO SECTION</p>;
 }
-
-export default Hello;

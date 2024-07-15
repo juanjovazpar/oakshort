@@ -1,16 +1,15 @@
-import { getFingerPrint } from '../utils/fingerprint.util';
+import { getFingerPrint } from '../../utils/fingerprint.util';
+
+let fingerPrint: number = getFingerPrint();
 
 export default (config: any) => {
   const token = localStorage.getItem('token');
-  const fingerprint = localStorage.getItem('fingerprint');
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
-  if (fingerprint) {
-    config.headers.Fingerprint = getFingerPrint();
-  }
+  config.headers.Fingerprint = fingerPrint;
 
   return config;
 };

@@ -1,8 +1,6 @@
 import React from 'react';
 import './Dashboard.css';
 
-function Dashboard() {
+export default function Dashboard() {
   return <p>DASHBOARD SECTION</p>;
 }
-
-export default Dashboard;

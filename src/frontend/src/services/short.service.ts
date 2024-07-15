@@ -2,13 +2,13 @@ import axiosInstance from './axios';
 
 import { ROUTES } from '../../../routes';
 
-const getShort = async () => await axiosInstance.get(ROUTES.SHORT);
+const getShort = async () => await axiosInstance.get('ROUTES.SHORT');
 
-const updateShort = async () => await axiosInstance.patch(ROUTES.SHORT);
+const updateShort = async () => await axiosInstance.patch('ROUTES.SHORT');
 
-const activateShort = async () => await axiosInstance.patch(ROUTES.SHORT);
+const activateShort = async () => await axiosInstance.patch('ROUTES.SHORT');
 
-const deleteShort = async () => await axiosInstance.delete(ROUTES.SHORT);
+const deleteShort = async () => await axiosInstance.delete('ROUTES.SHORT');
 
 export default {
   getShort,
