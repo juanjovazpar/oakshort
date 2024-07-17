@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
 
-export default function Sidebar({ onClose }) {
+export default function Sidebar({ onClose, showCloseButton }) {
   const onCloseHandler = (e: any) => {
     e.stopPropagation();
 
@@ -10,7 +10,7 @@ export default function Sidebar({ onClose }) {
 
   return (
     <section>
-      <button onClick={onCloseHandler}>X</button>
+      {showCloseButton && <button onClick={onCloseHandler}>X</button>}
     </section>
   );
 }

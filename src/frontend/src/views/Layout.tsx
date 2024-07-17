@@ -54,7 +54,7 @@ function Layout() {
           onClick={onSidebarClick}
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}
         >
-          <Sidebar onClose={onCloseSidebar} />
+          <Sidebar onClose={onCloseSidebar} showCloseButton={isCollapsedSide} />
         </section>
       </section>
     </div>
