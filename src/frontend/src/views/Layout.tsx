@@ -17,25 +17,44 @@ function Layout() {
     (state: any) => state.layout.isCollapsedSide
   );
 
+  const onDashboardClick = () => {
+    if (isCollapsedSide) {
+      dispatch(toggleCollapseSide());
+    }
+  };
+
+  const onSidebarClick = (e: any) => {
+    e.stopPropagation();
+
+    if (!isCollapsedSide) {
+      dispatch(toggleCollapseSide());
+    }
+  };
+
+  const onShowDashboard = () => {
+    dispatch(toggleCollapse());
+  };
+
+  const onCloseSidebar = () => {
+    if (isCollapsedSide) {
+      dispatch(toggleCollapseSide());
+    }
+  };
+
   return (
     <div className={`layout ${isCollapsed ? 'collapse' : ''}`}>
       <section className="hello-section collapse">
-        <Hello />
-        <button onClick={() => dispatch(toggleCollapse())}>
-          {isCollapsed ? 'Expand' : 'Collapse'}
-        </button>
-        <button onClick={() => dispatch(toggleCollapseSide())}>
-          {isCollapsedSide ? 'Expand Side' : 'Collapse Side'}
-        </button>
+        <Hello onSubmit={onShowDashboard} />
       </section>
 
-      <section className="main-section">
+      <section className="main-section" onClick={onDashboardClick}>
         <Dashboard />
 
         <section
+          onClick={onSidebarClick}
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}
         >
-          <Sidebar />
+          <Sidebar onClose={onCloseSidebar} />
         </section>
       </section>
     </div>
