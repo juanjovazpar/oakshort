@@ -1,6 +1,8 @@
 import React from 'react';
 import './Dashboard.css';
 
-export default function Dashboard() {
-  return <p>DASHBOARD SECTION</p>;
-}
+const Dashboard: React.FC = () => {
+  return <h1 className="text-3xl font-bold underline">DASHBOARD SECTION</h1>;
+};
+
+export default Dashboard;

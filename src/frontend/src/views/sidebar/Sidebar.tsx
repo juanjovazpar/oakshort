@@ -1,7 +1,15 @@
 import React from 'react';
 import './Sidebar.css';
 
-export default function Sidebar({ onClose, showCloseButton }) {
+export interface SidebarComponentProps {
+  onClose: Function;
+  showCloseButton: Function;
+}
+
+const Sidebar: React.FC<SidebarComponentProps> = ({
+  onClose,
+  showCloseButton,
+}) => {
   const onCloseHandler = (e: any) => {
     e.stopPropagation();
 
@@ -13,4 +21,6 @@ export default function Sidebar({ onClose, showCloseButton }) {
       {showCloseButton && <button onClick={onCloseHandler}>X</button>}
     </section>
   );
-}
+};
+
+export default Sidebar;

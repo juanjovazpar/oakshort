@@ -10,7 +10,7 @@ import {
   toggleCollapseSide,
 } from '../store/layout/layout.slice';
 
-function Layout() {
+const Layout: React.FC = () => {
   const dispatch = useDispatch();
   const isCollapsed = useSelector((state: any) => state.layout.isCollapsed);
   const isCollapsedSide = useSelector(
@@ -59,6 +59,6 @@ function Layout() {
       </section>
     </div>
   );
-}
+};
 
 export default Layout;
