@@ -16,6 +16,7 @@ const layoutSlice = createSlice({
   reducers: {
     toggleCollapse(state) {
       state.isCollapsed = !state.isCollapsed;
+      if (state.isCollapsed) state.isCollapsedSide = false;
     },
     toggleCollapseSide(state) {
       state.isCollapsedSide = !state.isCollapsedSide;

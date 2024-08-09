@@ -5,20 +5,24 @@ import { isValidURL } from '../utils/url.utils';
 import { isFutureDate } from '../utils/dates.utils';
 import { isPositiveInteger } from '../utils/number.utils';
 
-interface IShort extends Document {
-  owner?: string;
-  firstRead: Date;
+interface IShort {
   lastRead: Date;
   active: boolean;
   target: string;
   short: string;
   accessCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+  accessAttendsOverLimit: number;
+  _id?: string;
+  owner?: string;
+  firstRead?: Date;
   deleted?: boolean;
   expires?: Date;
   activation?: Date;
   password?: string;
   accessLimit?: number;
-  accessAttendsOverLimit: number;
+  name?: string;
 }
 
 interface IShortUpdate extends Omit<IShort, 'owner' | 'created' | 'short'> {}

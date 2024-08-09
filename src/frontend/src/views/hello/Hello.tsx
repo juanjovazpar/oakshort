@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 
 import './Hello.css';
 
-export interface HelloComponentProps {
+export interface HelloProps {
   onSubmit: Function;
 }
 
-const Hello: React.FC<HelloComponentProps> = ({ onSubmit }) => {
-  const isCollapsed = useSelector((state: any) => state.layout.isCollapsed);
+const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
+  const { isCollapsed } = useSelector((state: any) => state.layout);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
