@@ -27,11 +27,11 @@
   transition: opacity 0.3s ease, visibility 0.3s ease, height 0.3s ease;
 }
 
-.collapse .hello-section {
+.collapsed .hello-section {
   height: 100%;
 }
 
-.collapse .main-section {
+.collapsed .main-section {
   opacity: 0;
   visibility: hidden;
   height: 0;

@@ -42,11 +42,10 @@ const Layout: React.FC = () => {
   };
 
   return (
-    <section className={`layout ${isCollapsed ? 'collapse' : ''}`}>
-      <header className="hello-section collapse">
+    <section className={`layout ${isCollapsed ? 'collapsed' : ''}`}>
+      <header className="hello-section collapsed">
         <Hello onSubmit={onShowDashboard} />
       </header>
-
       <section className="main-section" onClick={onDashboardClick}>
         <Dashboard />
 
