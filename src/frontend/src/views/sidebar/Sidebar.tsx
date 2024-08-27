@@ -1,5 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
+import { useTranslation } from 'react-i18next';
+
 import { IShort } from '../../../../backend/models/short.model';
 import Short from '../../components/Short/Short';
 
@@ -9,6 +11,7 @@ export interface SidebarComponentProps {
 }
 
 const Sidebar: React.FC<SidebarComponentProps> = ({ onClose, isCollapsed }) => {
+  const { t } = useTranslation();
   const shorts: IShort[] = [
     {
       _id: '6693bf918dd280c4837b1ce1',
@@ -64,9 +67,9 @@ const Sidebar: React.FC<SidebarComponentProps> = ({ onClose, isCollapsed }) => {
         <>
           <button onClick={onCloseHandler}>X</button>
           <div>
-            <button>Filter by created date</button>
-            <button>Filter by label</button>
-            <button>Filter by expired</button>
+            <button>{t('FILTERS.FILTER_BY_CREATED_DATE')}</button>
+            <button>{t('FILTERS.FILTER_BY_LABEL')}</button>
+            <button>{t('FILTERS.FILTER_BY_EXPIRED')}</button>
           </div>
           {shorts.map((short: IShort, key: number) => (
             <Short short={short} key={key} />

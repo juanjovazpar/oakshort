@@ -2,12 +2,14 @@ import React, { FormEvent } from 'react';
 import { useSelector } from 'react-redux';
 
 import './Hello.css';
+import { useTranslation } from 'react-i18next';
 
 export interface HelloProps {
   onSubmit: Function;
 }
 
 const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
+  const { t } = useTranslation();
   const { isCollapsed } = useSelector((state: any) => state.layout);
 
   const handleSubmit = (e: FormEvent) => {
@@ -19,13 +21,13 @@ const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
     <section className="hello-section">
       <form onSubmit={handleSubmit}>
         <input type="text" name="url" />
-        <button type="submit">Cut</button>
+        <button type="submit">{t('HELLO_SECTION.MAIN_BUTTON')}</button>
       </form>
       {isCollapsed && (
         <>
-          <a href="/">Hello!</a>
-          <a href="/signin">Login</a>
-          <a href="/signup">Create account</a>
+          <a href="/">{t('LINKS.HELLO')}</a>
+          <a href="/signin">{t('LINKS.SIGNIN')}</a>
+          <a href="/signup">{t('LINKS.SIGNUP')}</a>
         </>
       )}
     </section>
