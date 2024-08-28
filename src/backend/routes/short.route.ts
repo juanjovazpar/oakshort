@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
 
-import { ROUTES } from '../../routes';
+import { ROUTES } from '../../shared/routes';
 import { updateShort, deleteShort } from '../controllers/short.controller';
 
 async function routes(app: FastifyInstance) {

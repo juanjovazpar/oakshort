@@ -1,9 +1,9 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { Short } from '../models/short.model';
-import { PARAMS } from '../../routes';
-import { isFutureDate, isPastDate } from '../utils/dates.utils';
-import { comparePasswords } from '../utils/password.util';
+import { Short } from '../../shared/models/short.model';
+import { PARAMS } from '../../shared/routes';
+import { isFutureDate, isPastDate } from '../../shared/utils/dates.utils';
+import { comparePasswords } from '../../shared/utils/password.util';
 
 interface RedirectShortBody {
   password: string;

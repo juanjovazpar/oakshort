@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { ROUTES } from '../../routes';
+import { ROUTES } from '../../shared/routes';
 
 import { redirectShort } from '../controllers/redirect.controller';
 const opts = {

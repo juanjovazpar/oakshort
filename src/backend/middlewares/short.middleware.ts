@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply, DoneFuncWithErrOrRes } from 'fastify';
-import { Short } from '../models/short.model';
-import { PARAMS } from '../../routes';
+import { Short } from '../../shared/models/short.model';
+import { PARAMS } from '../../shared/routes';
 
 export const shortMiddleware = async (
   req: FastifyRequest,

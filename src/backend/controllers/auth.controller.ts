@@ -1,13 +1,13 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { IUser, User } from '../models/user.model';
+import { IUser, User } from '../../shared/models/user.model';
 import {
   hashPassword,
   comparePasswords,
   isValidPassword,
   PASSWORD_RULES,
-} from '../utils/password.util';
-import { getJWToken } from '../utils/token.util';
+} from '../../shared/utils/password.util';
+import { getJWToken } from '../../shared/utils/token.util';
 
 interface SignupBody {
   email: string;

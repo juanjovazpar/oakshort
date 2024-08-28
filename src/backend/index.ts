@@ -21,7 +21,7 @@ dotenv.config();
 declare module 'fastify' {
   interface FastifyInstance {
     config: {
-      PORT: string;
+      PORT_BE: string;
       DB_URI: string;
       JWT_SECRET: string;
     };
@@ -36,11 +36,11 @@ const app = Fastify({
 
 const schema = {
   type: 'object',
-  required: ['PORT'],
+  required: ['PORT_BE'],
   properties: {
-    PORT: {
+    PORT_BE: {
       type: 'string',
-      default: '3000',
+      default: '4000',
     },
     DB_URI: { type: 'string' },
     JWT_SECRET: { type: 'string' },
@@ -83,7 +83,7 @@ app.register(RedirectRoute);
 
 const start = async () => {
   try {
-    const port = Number(process.env.PORT) || 3000;
+    const port = Number(process.env.PORT_BE) || 3000;
     await app.listen({ port });
     const address = app.server.address();
     const portNumber =

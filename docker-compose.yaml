@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: src/backend/Dockerfile
+    ports:
+      - '${PORT_BE}:80'
+    environment:
+      - PORT=${PORT_BE}
+      - DB_URI=${DB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - mongodb
+    networks:
+      - oakshort
+
+  frontend:
+    build:
+      context: .
+      dockerfile: src/frontend/Dockerfile
+    ports:
+      - '${PORT_FE}:80'
+    environment:
+      - PORT=${PORT_FE}
+    networks:
+      - oakshort
+
+  mongodb:
+    image: mongo:6
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - oakshort
+
+networks:
+  oakshort:
+    driver: bridge
+
+volumes:
+  mongo-data:

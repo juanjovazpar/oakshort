@@ -1,5 +1,5 @@
 import React from 'react';
-import { IShort } from '../../../../backend/models/short.model';
+import { IShort } from '../../../../shared/models/short.model';
 import Engagement from '../Engagement/Engagement';
 import { useTranslation } from 'react-i18next';
 

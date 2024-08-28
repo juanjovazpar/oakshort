@@ -14,7 +14,7 @@
       "@models/*": ["src/backend/models/*"],
       "@routes/*": ["src/backend/routes/*"],
       "@middlewares/*": ["src/backend/middlewares/*"],
-      "@utils/*": ["src/backend/utils/*"],
+      "@utils/*": ["src/shared/utils/*"],
       "@auth/*": ["src/backend/auth/*"]
     }
   },

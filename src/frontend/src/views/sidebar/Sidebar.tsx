@@ -2,7 +2,7 @@ import React from 'react';
 import './Sidebar.css';
 import { useTranslation } from 'react-i18next';
 
-import { IShort } from '../../../../backend/models/short.model';
+import { IShort } from '../../../../shared/models/short.model';
 import Short from '../../components/Short/Short';
 
 export interface SidebarComponentProps {

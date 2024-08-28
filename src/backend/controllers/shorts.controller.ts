@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { Short } from '../models/short.model';
-import { hashPassword } from '../utils/password.util';
+import { Short } from '../../shared/models/short.model';
+import { hashPassword } from '../../shared/utils/password.util';
 
 interface CreateShortBody {
   short: string;
@@ -52,6 +52,7 @@ export const createShort = async (
 
     newshort = newshort.toObject();
     delete newshort.deleted;
+    // @ts-ignore
     delete newshort._id;
     delete newshort.password;
 
