@@ -6,6 +6,7 @@ import fastifyEnv from '@fastify/env';
 import jwt from '@fastify/jwt';
 import bcrypt from 'fastify-bcrypt';
 import mongoose from 'mongoose';
+import path from 'path';
 
 import AuthRoute from './routes/auth.route';
 import RedirectRoute from './routes/redirect.route';
@@ -16,7 +17,8 @@ import { requestLogger } from './middlewares/requestLogger.middleware';
 import { authMiddleware } from './middlewares/auth.middleware';
 import { shortMiddleware } from './middlewares/short.middleware';
 
-dotenv.config();
+const envPath = path.resolve(__dirname, '../../.env');
+dotenv.config({ path: envPath });
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -40,7 +42,7 @@ const schema = {
   properties: {
     PORT_BE: {
       type: 'string',
-      default: '4000',
+      default: '80',
     },
     DB_URI: { type: 'string' },
     JWT_SECRET: { type: 'string' },
@@ -83,7 +85,7 @@ app.register(RedirectRoute);
 
 const start = async () => {
   try {
-    const port = Number(process.env.PORT_BE) || 3000;
+    const port = Number(process.env.PORT_BE) || 80;
     await app.listen({ port });
     const address = app.server.address();
     const portNumber =

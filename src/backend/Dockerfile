@@ -2,17 +2,26 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+ENV NODE_ENV=production
+
+COPY src/backend ./backend
+
+COPY src/shared ./shared
+
+WORKDIR /app/backend
 
 RUN npm install --production
 
-COPY . .
-COPY ../shared /app/src/shared
+RUN npm run build
 
-# RUN npm run build
+RUN mv dist/* /app/
 
-EXPOSE ${PORT_BE}
+RUN mv node_modules /app/
 
-ENV NODE_ENV=production
+RUN rm -rf ./backend ./shared
 
-CMD ["npm", "start"]
+WORKDIR /app
+
+EXPOSE 80
+
+CMD ["node", "./index.js"]

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "../",
+    "baseUrl": "./",
+    "paths": {
+      "@controllers/*": ["backend/controllers/*"],
+      "@models/*": ["backend/models/*"],
+      "@routes/*": ["backend/routes/*"],
+      "@middlewares/*": ["backend/middlewares/*"],
+      "@utils/*": ["shared/utils/*"],
+      "@auth/*": ["backend/auth/*"]
+    }
+  },
+  "include": ["../backend/**/*", "../shared/**/*"],
+  "exclude": ["node_modules"]
+}

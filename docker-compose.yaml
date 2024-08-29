@@ -6,10 +6,9 @@ services:
       context: .
       dockerfile: src/backend/Dockerfile
     ports:
-      - '${PORT_BE}:80'
+      - '${PORT_BE}:80' # Export PORT for development
     environment:
-      - PORT=${PORT_BE}
-      - DB_URI=${DB_URI}
+      - DB_URI=mongodb://mongodb:27017/${DB_NAME}
       - JWT_SECRET=${JWT_SECRET}
     depends_on:
       - mongodb
@@ -21,14 +20,18 @@ services:
       context: .
       dockerfile: src/frontend/Dockerfile
     ports:
-      - '${PORT_FE}:80'
+      - '${PORT_FE}:80' # Export PORT for development
     environment:
-      - PORT=${PORT_FE}
+      - API_URL=http://backend
+    depends_on:
+      - backend
     networks:
       - oakshort
 
   mongodb:
     image: mongo:6
+    ports:
+      - '${PORT_DB}:27017' # Export PORT for development
     volumes:
       - mongo-data:/data/db
     networks:

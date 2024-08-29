@@ -4,6 +4,7 @@ FROM node:18 AS builder
 WORKDIR /app
 
 COPY src/frontend ./frontend
+
 COPY src/shared ./shared
 
 WORKDIR /app/frontend
