@@ -2,7 +2,7 @@ import { getFingerPrint } from '../../utils/fingerprint.util';
 
 let fingerPrint: number = getFingerPrint();
 
-export default (config: any) => {
+const interceptor = (config: any) => {
   const token = localStorage.getItem('token');
 
   if (token) {
@@ -13,3 +13,5 @@ export default (config: any) => {
 
   return config;
 };
+
+export default interceptor;
