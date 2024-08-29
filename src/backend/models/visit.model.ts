@@ -1,13 +1,5 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
-
-interface IVisit extends Document {
-  ip: string;
-  userAgent: string;
-  referrer: string;
-  geoLocation: string;
-  deviceType: string;
-  language: string;
-}
+import mongoose, { Schema, Model } from 'mongoose';
+import { IVisit } from '../../shared/interfaces/visit.model';
 
 const schema: Schema<IVisit> = new mongoose.Schema(
   {
@@ -57,4 +49,4 @@ schema.pre('save', function (next) {
 
 const Visit: Model<IVisit> = mongoose.model<IVisit>('Visit', schema);
 
-export { Visit, IVisit };
+export default Visit;

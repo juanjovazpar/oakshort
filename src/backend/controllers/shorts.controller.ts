@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { Short } from '../../shared/models/short.model';
 import { hashPassword } from '../../shared/utils/password.util';
+import Short from 'models/short.model';
 
 interface CreateShortBody {
   short: string;

@@ -1,17 +1,8 @@
 import mongoose, { Document, Schema, Model, CallbackError } from 'mongoose';
 
-import { isValidEmail } from '../utils/email';
-import { getHashedToken } from '../utils/token.util';
-
-interface IUser extends Document {
-  email: string;
-  password: string;
-  name: string;
-  isVerified: boolean;
-  verificationToken?: string;
-  resetPasswordToken?: string;
-  last_login?: Date;
-}
+import { isValidEmail } from '../../shared/utils/email';
+import { getHashedToken } from '../../shared/utils/token.util';
+import { IUser } from '../../shared/interfaces/user.model';
 
 const schema: Schema<IUser> = new Schema(
   {
@@ -71,4 +62,4 @@ schema.pre<IUser>('save', async function (next) {
 
 const User: Model<IUser> = mongoose.model<IUser>('User', schema);
 
-export { User, IUser };
+export default User;

@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { Short } from '../../shared/models/short.model';
+import Short from 'models/short.model';
 
 export const updateShort = async (req: FastifyRequest, res: FastifyReply) => {
   try {

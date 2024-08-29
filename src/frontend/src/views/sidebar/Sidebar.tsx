@@ -2,8 +2,8 @@ import React from 'react';
 import './Sidebar.css';
 import { useTranslation } from 'react-i18next';
 
-import { IShort } from '../../../../shared/models/short.model';
 import Short from '../../components/Short/Short';
+import { IShort } from '../../../../shared/interfaces/short.interface';
 
 export interface SidebarComponentProps {
   onClose: Function;

@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { Short } from '../../shared/models/short.model';
+import Short from 'models/short.model';
 import { PARAMS } from '../../shared/routes';
 import { isFutureDate, isPastDate } from '../../shared/utils/dates.utils';
 import { comparePasswords } from '../../shared/utils/password.util';

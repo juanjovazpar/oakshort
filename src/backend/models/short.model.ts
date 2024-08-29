@@ -1,31 +1,10 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 
-import { idGenerator } from '../utils/idGenerator';
-import { isValidURL } from '../utils/url.utils';
-import { isFutureDate } from '../utils/dates.utils';
-import { isPositiveInteger } from '../utils/number.utils';
-
-interface IShort {
-  lastRead: Date;
-  active: boolean;
-  target: string;
-  short: string;
-  accessCount: number;
-  createdAt: Date;
-  updatedAt: Date;
-  accessAttendsOverLimit: number;
-  _id?: string;
-  owner?: string;
-  firstRead?: Date;
-  deleted?: boolean;
-  expires?: Date;
-  activation?: Date;
-  password?: string;
-  accessLimit?: number;
-  name?: string;
-}
-
-interface IShortUpdate extends Omit<IShort, 'owner' | 'created' | 'short'> {}
+import { idGenerator } from '../../shared/utils/idGenerator';
+import { isValidURL } from '../../shared/utils/url.utils';
+import { isFutureDate } from '../../shared/utils/dates.utils';
+import { isPositiveInteger } from '../../shared/utils/number.utils';
+import { IShort, IShortUpdate } from '../../shared/interfaces/short.model';
 
 const forbiddenFieldsToUpdate = ['owner', 'created', 'short'];
 
@@ -129,4 +108,4 @@ schema.pre('updateMany', edit.bind(schema));
 
 const Short: Model<IShort> = mongoose.model<IShort>('Short', schema);
 
-export { Short, IShort };
+export default Short;
