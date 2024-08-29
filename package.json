@@ -13,6 +13,10 @@
     "url": "https://github.com/OAKDEW/oakshort/issues"
   },
   "homepage": "https://github.com/OAKDEW/oakshort#readme",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
   "dependencies": {
     "@fastify/cors": "^9.0.1",
     "@fastify/env": "^4.4.0",
@@ -34,7 +38,17 @@
     "redux": "^5.0.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.8.0",
     "@reduxjs/toolkit": "^1.9.7",
+    "@storybook/addon-essentials": "^8.2.9",
+    "@storybook/addon-interactions": "^8.2.9",
+    "@storybook/addon-links": "^8.2.9",
+    "@storybook/addon-onboarding": "^8.2.9",
+    "@storybook/addon-webpack5-compiler-swc": "^1.0.5",
+    "@storybook/blocks": "^8.2.9",
+    "@storybook/react": "^8.2.9",
+    "@storybook/react-webpack5": "^8.2.9",
+    "@storybook/test": "^8.2.9",
     "@types/bcryptjs": "^2.4.6",
     "@types/fastify-cors": "^2.1.0",
     "@types/fastify-jwt": "^0.8.1",
@@ -44,6 +58,7 @@
     "@types/nanoid": "^3.0.0",
     "@types/shortid": "^0.0.32",
     "nodemon": "^3.1.4",
+    "storybook": "^8.2.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   }
