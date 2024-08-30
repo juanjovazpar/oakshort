@@ -1,8 +1,9 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, FormEventHandler } from 'react';
 import { useSelector } from 'react-redux';
 
 import './Hello.css';
 import { useTranslation } from 'react-i18next';
+import { ILayoutState } from '../../../../store/layout/layout.slice';
 
 export interface HelloProps {
   onSubmit: Function;
@@ -10,9 +11,13 @@ export interface HelloProps {
 
 const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
-  const { isCollapsed } = useSelector((state: any) => state.layout);
+  const { isCollapsed } = useSelector(
+    (state: any): ILayoutState => state.layout
+  );
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (
+    e: FormEvent
+  ): void => {
     e.preventDefault();
     onSubmit();
   };

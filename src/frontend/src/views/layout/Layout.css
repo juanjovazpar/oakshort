@@ -24,7 +24,10 @@
   opacity: 1;
   visibility: visible;
   height: auto;
-  transition: opacity 0.3s ease, visibility 0.3s ease, height 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    height 0.3s ease;
 }
 
 .collapsed .hello-section {
@@ -60,4 +63,14 @@
 
 .side-section.collapsed-side + div {
   margin-right: calc(100% - 200px);
+}
+
+.floatingBox {
+  background-color: white;
+  height: 200px;
+  width: 250px;
+  overflow: hidden;
+  position: absolute;
+  top: 10px;
+  left: 40px;
 }

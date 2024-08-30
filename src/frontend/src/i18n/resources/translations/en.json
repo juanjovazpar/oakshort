@@ -1,4 +1,5 @@
 {
+  "GENERAL": { "OPTIONAL": "optional" },
   "FILTERS": {
     "FILTER_BY_CREATED_DATE": "Filter by created date",
     "FILTER_BY_LABEL": "Filter by label",
@@ -29,5 +30,13 @@
     "LIMIT_COUNT": "{{count}} limit",
     "LAST_VIEW_DATE": "{{date}} last view"
   },
-  "METRICS": { "TITLE": "Metrics" }
+  "METRICS": { "TITLE": "Metrics" },
+  "SHORT_FORM": {
+    "TITLE": "New Short",
+    "TARGET_INPUT_LABEL": "Target",
+    "TARGET_INPUT_PLACEHOLDER": "https://target.com",
+    "NAME_INPUT_LABEL": "Name",
+    "NAME_INPUT_PLACEHOLDER": "Short name",
+    "SAVE_BUTTON": "Save"
+  }
 }

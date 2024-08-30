@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
 import './i18n';
 
-import Layout from './views/Layout';
+import Layout from './views/layout/Layout';
 import store from './store';
 
 const root = ReactDOM.createRoot(

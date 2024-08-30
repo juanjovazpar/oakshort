@@ -13,10 +13,16 @@ const Short: React.FC<ShortProps> = ({ short }) => {
 
   return (
     <section>
-      <div>
-        <button>{t('SHORT.CLIPBOARD_BUTTON')}</button>
-      </div>
-      <div>
+      <header>
+        <div>
+          <button>{t('SHORT.CLIPBOARD_BUTTON')}</button>
+        </div>
+        <div>
+          <button>{t('SHORT.COPY_BUTTON')}</button>
+          <button>{t('SHORT.EDIT_BUTTON')}</button>
+        </div>
+      </header>
+      <section>
         <h4>{short.name}</h4>
         <p>{short.short}</p>
         <p>{short.target}</p>
@@ -25,11 +31,7 @@ const Short: React.FC<ShortProps> = ({ short }) => {
           <span>{t('SHORT.LIMIT_COUNT', { count: short.accessLimit })}</span>
           <span>{t('SHORT.LAST_VIEW_DATE', { date: short.lastRead })}</span>
         </p>
-      </div>
-      <div>
-        <button>{t('SHORT.COPY_BUTTON')}</button>
-        <button>{t('SHORT.EDIT_BUTTON')}</button>
-      </div>
+      </section>
       <Engagement metrics={metrics} />
     </section>
   );
