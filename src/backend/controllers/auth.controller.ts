@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import User from 'models/user.model';
-import { IUser } from '../../shared/interfaces/user.model';
+import User from '../models/user.model';
+import { IUser } from '../../shared/interfaces/user.interface';
 import {
   hashPassword,
   comparePasswords,

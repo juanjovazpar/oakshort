@@ -1,4 +1,4 @@
-import React, { FormEvent, FormEventHandler, MouseEventHandler } from 'react';
+import React, { FormEvent, FormEventHandler, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import './ShortForm.css';
@@ -10,17 +10,20 @@ interface ShortFormProps {
 
 const ShortForm: React.FC<ShortFormProps> = ({ short }) => {
   const { t } = useTranslation();
-
-  const handleRedirect: MouseEventHandler<HTMLButtonElement> = (
-    e: FormEvent
-  ): void => {
-    e.preventDefault();
-  };
+  const [formValues, setFormValues] = useState(short);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (
     e: FormEvent
   ): void => {
     e.preventDefault();
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
   };
 
   return (
@@ -38,19 +41,21 @@ const ShortForm: React.FC<ShortFormProps> = ({ short }) => {
           id="target"
           type="text"
           placeholder={t('SHORT_FORM.TARGET_INPUT_PLACEHOLDER')}
-          value={short.target}
+          value={formValues.target}
+          onChange={handleInputChange}
           required
         />
-        <label htmlFor="target">
-          {t('SHORT_FORM.TARGET_INPUT_LABEL')}
+        <label htmlFor="name">
+          {t('SHORT_FORM.NAME_INPUT_LABEL')}
           <small>({t('GENERAL.OPTIONAL')})</small>:
         </label>
         <input
-          name="target"
-          id="target"
+          name="name"
+          id="name"
           type="text"
-          placeholder={t('SHORT_FORM.TARGET_INPUT_PLACEHOLDER')}
-          value={short.name}
+          placeholder={t('SHORT_FORM.NAME_INPUT_PLACEHOLDER')}
+          value={formValues.name}
+          onChange={handleInputChange}
         />
         <button type="submit">{t('SHORT_FORM.SAVE_BUTTON')}</button>
       </form>

@@ -1,9 +1,11 @@
-import React, { FormEvent, FormEventHandler } from 'react';
+import React, { FormEvent, FormEventHandler, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link, Outlet } from 'react-router-dom';
 
 import './Hello.css';
 import { useTranslation } from 'react-i18next';
 import { ILayoutState } from '../../../../store/layout/layout.slice';
+import ROUTES from '../../../../routes';
 
 export interface HelloProps {
   onSubmit: Function;
@@ -14,6 +16,7 @@ const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
   const { isCollapsed } = useSelector(
     (state: any): ILayoutState => state.layout
   );
+  const [formValues, setFormValues] = useState({ url: '' });
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (
     e: FormEvent
@@ -22,17 +25,35 @@ const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
     onSubmit();
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
   return (
     <section className="hello-section">
       <form onSubmit={handleSubmit}>
-        <input type="text" name="url" />
+        <input
+          id="url"
+          name="url"
+          type="text"
+          placeholder={t('HELLO_SECTION.TARGET_INPUT_PLACEHOLDER')}
+          value={formValues.url}
+          onChange={handleInputChange}
+          required
+        />
         <button type="submit">{t('HELLO_SECTION.MAIN_BUTTON')}</button>
       </form>
       {isCollapsed && (
         <>
-          <a href="/">{t('LINKS.HELLO')}</a>
-          <a href="/signin">{t('LINKS.SIGNIN')}</a>
-          <a href="/signup">{t('LINKS.SIGNUP')}</a>
+          {/* <nav>
+            <Link to={ROUTES.SIGNIN}>{t('LINKS.SIGNIN')}</Link>
+            <Link to={ROUTES.SIGNUP}>{t('LINKS.SIGNUP')}</Link>
+          </nav>
+          <Outlet /> */}
         </>
       )}
     </section>

@@ -14,7 +14,8 @@
     "SIGNUP": "Create account"
   },
   "HELLO_SECTION": {
-    "MAIN_BUTTON": "Cut"
+    "MAIN_BUTTON": "Cut",
+    "TARGET_INPUT_PLACEHOLDER": "URL to cut!"
   },
   "SIGNIN_SECTION": {
     "MAIN_BUTTON": "Login"

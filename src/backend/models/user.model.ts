@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, Model, CallbackError } from 'mongoose';
 
 import { isValidEmail } from '../../shared/utils/email';
 import { getHashedToken } from '../../shared/utils/token.util';
-import { IUser } from '../../shared/interfaces/user.model';
+import { IUser } from '../../shared/interfaces/user.interface';
 
 const schema: Schema<IUser> = new Schema(
   {

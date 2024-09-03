@@ -4,7 +4,7 @@ import { idGenerator } from '../../shared/utils/idGenerator';
 import { isValidURL } from '../../shared/utils/url.utils';
 import { isFutureDate } from '../../shared/utils/dates.utils';
 import { isPositiveInteger } from '../../shared/utils/number.utils';
-import { IShort, IShortUpdate } from '../../shared/interfaces/short.model';
+import { IShort, IShortUpdate } from '../../shared/interfaces/short.interface';
 
 const forbiddenFieldsToUpdate = ['owner', 'created', 'short'];
 
