@@ -9,11 +9,11 @@
     "TITLE": "Dashboard Title"
   },
   "LINKS": {
-    "HELLO": "Hello!",
+    "VEIL": "Veil!",
     "SIGNIN": "Login",
     "SIGNUP": "Create account"
   },
-  "HELLO_SECTION": {
+  "VEIL_SECTION": {
     "MAIN_BUTTON": "Cut",
     "TARGET_INPUT_PLACEHOLDER": "URL to cut!"
   },

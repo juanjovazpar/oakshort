@@ -1,17 +1,16 @@
 import React, { FormEvent, FormEventHandler, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
 
-import './Hello.css';
+import './Veil.css';
 import { useTranslation } from 'react-i18next';
 import { ILayoutState } from '../../../../store/layout/layout.slice';
-import ROUTES from '../../../../routes';
+import { Outlet } from 'react-router-dom';
 
-export interface HelloProps {
+export interface VeilProps {
   onSubmit: Function;
 }
 
-const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
+const Veil: React.FC<VeilProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
   const { isCollapsed } = useSelector(
     (state: any): ILayoutState => state.layout
@@ -34,18 +33,18 @@ const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
   };
 
   return (
-    <section className="hello-section">
+    <section className="veil-section">
       <form onSubmit={handleSubmit}>
         <input
           id="url"
           name="url"
           type="text"
-          placeholder={t('HELLO_SECTION.TARGET_INPUT_PLACEHOLDER')}
+          placeholder={t('VEIL_SECTION.TARGET_INPUT_PLACEHOLDER')}
           value={formValues.url}
           onChange={handleInputChange}
           required
         />
-        <button type="submit">{t('HELLO_SECTION.MAIN_BUTTON')}</button>
+        <button type="submit">{t('VEIL_SECTION.MAIN_BUTTON')}</button>
       </form>
       {isCollapsed && (
         <>
@@ -54,10 +53,11 @@ const Hello: React.FC<HelloProps> = ({ onSubmit }) => {
             <Link to={ROUTES.SIGNUP}>{t('LINKS.SIGNUP')}</Link>
           </nav>
           <Outlet /> */}
+          <Outlet />
         </>
       )}
     </section>
   );
 };
 
-export default Hello;
+export default Veil;

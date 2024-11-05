@@ -8,7 +8,7 @@ import {
   toggleFloatingBox,
 } from '../../store/layout/layout.slice';
 import Dashboard from '../../components/Dashboard/Dashboard';
-import Hello from './components/Hello/Hello';
+import Veil from './components/Veil/Veil';
 import ShortsList from '../../components/ShortsList/ShortsList';
 import ShortForm from '../../components/ShortForm/ShortForm';
 import { IShort } from '../../../../shared/interfaces/short.interface';
@@ -97,8 +97,8 @@ const Layout: React.FC = () => {
 
   return (
     <section className={`layout ${isCollapsed ? 'collapsed' : ''}`}>
-      <header className="hello-section collapsed">
-        <Hello onSubmit={onShowDashboard} />
+      <header className="veil-section collapsed">
+        <Veil onSubmit={onShowDashboard} />
       </header>
       <section className="main-section" onClick={onDashboardClick}>
         {isFloatingBoxVisible && (

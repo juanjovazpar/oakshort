@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.hello-section {
+.veil-section {
   background-color: #75205e;
   text-align: center;
   color: white;
@@ -30,7 +30,7 @@
     height 0.3s ease;
 }
 
-.collapsed .hello-section {
+.collapsed .veil-section {
   height: 100%;
 }
 
