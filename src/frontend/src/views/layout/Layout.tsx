@@ -1,17 +1,14 @@
-import React, { MouseEventHandler } from 'react';
+import React, { useState, useEffect, MouseEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { Outlet, useLocation } from 'react-router-dom';
 import './Layout.css';
 import {
-  toggleCollapse,
   toggleCollapseSide,
   toggleFloatingBox,
 } from '../../store/layout/layout.slice';
-import Dashboard from '../../components/Dashboard/Dashboard';
-import Veil from './components/Veil/Veil';
-import ShortsList from '../../components/ShortsList/ShortsList';
 import ShortForm from '../../components/ShortForm/ShortForm';
 import { IShort } from '../../../../shared/interfaces/short.interface';
+import ROUTES from '../../routes';
 
 const shorts: IShort[] = [
   {
@@ -59,10 +56,22 @@ const shorts: IShort[] = [
 ];
 
 const Layout: React.FC = () => {
+  const location = useLocation();
   const dispatch: Function = useDispatch();
-  const { isCollapsed, isCollapsedSide, isFloatingBoxVisible } = useSelector(
+  const [isVeilActive, setIsVeilActive] = useState(true);
+  const { isCollapsedSide, isFloatingBoxVisible } = useSelector(
     (state: any) => state.layout
   );
+
+  useEffect(() => {
+    const veilRoutes = [
+      ROUTES.HOME,
+      ROUTES.SIGNIN,
+      ROUTES.SIGNUP,
+      ROUTES.FORGOTTEN,
+    ];
+    setIsVeilActive(veilRoutes.includes(location.pathname));
+  }, [location]);
 
   const onDashboardClick: MouseEventHandler<HTMLElement> = (): void => {
     if (isCollapsedSide) {
@@ -78,27 +87,27 @@ const Layout: React.FC = () => {
     }
   };
 
-  const onShowDashboard: Function = (): void => {
+  /* const onShowDashboard: Function = (): void => {
     dispatch(toggleCollapse());
-    if (isCollapsed) {
+    if (isVeilActive) {
       dispatch(toggleFloatingBox());
     }
-  };
+  }; 
 
   const onCloseSidebar: MouseEventHandler<HTMLButtonElement> = (): void => {
     if (isCollapsedSide) {
       dispatch(toggleCollapseSide());
     }
-  };
+  };*/
 
   const onCloseFloatingBox: MouseEventHandler<HTMLButtonElement> = (): void => {
     dispatch(toggleFloatingBox());
   };
 
   return (
-    <section className={`layout ${isCollapsed ? 'collapsed' : ''}`}>
+    <section className={`layout ${isVeilActive ? 'collapsed' : ''}`}>
       <header className="veil-section collapsed">
-        <Veil onSubmit={onShowDashboard} />
+        <Outlet context="veil" />
       </header>
       <section className="main-section" onClick={onDashboardClick}>
         {isFloatingBoxVisible && (
@@ -108,18 +117,20 @@ const Layout: React.FC = () => {
           </section>
         )}
 
-        <Dashboard />
+        <Outlet context="main" />
 
         <section
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}
           onClick={onSidebarClick}
         >
-          {isCollapsedSide && (
-            <>
-              <button onClick={onCloseSidebar}>X</button>
-              <ShortsList shorts={shorts} />
-            </>
-          )}
+          {/*
+              {isCollapsedSide && (
+                <>
+                  <button onClick={onCloseSidebar}>X</button>
+                  <ShortsList shorts={shorts} />
+                </>
+              )} 
+            */}
         </section>
       </section>
     </section>

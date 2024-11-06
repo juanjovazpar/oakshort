@@ -1,61 +1,24 @@
-import React, { FormEvent, FormEventHandler, useState } from 'react';
-import { useSelector } from 'react-redux';
-
-import './Veil.css';
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ILayoutState } from '../../../../store/layout/layout.slice';
-import { Outlet } from 'react-router-dom';
+import ROUTES from '../../../../routes';
+import './Veil.css';
 
-export interface VeilProps {
-  onSubmit: Function;
-}
+export interface VeilProps {}
 
-const Veil: React.FC<VeilProps> = ({ onSubmit }) => {
+const Veil: React.FC<VeilProps> = () => {
   const { t } = useTranslation();
-  const { isCollapsed } = useSelector(
-    (state: any): ILayoutState => state.layout
-  );
-  const [formValues, setFormValues] = useState({ url: '' });
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (
-    e: FormEvent
-  ): void => {
-    e.preventDefault();
-    onSubmit();
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
 
   return (
     <section className="veil-section">
-      <form onSubmit={handleSubmit}>
-        <input
-          id="url"
-          name="url"
-          type="text"
-          placeholder={t('VEIL_SECTION.TARGET_INPUT_PLACEHOLDER')}
-          value={formValues.url}
-          onChange={handleInputChange}
-          required
-        />
-        <button type="submit">{t('VEIL_SECTION.MAIN_BUTTON')}</button>
-      </form>
-      {isCollapsed && (
-        <>
-          {/* <nav>
-            <Link to={ROUTES.SIGNIN}>{t('LINKS.SIGNIN')}</Link>
-            <Link to={ROUTES.SIGNUP}>{t('LINKS.SIGNUP')}</Link>
-          </nav>
-          <Outlet /> */}
-          <Outlet />
-        </>
-      )}
+      <Outlet />
+
+      <div>
+        <Link to={ROUTES.HOME}>{t('VEIL_SECTION.CUTTER_LINK')}</Link>
+        <Link to={ROUTES.SIGNIN}>{t('VEIL_SECTION.SIGNIN_LINK')}</Link>
+        <Link to={ROUTES.SIGNUP}>{t('VEIL_SECTION.SIGNUP_LINK')}</Link>
+        <Link to={ROUTES.FORGOTTEN}>{t('VEIL_SECTION.FORGOTTEN_LINK')}</Link>
+      </div>
     </section>
   );
 };

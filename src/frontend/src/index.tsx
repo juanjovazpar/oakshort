@@ -1,37 +1,104 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
 import './i18n';
-
+import { AnimatePresence, motion } from 'framer-motion';
 import Layout from './views/layout/Layout';
 import store from './store';
 import Dashboard from './components/Dashboard/Dashboard';
 import Main from './views/layout/components/Main/Main';
+import Veil from './views/layout/components/Veil/Veil';
+import ShortInput from './components/ShortInput/ShortInput';
+import { shortsLoader } from './loaders/shorts';
+import { initLoader } from './loaders/init';
+import Forgotten from './components/Forgotten/Forgotten';
+import Signin from './components/Signin/Signin';
+import Signup from './components/Signup/Signup';
+import ROUTES from './routes';
+
+const VEIL_COMPONENTS = [
+  {
+    path: ROUTES.HOME,
+    component: <ShortInput />,
+  },
+  {
+    path: ROUTES.SIGNIN,
+    component: <Signin />,
+  },
+  {
+    path: ROUTES.SIGNUP,
+    component: <Signup />,
+  },
+  {
+    path: ROUTES.FORGOTTEN,
+    component: <Forgotten />,
+  },
+];
+
+const AnimatedRoute = (props: any) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.2 }}
+  >
+    {props.children}
+  </motion.div>
+);
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence>
+      <Routes location={location} key={location.key}>
+        <Route path={ROUTES.HOME} element={<Layout />}>
+          <Route
+            element={
+              <AnimatedRoute>
+                <Veil />
+              </AnimatedRoute>
+            }
+            loader={initLoader}
+          >
+            {VEIL_COMPONENTS.map(({ path, component }, key) => (
+              <Route
+                key={key}
+                path={path}
+                element={<AnimatedRoute>{component}</AnimatedRoute>}
+              ></Route>
+            ))}
+          </Route>
+          <Route element={<Main />}>
+            <Route
+              path={ROUTES.MAIN}
+              element={<Dashboard />}
+              loader={shortsLoader}
+            />
+          </Route>
+        </Route>
+      </Routes>
+    </AnimatePresence>
+  );
+};
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route element={<Dashboard />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/login" element={<Dashboard />} />
-              <Route path="/register" element={<Dashboard />} />
-              <Route path="/forgotten" element={<Dashboard />} />
-            </Route>
-
-            <Route element={<Main />}>
-              <Route path="/hi" element={<Dashboard />} />
-            </Route>
-          </Route>
-        </Routes>
+        <AnimatedRoutes />
       </Router>
     </Provider>
   </React.StrictMode>

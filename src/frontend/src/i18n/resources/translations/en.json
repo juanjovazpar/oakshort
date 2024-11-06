@@ -15,7 +15,11 @@
   },
   "VEIL_SECTION": {
     "MAIN_BUTTON": "Cut",
-    "TARGET_INPUT_PLACEHOLDER": "URL to cut!"
+    "TARGET_INPUT_PLACEHOLDER": "URL to cut!",
+    "CUTTER_LINK": "Cut",
+    "SIGNIN_LINK": "Login",
+    "SIGNUP_LINK": "Create account",
+    "FORGOTTEN_LINK": "I forgot!"
   },
   "SIGNIN_SECTION": {
     "MAIN_BUTTON": "Login"
