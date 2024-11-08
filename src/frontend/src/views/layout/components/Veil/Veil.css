@@ -1,19 +1,26 @@
 input[type='text'] {
-  border: 2px solid white;
+  border: 3px solid #6f6f6f;
   background-color: transparent;
-  padding: 10px 15px;
-  border-radius: 5px;
-  color: white;
+  padding: 15px 25px;
+  border-radius: 60px;
+  font-size: 30px;
+  width: 500px;
 }
 
 .veil-section {
-  .shorts-list {
+  .shorts-summary {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
     position: absolute;
     bottom: 5vw;
     right: 5vw;
+    text-align: left;
+
+    .shorts-list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
   }
 }

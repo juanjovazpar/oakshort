@@ -22,24 +22,33 @@ import { initLoader } from './loaders/init';
 import Forgotten from './components/Forgotten/Forgotten';
 import Signin from './components/Signin/Signin';
 import Signup from './components/Signup/Signup';
+import ResetPassword from './components/ResetPassword/ResetPassword';
 import ROUTES from './routes';
 
-const VEIL_COMPONENTS = [
+export const VEIL_COMPONENTS = [
   {
     path: ROUTES.HOME,
     component: <ShortInput />,
+    label: 'VEIL_SECTION.CUTTER_LINK',
   },
   {
     path: ROUTES.SIGNIN,
     component: <Signin />,
+    label: 'VEIL_SECTION.SIGNIN_LINK',
   },
   {
     path: ROUTES.SIGNUP,
     component: <Signup />,
+    label: 'VEIL_SECTION.SIGNUP_LINK',
   },
   {
     path: ROUTES.FORGOTTEN,
     component: <Forgotten />,
+    label: 'VEIL_SECTION.FORGOTTEN_LINK',
+  },
+  {
+    path: ROUTES.RESET_PASSWORD,
+    component: <ResetPassword />,
   },
 ];
 

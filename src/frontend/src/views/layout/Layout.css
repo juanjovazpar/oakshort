@@ -7,9 +7,9 @@
 }
 
 .veil-section {
-  background-color: #75205e;
+  background-color: #e5f29c;
   text-align: center;
-  color: white;
+  color: #4a4a4a;
   height: 60px;
   transition: height 0.3s ease;
 }
@@ -18,7 +18,7 @@
   flex: 1;
   display: flex;
   position: relative;
-  background-color: lightcoral;
+  background-color: #eeeeee;
   text-align: center;
   color: grey;
   opacity: 1;
@@ -42,7 +42,7 @@
 }
 
 .side-section {
-  background-color: lightgreen;
+  background-color: white;
   width: 100px;
   height: 100%;
   position: absolute;

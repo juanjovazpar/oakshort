@@ -19,7 +19,11 @@
     "CUTTER_LINK": "Cut",
     "SIGNIN_LINK": "Login",
     "SIGNUP_LINK": "Create account",
-    "FORGOTTEN_LINK": "I forgot!"
+    "FORGOTTEN_LINK": "I forgot!",
+    "SHORTS_LIST": {
+      "TITLE": "Your most popular",
+      "SUBTITLE": "created shorts"
+    }
   },
   "SIGNIN_SECTION": {
     "MAIN_BUTTON": "Login"

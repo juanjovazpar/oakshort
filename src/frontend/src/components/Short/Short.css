@@ -4,5 +4,7 @@
   border-radius: 10px;
   width: 15vw;
   height: 15vw;
+  border: 2px solid #6f6f6f;
+  padding: 10px;
   overflow: hidden;
 }

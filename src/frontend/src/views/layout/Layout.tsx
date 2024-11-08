@@ -7,8 +7,8 @@ import {
   toggleFloatingBox,
 } from '../../store/layout/layout.slice';
 import ShortForm from '../../components/ShortForm/ShortForm';
-import ROUTES from '../../routes';
 import { SHORT_MOCKS } from '../../mocks/shorts.mocks';
+import { VEIL_COMPONENTS } from '../../index';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -19,12 +19,7 @@ const Layout: React.FC = () => {
   );
 
   useEffect(() => {
-    const veilRoutes = [
-      ROUTES.HOME,
-      ROUTES.SIGNIN,
-      ROUTES.SIGNUP,
-      ROUTES.FORGOTTEN,
-    ];
+    const veilRoutes = VEIL_COMPONENTS.map(({ path }) => path);
     setIsVeilActive(veilRoutes.includes(location.pathname));
   }, [location]);
 
@@ -78,14 +73,7 @@ const Layout: React.FC = () => {
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}
           onClick={onSidebarClick}
         >
-          {/*
-              {isCollapsedSide && (
-                <>
-                  <button onClick={onCloseSidebar}>X</button>
-                  <ShortsList shorts={shorts} />
-                </>
-              )} 
-            */}
+          <Outlet context="side" />
         </section>
       </section>
     </section>
