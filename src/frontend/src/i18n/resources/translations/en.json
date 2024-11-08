@@ -14,6 +14,9 @@
     "SIGNUP": "Create account"
   },
   "VEIL_SECTION": {
+    "NAME": "OAKshort",
+    "TITLE_1": "Control your",
+    "TITLE_2": "Links with",
     "MAIN_BUTTON": "Cut",
     "TARGET_INPUT_PLACEHOLDER": "URL to cut!",
     "CUTTER_LINK": "Cut",

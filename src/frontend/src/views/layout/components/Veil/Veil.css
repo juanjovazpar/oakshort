@@ -8,6 +8,24 @@ input[type='text'] {
 }
 
 .veil-section {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+
+  .veil-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30%;
+    text-align: left;
+
+    .veil-links {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+    }
+  }
+
   .shorts-summary {
     display: flex;
     flex-direction: column;

@@ -11,9 +11,14 @@ const Veil: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="veil-section">
+    <>
       <section className="veil-content">
+        <h2>{t('VEIL_SECTION.TITLE_1')}</h2>
+        <h2>{t('VEIL_SECTION.TITLE_2')}</h2>
+        <h1>{t('VEIL_SECTION.NAME')}</h1>
+
         <Outlet />
+
         <div className="veil-links">
           {VEIL_COMPONENTS.map(
             ({ path, label }, key) =>
@@ -29,7 +34,7 @@ const Veil: React.FC = () => {
       {SHORT_MOCKS?.length > 0 && (
         <section className="shorts-summary">
           <h3>{t('VEIL_SECTION.SHORTS_LIST.TITLE')}</h3>
-          <p>{t('VEIL_SECTION.SHORTS_LIST.SUBTITLE')}</p>
+          <h4>{t('VEIL_SECTION.SHORTS_LIST.SUBTITLE')}</h4>
 
           <div className="shorts-list">
             {SHORT_MOCKS.slice(0, 3).map((short) => (
@@ -38,7 +43,7 @@ const Veil: React.FC = () => {
           </div>
         </section>
       )}
-    </section>
+    </>
   );
 };
 
