@@ -2,6 +2,7 @@ import React from 'react';
 import Engagement from '../Engagement/Engagement';
 import { useTranslation } from 'react-i18next';
 import { IShort } from '../../../../shared/interfaces/short.interface';
+import './Short.css';
 
 interface ShortProps {
   short: IShort;
@@ -12,7 +13,7 @@ const Short: React.FC<ShortProps> = ({ short }) => {
   const metrics = {};
 
   return (
-    <section>
+    <section className="short-card">
       <header>
         <div>
           <button>{t('SHORT.CLIPBOARD_BUTTON')}</button>

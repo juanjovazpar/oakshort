@@ -18,7 +18,6 @@ const ShortInput: React.FC<ShortInputProps> = () => {
 
   return (
     <div>
-      <h3>ShortInput</h3>
       <form onSubmit={handleSubmit}>
         <input
           id="url"

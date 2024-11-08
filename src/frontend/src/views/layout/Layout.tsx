@@ -7,53 +7,8 @@ import {
   toggleFloatingBox,
 } from '../../store/layout/layout.slice';
 import ShortForm from '../../components/ShortForm/ShortForm';
-import { IShort } from '../../../../shared/interfaces/short.interface';
 import ROUTES from '../../routes';
-
-const shorts: IShort[] = [
-  {
-    _id: '6693bf918dd280c4837b1ce1',
-    name: 'SF Living Store - Summer sale',
-    active: true,
-    target: 'http://expires.com',
-    accessCount: 3,
-    deleted: false,
-    expires: new Date('2024-07-14T14:09:00.973Z'),
-    short: 'QO97YEF0_I',
-    createdAt: new Date('2024-07-14T12:07:45.488Z'),
-    updatedAt: new Date('2024-07-14T12:11:00.525Z'),
-    lastRead: new Date('2024-07-14T12:11:00.524Z'),
-    accessAttendsOverLimit: 0,
-  },
-  {
-    _id: '6693bf918dd280c4837b1ce1',
-    name: 'SF Living Store - Summer sale',
-    active: true,
-    target: 'http://expires.com',
-    accessCount: 3,
-    deleted: false,
-    expires: new Date('2024-07-14T14:09:00.973Z'),
-    short: 'QO97YEF0_I',
-    createdAt: new Date('2024-07-14T12:07:45.488Z'),
-    updatedAt: new Date('2024-07-14T12:11:00.525Z'),
-    lastRead: new Date('2024-07-14T12:11:00.524Z'),
-    accessAttendsOverLimit: 0,
-  },
-  {
-    _id: '6693bf918dd280c4837b1ce1',
-    name: 'SF Living Store - Summer sale',
-    active: true,
-    target: 'http://expires.com',
-    accessCount: 3,
-    deleted: false,
-    expires: new Date('2024-07-14T14:09:00.973Z'),
-    short: 'QO97YEF0_I',
-    createdAt: new Date('2024-07-14T12:07:45.488Z'),
-    updatedAt: new Date('2024-07-14T12:11:00.525Z'),
-    lastRead: new Date('2024-07-14T12:11:00.524Z'),
-    accessAttendsOverLimit: 0,
-  },
-];
+import { SHORT_MOCKS } from '../../mocks/shorts.mocks';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -110,14 +65,14 @@ const Layout: React.FC = () => {
         <Outlet context="veil" />
       </header>
       <section className="main-section" onClick={onDashboardClick}>
+        <Outlet context="main" />
+
         {isFloatingBoxVisible && (
           <section className="floatingBox">
             <button onClick={onCloseFloatingBox}>X</button>
-            <ShortForm short={shorts[0]} />
+            <ShortForm short={SHORT_MOCKS[0]} />
           </section>
         )}
-
-        <Outlet context="main" />
 
         <section
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}

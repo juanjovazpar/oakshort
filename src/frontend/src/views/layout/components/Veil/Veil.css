@@ -5,3 +5,15 @@ input[type='text'] {
   border-radius: 5px;
   color: white;
 }
+
+.veil-section {
+  .shorts-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 5vw;
+    right: 5vw;
+  }
+}
