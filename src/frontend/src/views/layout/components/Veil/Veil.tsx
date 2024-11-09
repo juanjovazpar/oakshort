@@ -31,7 +31,7 @@ const Veil: React.FC = () => {
         </div>
       </section>
 
-      {SHORT_MOCKS?.length > 0 && (
+      {/* {SHORT_MOCKS?.length > 0 && (
         <section className="shorts-summary">
           <h3>{t('VEIL_SECTION.SHORTS_LIST.TITLE')}</h3>
           <h4>{t('VEIL_SECTION.SHORTS_LIST.SUBTITLE')}</h4>
@@ -42,7 +42,7 @@ const Veil: React.FC = () => {
             ))}
           </div>
         </section>
-      )}
+      )} */}
     </>
   );
 };

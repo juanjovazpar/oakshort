@@ -7,7 +7,7 @@ export interface ILayoutState {
 
 const initialState: ILayoutState = {
   isCollapsedSide: false,
-  isFloatingBoxVisible: false,
+  isFloatingBoxVisible: true,
 };
 
 const layoutSlice = createSlice({

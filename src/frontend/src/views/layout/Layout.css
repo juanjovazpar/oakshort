@@ -12,6 +12,23 @@
   color: #4a4a4a;
   height: 60px;
   transition: height 0.3s ease;
+
+  .header-short-input {
+    padding: 0.25rem 3rem;
+
+    input {
+      border-width: 2px;
+      padding: 10px 15px;
+      border-radius: 60px;
+      font-size: 15px;
+    }
+
+    button {
+      right: 5px;
+      top: 4px;
+      padding: 7px;
+    }
+  }
 }
 
 .main-section {
@@ -67,10 +84,13 @@
 
 .floatingBox {
   background-color: white;
-  height: 200px;
-  width: 250px;
+  height: 300px;
+  width: 500px;
   overflow: hidden;
   position: absolute;
+  border-radius: 0.5rem;
+  border: 2px solid;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   top: 10px;
   left: 40px;
 }

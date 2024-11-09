@@ -1,10 +1,10 @@
 import axiosInstance from './axios';
 
-import { ROUTES } from '../../../shared/routes';
-
 const service = {
-  getShorts: async () => await axiosInstance.get(ROUTES.SHORTS),
-  createShort: async () => await axiosInstance.post(ROUTES.SHORTS),
+  getShorts: async () =>
+    await axiosInstance.get('http://localhost:4000/shorts'),
+  createShort: async (short: any) =>
+    await axiosInstance.post('http://localhost:4000/shorts', short),
 };
 
 export default service;

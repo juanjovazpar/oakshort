@@ -13,7 +13,6 @@ import './i18n';
 import { AnimatePresence, motion } from 'framer-motion';
 import Layout from './views/layout/Layout';
 import store from './store';
-import Dashboard from './components/Dashboard/Dashboard';
 import Main from './views/layout/components/Main/Main';
 import Veil from './views/layout/components/Veil/Veil';
 import ShortInput from './components/ShortInput/ShortInput';
@@ -25,8 +24,6 @@ import Signup from './components/Signup/Signup';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import ROUTES from './routes';
 import NotFound from './views/layout/components/NotFound/NotFound';
-import ShortsList from './components/ShortsList/ShortsList';
-import { SHORT_MOCKS } from './mocks/shorts.mocks';
 
 export const VEIL_COMPONENTS = [
   {

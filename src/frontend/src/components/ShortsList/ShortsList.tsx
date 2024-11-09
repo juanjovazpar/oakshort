@@ -25,6 +25,7 @@ const ShortsList: React.FC<ShortsListProps> = ({ shorts }) => {
             <Short short={short} />
           </li>
         ))}
+        <li>here are the filters</li>
       </ul>
     </section>
   );

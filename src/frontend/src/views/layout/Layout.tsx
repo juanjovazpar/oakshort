@@ -39,30 +39,17 @@ const Layout: React.FC = () => {
     }
   };
 
-  /* const onShowDashboard: Function = (): void => {
-    dispatch(toggleCollapse());
-    if (isVeilActive) {
-      dispatch(toggleFloatingBox());
-    }
-  }; 
-
-  const onCloseSidebar: MouseEventHandler<HTMLButtonElement> = (): void => {
-    if (isCollapsedSide) {
-      dispatch(toggleCollapseSide());
-    }
-  };*/
-
   const onCloseFloatingBox: MouseEventHandler<HTMLButtonElement> = (): void => {
     dispatch(toggleFloatingBox());
   };
 
   return (
     <section className={`layout ${isVeilActive ? 'collapsed' : ''}`}>
-      <header className="veil-section collapsed">
+      <header className="veil-section">
         {!location.pathname.startsWith(ROUTES.MAIN) && <Outlet />}
 
         {location.pathname.startsWith(ROUTES.MAIN) && (
-          <div>
+          <div className="header-short-input">
             <ShortInput />
           </div>
         )}
@@ -71,7 +58,7 @@ const Layout: React.FC = () => {
       <section className="main-section" onClick={onDashboardClick}>
         {location.pathname.startsWith(ROUTES.MAIN) && <Outlet />}
 
-        {!isFloatingBoxVisible && !isCollapsedSide && (
+        {isFloatingBoxVisible && !isCollapsedSide && (
           <section className="floatingBox">
             <button onClick={onCloseFloatingBox}>X</button>
             <ShortForm short={SHORT_MOCKS[0]} />
