@@ -29,10 +29,22 @@
     }
   },
   "SIGNIN_SECTION": {
-    "MAIN_BUTTON": "Login"
+    "MAIN_BUTTON": "Login",
+    "EMAIL_PLACEHOLDER": "Your email",
+    "PASSWORD_PLACEHOLDER": "Your password"
   },
   "SIGNUP_SECTION": {
-    "MAIN_BUTTON": "Create account"
+    "MAIN_BUTTON": "Create account",
+    "EMAIL_PLACEHOLDER": "Your email"
+  },
+  "FORGOTTEN": {
+    "EMAIL_PLACEHOLDER": "Your email",
+    "MAIN_BUTTON": "Recover password"
+  },
+  "RESET_PASSWORD": {
+    "PASSWORD_PLACEHOLDER": "New password",
+    "PASSWORD_CONFIRMATION_PLACEHOLDER": "Confirm new password",
+    "MAIN_BUTTON": "Set new password"
   },
   "SHORT": {
     "EDIT_BUTTON": "Edit",

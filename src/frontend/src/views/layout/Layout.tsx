@@ -9,6 +9,8 @@ import {
 import ShortForm from '../../components/ShortForm/ShortForm';
 import { SHORT_MOCKS } from '../../mocks/shorts.mocks';
 import { VEIL_COMPONENTS } from '../../index';
+import ROUTES from '../../routes';
+import ShortInput from '../../components/ShortInput/ShortInput';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -57,12 +59,19 @@ const Layout: React.FC = () => {
   return (
     <section className={`layout ${isVeilActive ? 'collapsed' : ''}`}>
       <header className="veil-section collapsed">
-        <Outlet context="veil" />
-      </header>
-      <section className="main-section" onClick={onDashboardClick}>
-        <Outlet context="main" />
+        {!location.pathname.startsWith(ROUTES.MAIN) && <Outlet />}
 
-        {isFloatingBoxVisible && (
+        {location.pathname.startsWith(ROUTES.MAIN) && (
+          <div>
+            <ShortInput />
+          </div>
+        )}
+      </header>
+
+      <section className="main-section" onClick={onDashboardClick}>
+        {location.pathname.startsWith(ROUTES.MAIN) && <Outlet />}
+
+        {!isFloatingBoxVisible && !isCollapsedSide && (
           <section className="floatingBox">
             <button onClick={onCloseFloatingBox}>X</button>
             <ShortForm short={SHORT_MOCKS[0]} />
@@ -73,7 +82,7 @@ const Layout: React.FC = () => {
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}
           onClick={onSidebarClick}
         >
-          <Outlet context="side" />
+          {location.pathname.startsWith(ROUTES.SHORT_DETAILS) && <Outlet />}
         </section>
       </section>
     </section>

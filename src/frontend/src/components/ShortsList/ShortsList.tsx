@@ -13,15 +13,19 @@ const ShortsList: React.FC<ShortsListProps> = ({ shorts }) => {
   const { t } = useTranslation();
 
   return (
-    <section>
+    <section className="shorts-list">
       <div>
         <button>{t('FILTERS.FILTER_BY_CREATED_DATE')}</button>
         <button>{t('FILTERS.FILTER_BY_LABEL')}</button>
         <button>{t('FILTERS.FILTER_BY_EXPIRED')}</button>
       </div>
-      {shorts.map((short: IShort, key: number) => (
-        <Short short={short} key={key} />
-      ))}
+      <ul>
+        {shorts.map((short: IShort, key: number) => (
+          <li key={key}>
+            <Short short={short} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };

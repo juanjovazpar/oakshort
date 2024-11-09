@@ -1,11 +1,16 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import Dashboard from '../../../../components/Dashboard/Dashboard';
+import ShortsList from '../../../../components/ShortsList/ShortsList';
+import { SHORT_MOCKS } from '../../../../mocks/shorts.mocks';
+
+import './Main.css';
 
 export interface MainProps {}
 
 const Main: React.FC<MainProps> = () => (
-  <section className="main-section">
-    <Outlet />
+  <section className="main-content">
+    <Dashboard />
+    <ShortsList shorts={SHORT_MOCKS} />
   </section>
 );
 

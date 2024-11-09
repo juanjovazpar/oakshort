@@ -24,6 +24,9 @@ import Signin from './components/Signin/Signin';
 import Signup from './components/Signup/Signup';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import ROUTES from './routes';
+import NotFound from './views/layout/components/NotFound/NotFound';
+import ShortsList from './components/ShortsList/ShortsList';
+import { SHORT_MOCKS } from './mocks/shorts.mocks';
 
 export const VEIL_COMPONENTS = [
   {
@@ -70,14 +73,7 @@ const AnimatedRoutes = () => {
     <AnimatePresence>
       <Routes location={location} key={location.key}>
         <Route path={ROUTES.HOME} element={<Layout />}>
-          <Route
-            element={
-              <AnimatedRoute>
-                <Veil />
-              </AnimatedRoute>
-            }
-            loader={initLoader}
-          >
+          <Route element={<Veil />} loader={initLoader}>
             {VEIL_COMPONENTS.map(({ path, component }, key) => (
               <Route
                 key={key}
@@ -86,13 +82,12 @@ const AnimatedRoutes = () => {
               ></Route>
             ))}
           </Route>
-          <Route element={<Main />}>
-            <Route
-              path={ROUTES.MAIN}
-              element={<Dashboard />}
-              loader={shortsLoader}
-            />
-          </Route>
+          <Route
+            path={ROUTES.MAIN}
+            element={<Main />}
+            loader={shortsLoader}
+          ></Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </AnimatePresence>

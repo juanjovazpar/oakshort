@@ -1,0 +1,12 @@
+.short-input {
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 50px;
+  }
+}

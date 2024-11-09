@@ -6,6 +6,7 @@ const ROUTES = {
   FORGOTTEN: `/forgotten`,
   RESET_PASSWORD: `/reset-password`,
   MAIN: `/hi!`,
+  SHORT_DETAILS: `/short`,
 };
 
 export default ROUTES;

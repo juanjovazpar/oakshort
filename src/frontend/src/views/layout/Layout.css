@@ -7,7 +7,7 @@
 }
 
 .veil-section {
-  background-color: #e5f29c;
+  background-color: #f4e082;
   text-align: center;
   color: #4a4a4a;
   height: 60px;
@@ -17,9 +17,9 @@
 .main-section {
   flex: 1;
   display: flex;
+  flex-direction: column;
   position: relative;
   background-color: #eeeeee;
-  text-align: center;
   color: grey;
   opacity: 1;
   visibility: visible;
