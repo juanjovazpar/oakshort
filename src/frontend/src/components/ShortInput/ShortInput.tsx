@@ -1,35 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ROUTES from '../../routes';
 
 import './ShortInput.css';
 import service from '../../services/shorts.service';
+import Shake from '../../animations/shake';
 
-interface ShortInputProps {}
+interface ShortInputProps {
+  onCreation?: (short: any) => void;
+}
 
-const ShortInput: React.FC<ShortInputProps> = () => {
+const ShortInput: React.FC<ShortInputProps> = ({ onCreation }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  let loading: boolean = false;
-  let error: string = '';
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const createShort = async (short: any) => {
+    setLoading(true);
+    setErrorMsg('');
+
     try {
-      loading = true;
-      await service.createShort(short);
+      const response = await service.createShort(short);
+
+      // TODO: Simplify payload response
+      onCreation && onCreation(response.data.payload);
 
       if (!location.pathname.startsWith(ROUTES.MAIN)) {
         navigate(ROUTES.MAIN);
       }
     } catch (e) {
-      console.log(e);
-      error = 'Error creating short';
+      setErrorMsg(t('SHORT_INPUT.CREATION_ERROR'));
     } finally {
-      error = '';
-      loading = false;
+      setLoading(false);
     }
   };
 
@@ -41,22 +46,23 @@ const ShortInput: React.FC<ShortInputProps> = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="short-input" autoComplete="off">
-        <input
-          id="target"
-          name="target"
-          type="text"
-          placeholder={t('VEIL_SECTION.TARGET_INPUT_PLACEHOLDER')}
-          disabled={loading}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {t('VEIL_SECTION.MAIN_BUTTON')}
-        </button>
-        {error && <p>{error}</p>}
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="short-input" autoComplete="off">
+      <Shake shaking={!!errorMsg}>
+        <>
+          <input
+            id="target"
+            name="target"
+            type="text"
+            placeholder={t('SHORT_INPUT.TARGET_INPUT_PLACEHOLDER')}
+            disabled={loading}
+            required
+          />
+          <button type="submit" disabled={loading}>
+            {t('SHORT_INPUT.MAIN_BUTTON')}
+          </button>
+        </>
+      </Shake>
+    </form>
   );
 };
 

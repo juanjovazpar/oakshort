@@ -2,23 +2,19 @@ import React, { useState, useEffect, MouseEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
 import './Layout.css';
-import {
-  toggleCollapseSide,
-  toggleFloatingBox,
-} from '../../store/layout/layout.slice';
-import ShortForm from '../../components/ShortForm/ShortForm';
-import { SHORT_MOCKS } from '../../mocks/shorts.mocks';
+import { toggleCollapseSide } from '../../store/layout/layout.slice';
 import { VEIL_COMPONENTS } from '../../index';
 import ROUTES from '../../routes';
 import ShortInput from '../../components/ShortInput/ShortInput';
+import WizardShortForm from '../../components/WizardShortForm/WizardShortForm';
+import FadeIn from '../../animations/fadein';
 
 const Layout: React.FC = () => {
   const location = useLocation();
   const dispatch: Function = useDispatch();
   const [isVeilActive, setIsVeilActive] = useState(true);
-  const { isCollapsedSide, isFloatingBoxVisible } = useSelector(
-    (state: any) => state.layout
-  );
+  const [createdShort, setCreatedShort] = useState();
+  const { isCollapsedSide } = useSelector((state: any) => state.layout);
 
   useEffect(() => {
     const veilRoutes = VEIL_COMPONENTS.map(({ path }) => path);
@@ -40,7 +36,11 @@ const Layout: React.FC = () => {
   };
 
   const onCloseFloatingBox: MouseEventHandler<HTMLButtonElement> = (): void => {
-    dispatch(toggleFloatingBox());
+    setCreatedShort(undefined);
+  };
+
+  const onNewShortCreated = (short: any) => {
+    setCreatedShort(short);
   };
 
   return (
@@ -50,7 +50,7 @@ const Layout: React.FC = () => {
 
         {location.pathname.startsWith(ROUTES.MAIN) && (
           <div className="header-short-input">
-            <ShortInput />
+            <ShortInput onCreation={onNewShortCreated} />
           </div>
         )}
       </header>
@@ -58,11 +58,18 @@ const Layout: React.FC = () => {
       <section className="main-section" onClick={onDashboardClick}>
         {location.pathname.startsWith(ROUTES.MAIN) && <Outlet />}
 
-        {isFloatingBoxVisible && !isCollapsedSide && (
-          <section className="floatingBox">
-            <button onClick={onCloseFloatingBox}>X</button>
-            <ShortForm short={SHORT_MOCKS[0]} />
-          </section>
+        {createdShort && !isCollapsedSide && (
+          <FadeIn>
+            <section className="floatingbox">
+              <button
+                className="floatingbox-close-btn"
+                onClick={onCloseFloatingBox}
+              >
+                X
+              </button>
+              <WizardShortForm short={createdShort} />
+            </section>
+          </FadeIn>
         )}
 
         <section

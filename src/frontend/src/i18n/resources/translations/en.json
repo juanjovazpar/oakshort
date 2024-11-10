@@ -13,12 +13,15 @@
     "SIGNIN": "Login",
     "SIGNUP": "Create account"
   },
+  "SHORT_INPUT": {
+    "MAIN_BUTTON": "Cut",
+    "TARGET_INPUT_PLACEHOLDER": "URL to cut!",
+    "CREATION_ERROR": "Error creating short"
+  },
   "VEIL_SECTION": {
     "NAME": "OAKshort",
     "TITLE_1": "Control your",
     "TITLE_2": "Links with",
-    "MAIN_BUTTON": "Cut",
-    "TARGET_INPUT_PLACEHOLDER": "URL to cut!",
     "CUTTER_LINK": "Cut",
     "SIGNIN_LINK": "Login",
     "SIGNUP_LINK": "Create account",

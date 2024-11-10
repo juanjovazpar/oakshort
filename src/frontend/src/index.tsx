@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
 import './i18n';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import Layout from './views/layout/Layout';
 import store from './store';
 import Main from './views/layout/components/Main/Main';
@@ -24,6 +24,7 @@ import Signup from './components/Signup/Signup';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import ROUTES from './routes';
 import NotFound from './views/layout/components/NotFound/NotFound';
+import FadeIn from './animations/fadein';
 
 export const VEIL_COMPONENTS = [
   {
@@ -52,17 +53,6 @@ export const VEIL_COMPONENTS = [
   },
 ];
 
-const AnimatedRoute = (props: any) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.2 }}
-  >
-    {props.children}
-  </motion.div>
-);
-
 const AnimatedRoutes = () => {
   const location = useLocation();
 
@@ -75,7 +65,7 @@ const AnimatedRoutes = () => {
               <Route
                 key={key}
                 path={path}
-                element={<AnimatedRoute>{component}</AnimatedRoute>}
+                element={<FadeIn>{component}</FadeIn>}
               ></Route>
             ))}
           </Route>

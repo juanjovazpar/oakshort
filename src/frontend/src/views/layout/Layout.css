@@ -82,10 +82,9 @@
   margin-right: calc(100% - 200px);
 }
 
-.floatingBox {
+.floatingbox {
   background-color: white;
-  height: 300px;
-  width: 500px;
+  width: 400px;
   overflow: hidden;
   position: absolute;
   border-radius: 0.5rem;
@@ -93,6 +92,24 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   top: 10px;
   left: 40px;
+  padding: 20px 30px 15px 30px;
+  overflow: hidden;
+
+  .floatingbox-close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 7px;
+  }
+
+  input[type='text'] {
+    border: 2px solid #6f6f6f;
+    background-color: #ffffff30;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+  }
 }
 
 h1,

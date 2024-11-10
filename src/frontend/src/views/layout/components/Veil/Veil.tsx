@@ -3,8 +3,6 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Veil.css';
 import { VEIL_COMPONENTS } from '../../../../index';
-import { SHORT_MOCKS } from '../../../../mocks/shorts.mocks';
-import Short from '../../../../components/Short/Short';
 
 const Veil: React.FC = () => {
   const location = useLocation();
