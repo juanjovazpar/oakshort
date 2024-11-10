@@ -6,15 +6,14 @@ import ROUTES from '../../routes';
 import './ShortInput.css';
 import service from '../../services/shorts.service';
 import Shake from '../../animations/shake';
+import { setRecentlyCreatedShort } from '../../store/layout/layout.slice';
+import { useDispatch } from 'react-redux';
 
-interface ShortInputProps {
-  onCreation?: (short: any) => void;
-}
-
-const ShortInput: React.FC<ShortInputProps> = ({ onCreation }) => {
+const ShortInput = () => {
+  const { t } = useTranslation();
+  const dispatch: Function = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -26,12 +25,13 @@ const ShortInput: React.FC<ShortInputProps> = ({ onCreation }) => {
       const response = await service.createShort(short);
 
       // TODO: Simplify payload response
-      onCreation && onCreation(response.data.payload);
+      dispatch(setRecentlyCreatedShort(response.data.payload));
 
       if (!location.pathname.startsWith(ROUTES.MAIN)) {
         navigate(ROUTES.MAIN);
       }
     } catch (e) {
+      console.log(e);
       setErrorMsg(t('SHORT_INPUT.CREATION_ERROR'));
     } finally {
       setLoading(false);
