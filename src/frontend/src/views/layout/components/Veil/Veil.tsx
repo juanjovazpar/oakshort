@@ -11,13 +11,13 @@ const Veil: React.FC = () => {
   return (
     <>
       <section className="veil-content">
-        <h2>{t('VEIL_SECTION.TITLE_1')}</h2>
-        <h2>{t('VEIL_SECTION.TITLE_2')}</h2>
-        <h1>{t('VEIL_SECTION.NAME')}</h1>
+        <h2 className="font-thin">{t('VEIL_SECTION.TITLE_1')}</h2>
+        <h2 className="font-thin">{t('VEIL_SECTION.TITLE_2')}</h2>
+        <h1 className="mb-4 font-bold">{t('VEIL_SECTION.NAME')}</h1>
 
         <Outlet />
 
-        <div className="veil-links">
+        <div className="mt-3 veil-links">
           {VEIL_COMPONENTS.map(
             ({ path, label }, key) =>
               location.pathname !== path && (
