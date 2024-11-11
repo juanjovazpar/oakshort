@@ -10,7 +10,7 @@ export interface MainProps {}
 const Main: React.FC<MainProps> = () => (
   <section className="main-content">
     <Dashboard />
-    <ShortsList shorts={SHORT_MOCKS} />
+    <ShortsList shorts={SHORT_MOCKS.slice(0, 1)} />
   </section>
 );
 

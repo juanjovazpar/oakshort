@@ -3,7 +3,7 @@ import { IShort } from '../../../shared/interfaces/short.interface';
 export const SHORT_MOCKS: IShort[] = [
   {
     _id: '6693bf918dd280c4837b1ce1',
-    name: 'SF Living Store - Summer sale',
+    name: 'SF Living Store',
     active: true,
     target: 'http://expires.com',
     accessCount: 3,

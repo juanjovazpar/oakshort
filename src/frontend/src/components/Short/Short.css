@@ -2,9 +2,23 @@
   background-color: white;
   color: black;
   border-radius: 10px;
-  width: 15vw;
-  height: 15vw;
+  width: 18vw;
+  height: 18vw;
   border: 2px solid #6f6f6f;
   padding: 10px;
   overflow: hidden;
+}
+
+@keyframes borderPulse {
+  0%,
+  100% {
+    border-color: rgba(111, 111, 111, 0.8);
+  }
+  50% {
+    border-color: rgba(111, 111, 111, 0.5);
+  }
+}
+
+.border-pulse {
+  animation: borderPulse 1.5s infinite ease-in-out;
 }
