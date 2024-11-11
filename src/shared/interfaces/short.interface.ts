@@ -16,6 +16,7 @@ interface IShort {
   expires?: Date;
   activation?: Date;
   password?: string;
+  protected?: boolean;
   accessLimit?: number;
   name?: string;
 }

@@ -13,6 +13,7 @@ export const SHORT_MOCKS: IShort[] = [
     createdAt: new Date('2024-07-14T12:07:45.488Z'),
     updatedAt: new Date('2024-07-14T12:11:00.525Z'),
     lastRead: new Date('2024-07-14T12:11:00.524Z'),
+    protected: false,
     accessAttendsOverLimit: 0,
   },
   {
@@ -27,6 +28,7 @@ export const SHORT_MOCKS: IShort[] = [
     createdAt: new Date('2024-07-14T12:07:45.488Z'),
     updatedAt: new Date('2024-07-14T12:11:00.525Z'),
     lastRead: new Date('2024-07-14T12:11:00.524Z'),
+    protected: false,
     accessAttendsOverLimit: 0,
   },
   {
@@ -41,6 +43,7 @@ export const SHORT_MOCKS: IShort[] = [
     createdAt: new Date('2024-07-14T12:07:45.488Z'),
     updatedAt: new Date('2024-07-14T12:11:00.525Z'),
     lastRead: new Date('2024-07-14T12:11:00.524Z'),
+    protected: true,
     accessAttendsOverLimit: 0,
   },
   {
@@ -55,6 +58,7 @@ export const SHORT_MOCKS: IShort[] = [
     createdAt: new Date('2024-07-14T12:07:45.488Z'),
     updatedAt: new Date('2024-07-14T12:11:00.525Z'),
     lastRead: new Date('2024-07-14T12:11:00.524Z'),
+    protected: false,
     accessAttendsOverLimit: 0,
   },
 ];
