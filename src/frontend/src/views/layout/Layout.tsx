@@ -10,7 +10,7 @@ import { VEIL_COMPONENTS } from '../../index';
 import ROUTES from '../../routes';
 import ShortInput from '../../components/ShortInput/ShortInput';
 import WizardShortForm from '../../components/WizardShortForm/WizardShortForm';
-import FadeIn from '../../animations/fadein';
+import FadeInOut from '../../animations/fadeinout';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -58,19 +58,17 @@ const Layout: React.FC = () => {
       <section className="main-section" onClick={onDashboardClick}>
         {location.pathname.startsWith(ROUTES.MAIN) && <Outlet />}
 
-        {recentlyCreatedShort && !isCollapsedSide && (
-          <FadeIn>
-            <section className="floatingbox">
-              <button
-                className="floatingbox-close-btn"
-                onClick={onCloseFloatingBox}
-              >
-                X
-              </button>
-              <WizardShortForm short={recentlyCreatedShort} />
-            </section>
-          </FadeIn>
-        )}
+        <FadeInOut isVisible={recentlyCreatedShort && !isCollapsedSide}>
+          <section className="floatingbox">
+            <button
+              className="floatingbox-close-btn"
+              onClick={onCloseFloatingBox}
+            >
+              X
+            </button>
+            <WizardShortForm short={recentlyCreatedShort} />
+          </section>
+        </FadeInOut>
 
         <section
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}
