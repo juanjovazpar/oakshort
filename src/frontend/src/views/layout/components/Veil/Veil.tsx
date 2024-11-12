@@ -5,6 +5,8 @@ import './Veil.css';
 import { VEIL_COMPONENTS } from '../../../../index';
 import { SHORT_MOCKS } from '../../../../mocks/shorts.mocks';
 import Short from '../../../../components/Short/Short';
+import ROUTES from '../../../../routes';
+import FadeInOut from '../../../../animations/fadeinout';
 
 const Veil: React.FC = () => {
   const location = useLocation();
@@ -31,20 +33,24 @@ const Veil: React.FC = () => {
         </div>
       </section>
 
-      {SHORT_MOCKS?.length > 0 && (
-        <section className="shorts-summary">
-          <h3 className="font-thin">{t('VEIL_SECTION.SHORTS_LIST.TITLE')}</h3>
-          <h3 className="mb-4 font-bold">
-            {t('VEIL_SECTION.SHORTS_LIST.SUBTITLE')}
-          </h3>
-
-          <div className="shorts-list">
-            {SHORT_MOCKS.slice(0, 3).map((short) => (
-              <Short short={short} key={short._id} />
-            ))}
+      <FadeInOut
+        isVisible={location.pathname === ROUTES.HOME && SHORT_MOCKS?.length > 0}
+      >
+        <section className="shorts-summary grid grid-cols-3 gap-2">
+          <div className="col-span-3">
+            <h3 className="text-sm font-thin">
+              {t('VEIL_SECTION.SHORTS_LIST.TITLE')}
+            </h3>
+            <h3 className="text-sm font-bold">
+              {t('VEIL_SECTION.SHORTS_LIST.SUBTITLE')}
+            </h3>
           </div>
+
+          {SHORT_MOCKS.slice(0, 3).map((short) => (
+            <Short short={short} key={short._id} simplified />
+          ))}
         </section>
-      )}
+      </FadeInOut>
     </>
   );
 };

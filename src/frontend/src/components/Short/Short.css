@@ -2,8 +2,8 @@
   background-color: white;
   color: black;
   border-radius: 10px;
-  width: 18vw;
-  height: 18vw;
+  max-width: 18vw;
+  max-height: 18vw;
   border: 2px solid #6f6f6f;
   padding: 10px;
   overflow: hidden;

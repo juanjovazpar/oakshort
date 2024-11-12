@@ -1,9 +1,12 @@
 {
   "GENERAL": { "OPTIONAL": "optional" },
   "FILTERS": {
+    "TITLE": "filter and manage you shorts faster by selecting them see your metrics",
     "FILTER_BY_CREATED_DATE": "Filter by created date",
     "FILTER_BY_LABEL": "Filter by label",
-    "FILTER_BY_EXPIRED": "Filter by expired"
+    "FILTER_BY_EXPIRED": "Filter by expired",
+    "FILTER_BY_STATUS": "Status filters:",
+    "FILTER_BY_RANGE": "Status range:"
   },
   "DASHBOARD": {
     "TITLE": "Dashboard Title"

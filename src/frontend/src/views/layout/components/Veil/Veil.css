@@ -27,18 +27,11 @@ input[type='text'] {
   }
 
   .shorts-summary {
-    display: flex;
-    flex-direction: column;
     position: absolute;
-    bottom: 5vw;
-    right: 5vw;
+    bottom: 2vw;
+    right: 2vw;
     text-align: left;
-
-    .shorts-list {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 10px;
-    }
+    width: 40%;
+    max-width: 450px;
   }
 }

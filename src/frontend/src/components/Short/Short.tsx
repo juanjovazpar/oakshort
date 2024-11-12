@@ -11,6 +11,7 @@ interface ShortProps {
   disabled?: boolean;
   ping?: boolean;
   justCreated?: boolean;
+  simplified?: boolean;
 }
 
 const Short: React.FC<ShortProps> = ({
@@ -18,14 +19,15 @@ const Short: React.FC<ShortProps> = ({
   loading = false,
   disabled = false,
   ping = false,
+  simplified = false,
   justCreated,
 }) => (
-  <Ping active={ping}>
-    <Shake shaking={true}>
-      {/* TODO: Add animation to all the status changes */}
-      <section
-        className={`short-card flex flex-col relative ${disabled && 'opacity-30'} ${justCreated && 'ring-4 ring-yellow-100 ring-opacity-50'} ${loading && 'border-pulse'}`}
-      >
+  <section>
+    {/* TODO: Add animation to all the status changes */}
+    <div
+      className={`short-card aspect-square flex flex-col cursor-pointer ${disabled && 'opacity-30'} ${justCreated && 'ring-4 ring-yellow-100 ring-opacity-50'} ${loading && 'border-pulse'}`}
+    >
+      {!simplified && (
         <header
           className={`flex flex-row w-full ${loading && !disabled && 'opacity-30'}`}
         >
@@ -45,48 +47,48 @@ const Short: React.FC<ShortProps> = ({
             </button>
           </div>
         </header>
-
-        <section className={`mt-auto ${loading && !disabled && 'opacity-30'}`}>
-          <h4 className="text-xl font-black truncate">{short.name}</h4>
-          <p className="text-sm font-medium truncate">{short.short}</p>
-          <a
-            href="short.target"
-            target="_blank"
-            rel="noreferrer"
-            className="font-thin text-sm text-blue-500 transition duration-100 hover:underline hover:text-blue-700 truncate"
-          >
-            {short.target}
-          </a>
-
-          {short.protected && (
-            <div className="relative mt-1">
-              <input
-                id="target"
-                className="w-full h-7 border-2"
-                name="target"
-                type="text"
-                placeholder="********"
-                disabled={loading}
-              />
-              <button
-                className="absolute right-1 top-1 w-5 h-5 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
-                type="submit"
-                disabled={loading}
-              >
-                +
-              </button>
-            </div>
-          )}
-        </section>
-      </section>
-
-      {loading && (
-        <section className="absolute bottom-1 left-0 right-0 w-full">
-          <Loading />
-        </section>
       )}
-    </Shake>
-  </Ping>
+
+      <section className={`mt-auto ${loading && !disabled && 'opacity-30'}`}>
+        <h4 className="text-xl font-black truncate">{short.name}</h4>
+        <p className="text-sm font-medium truncate">{short.short}</p>
+        <a
+          href="short.target"
+          target="_blank"
+          rel="noreferrer"
+          className="font-thin text-sm text-blue-500 transition duration-100 hover:underline hover:text-blue-700 truncate"
+        >
+          {short.target}
+        </a>
+
+        {!simplified && short.protected && (
+          <div className="relative mt-1">
+            <input
+              id="target"
+              className="w-full h-7 border-2"
+              name="target"
+              type="text"
+              placeholder="********"
+              disabled={true}
+            />
+            <button
+              className="absolute right-1 top-1 w-5 h-5 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
+              type="submit"
+              disabled={loading}
+            >
+              +
+            </button>
+          </div>
+        )}
+      </section>
+    </div>
+
+    {loading && (
+      <section className="absolute bottom-1 left-0 right-0 w-full">
+        <Loading />
+      </section>
+    )}
+  </section>
 );
 
 export default Short;

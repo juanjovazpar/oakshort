@@ -13,20 +13,53 @@ const ShortsList: React.FC<ShortsListProps> = ({ shorts }) => {
   const { t } = useTranslation();
 
   return (
-    <section className="shorts-list">
+    <section className="grid grid-cols-6 gap-4">
       <div>
-        <button>{t('FILTERS.FILTER_BY_CREATED_DATE')}</button>
-        <button>{t('FILTERS.FILTER_BY_LABEL')}</button>
-        <button>{t('FILTERS.FILTER_BY_EXPIRED')}</button>
+        <p className="uppercase font-normal">{t('FILTERS.FILTER_BY_STATUS')}</p>
+        <p>
+          <button
+            className="w-15 h-15 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
+            type="button"
+          >
+            F
+          </button>
+        </p>
       </div>
-      <ul>
-        {shorts.map((short: IShort, key: number) => (
-          <li key={key}>
-            <Short short={short} />
-          </li>
-        ))}
-        <li>here are the filters</li>
-      </ul>
+
+      <div className="col-span-5">
+        <p className="uppercase font-normal">{t('FILTERS.FILTER_BY_RANGE')}</p>
+        <p>
+          <button
+            className="w-15 h-15 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
+            type="button"
+          >
+            F
+          </button>
+        </p>
+      </div>
+
+      {shorts.slice(0, 4).map((short: IShort, key: number) => (
+        <Short short={short} key={key} />
+      ))}
+
+      <div className="col-end-7 col-start-6">
+        <p className="font-thin uppercase justify-normal">
+          {t('FILTERS.TITLE')}
+        </p>
+
+        <span className="flex flex-row gap-2 mt-3">
+          <button
+            className="w-15 h-15 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
+            type="button"
+          >
+            F
+          </button>
+        </span>
+      </div>
+
+      {shorts.slice(4).map((short: IShort, key: number) => (
+        <Short short={short} key={key} />
+      ))}
     </section>
   );
 };
