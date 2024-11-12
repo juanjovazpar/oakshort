@@ -1,1 +1,3 @@
-export const initLoader = async () => {};
+export const initLoader = async () => {
+  return {};
+};

@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
 import './i18n';
-import { AnimatePresence } from 'framer-motion';
 import Layout from './views/layout/Layout';
 import store from './store';
 import Main from './views/layout/components/Main/Main';
@@ -53,33 +47,32 @@ export const VEIL_COMPONENTS = [
   },
 ];
 
-const AnimatedRoutes = () => {
-  const location = useLocation();
-
-  return (
-    <AnimatePresence>
-      <Routes location={location} key={location.key}>
-        <Route path={ROUTES.HOME} element={<Layout />}>
-          <Route element={<Veil />} loader={initLoader}>
-            {VEIL_COMPONENTS.map(({ path, component }, key) => (
-              <Route
-                key={key}
-                path={path}
-                element={<FadeIn>{component}</FadeIn>}
-              ></Route>
-            ))}
-          </Route>
-          <Route
-            path={ROUTES.MAIN}
-            element={<Main />}
-            loader={shortsLoader}
-          ></Route>
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </AnimatePresence>
-  );
-};
+const router = createBrowserRouter([
+  {
+    path: ROUTES.HOME,
+    element: <Layout />,
+    children: [
+      {
+        element: <Veil />,
+        loader: initLoader,
+        children: VEIL_COMPONENTS.map(({ path, component }, key) => ({
+          path,
+          element: <FadeIn>{component}</FadeIn>,
+          key,
+        })),
+      },
+      {
+        path: ROUTES.MAIN,
+        element: <Main />,
+        loader: shortsLoader,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -88,9 +81,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <AnimatedRoutes />
-      </Router>
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
