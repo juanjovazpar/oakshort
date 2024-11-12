@@ -6,7 +6,7 @@
     "FILTER_BY_LABEL": "Filter by label",
     "FILTER_BY_EXPIRED": "Filter by expired",
     "FILTER_BY_STATUS": "Status filters:",
-    "FILTER_BY_RANGE": "Status range:"
+    "FILTER_BY_RANGE": "Range filter:"
   },
   "DASHBOARD": {
     "TITLE": "Dashboard Title"

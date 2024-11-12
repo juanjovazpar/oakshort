@@ -11,7 +11,7 @@ const Main: React.FC<MainProps> = () => {
   const shorts: IShort[] = useLoaderData() as IShort[];
 
   return (
-    <section className="main-content">
+    <section className="main-content overflow-y-scroll">
       <Dashboard />
       <ShortsList shorts={shorts} />
     </section>

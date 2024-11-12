@@ -55,7 +55,10 @@ const Layout: React.FC = () => {
         )}
       </header>
 
-      <section className="main-section" onClick={onDashboardClick}>
+      <section
+        className="main-section overflow-y-scroll"
+        onClick={onDashboardClick}
+      >
         {location.pathname.startsWith(ROUTES.MAIN) && <Outlet />}
 
         <FadeInOut isVisible={recentlyCreatedShort && !isCollapsedSide}>
