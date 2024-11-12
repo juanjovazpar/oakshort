@@ -23,6 +23,18 @@ const ShortsList: React.FC<ShortsListProps> = ({ shorts }) => {
           >
             F
           </button>
+          <button
+            className="w-15 h-15 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
+            type="button"
+          >
+            F
+          </button>
+          <button
+            className="w-15 h-15 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
+            type="button"
+          >
+            F
+          </button>
         </p>
       </div>
 
@@ -48,6 +60,18 @@ const ShortsList: React.FC<ShortsListProps> = ({ shorts }) => {
         </p>
 
         <span className="flex flex-row gap-2 mt-3">
+          <button
+            className="w-15 h-15 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
+            type="button"
+          >
+            F
+          </button>
+          <button
+            className="w-15 h-15 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
+            type="button"
+          >
+            F
+          </button>
           <button
             className="w-15 h-15 bg-gray-300 text-white rounded-full flex items-center justify-center transition duration-100 ease-in-out hover:bg-gray-400"
             type="button"
