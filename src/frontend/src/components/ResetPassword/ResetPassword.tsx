@@ -5,6 +5,7 @@ import './ResetPassword.css';
 
 export default function ResetPassword() {
   const { t } = useTranslation();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };

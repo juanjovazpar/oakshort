@@ -16,6 +16,10 @@ interface SignupBody {
   password: string;
 }
 
+interface ForgotPasswordBody {
+  email: string;
+}
+
 export const signup = async (
   req: FastifyRequest<{ Body: SignupBody }>,
   res: FastifyReply
@@ -103,5 +107,21 @@ export const verify = async (req: FastifyRequest, res: FastifyReply) => {
     res.status(200).send({ message: 'Account verified successfully' });
   } catch (error) {
     res.status(400).send({ message: 'Error verifying account' });
+  }
+};
+
+export const forgotPassword = async (
+  req: FastifyRequest<{ Body: ForgotPasswordBody }>,
+  res: FastifyReply
+) => {
+  try {
+    const { email } = req.body;
+
+    // TODO: Send email with reset password token
+    console.log(email);
+
+    res.status(200).send({ message: 'Reset password token sent successfully' });
+  } catch (error) {
+    res.status(400).send({ message: 'Error sending token' });
   }
 };

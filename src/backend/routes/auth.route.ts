@@ -1,6 +1,11 @@
 import { FastifyInstance } from 'fastify';
 
-import { signup, signin, verify } from '../controllers/auth.controller';
+import {
+  signup,
+  signin,
+  verify,
+  forgotPassword,
+} from '../controllers/auth.controller';
 import { ROUTES } from '../../shared/routes';
 
 const opts = {
@@ -18,6 +23,7 @@ const opts = {
 
 async function routes(fastify: FastifyInstance) {
   fastify.get(ROUTES.VERIFY, verify);
+  fastify.post(ROUTES.FORGOT_PASSWORD, forgotPassword);
   fastify.post(ROUTES.SIGNUP, opts, signup);
   fastify.post(ROUTES.SIGNIN, opts, signin);
 }
