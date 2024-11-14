@@ -5,6 +5,7 @@ import {
   signin,
   verify,
   forgotPassword,
+  resetPassword,
 } from '../controllers/auth.controller';
 import { ROUTES } from '../../shared/routes';
 
@@ -24,6 +25,7 @@ const opts = {
 async function routes(fastify: FastifyInstance) {
   fastify.get(ROUTES.VERIFY, verify);
   fastify.post(ROUTES.FORGOT_PASSWORD, forgotPassword);
+  fastify.post(ROUTES.RESET_PASSWORD, resetPassword);
   fastify.post(ROUTES.SIGNUP, opts, signup);
   fastify.post(ROUTES.SIGNIN, opts, signin);
 }

@@ -56,6 +56,7 @@
   "RESET_PASSWORD": {
     "PASSWORD_PLACEHOLDER": "New password",
     "PASSWORD_CONFIRMATION_PLACEHOLDER": "Confirm new password",
+    "ERROR_MESSAGE": "Error reseting password",
     "MAIN_BUTTON": "Set new password"
   },
   "SHORT": {

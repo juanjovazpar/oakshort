@@ -20,6 +20,10 @@ interface ForgotPasswordBody {
   email: string;
 }
 
+interface ResetPasswordBody {
+  password: string;
+}
+
 export const signup = async (
   req: FastifyRequest<{ Body: SignupBody }>,
   res: FastifyReply
@@ -123,5 +127,24 @@ export const forgotPassword = async (
     res.status(200).send({ message: 'Reset password token sent successfully' });
   } catch (error) {
     res.status(400).send({ message: 'Error sending token' });
+  }
+};
+
+export const resetPassword = async (
+  req: FastifyRequest<{ Body: ResetPasswordBody }>,
+  res: FastifyReply
+) => {
+  try {
+    const { [PARAMS.RESET_TOKEN]: resetToken } = req.params as {
+      [PARAMS.RESET_TOKEN]: string;
+    };
+    const { password } = req.body;
+
+    // TODO: Reset password process
+    console.log(password);
+
+    res.status(200).send({ message: 'Reset password token sent successfully' });
+  } catch (error) {
+    res.status(400).send({ message: 'Error reseting password' });
   }
 };

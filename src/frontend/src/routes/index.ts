@@ -11,7 +11,8 @@ const ROUTES = {
 };
 
 export const PARAMS = {
-  VERIFICATION_TOKEN: `token`,
+  VERIFICATION_TOKEN: `verificationToken`,
+  RESET_TOKEN: `resetToken`,
 };
 
 export default ROUTES;

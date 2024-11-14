@@ -6,6 +6,7 @@ const enum ENDPOINTS {
 export enum PARAMS {
   SHORTEN_ID = 'shorten_id',
   VERIFICATION_TOKEN = 'verificationToken',
+  RESET_TOKEN = 'resetToken',
 }
 
 export const ROUTES = {
@@ -13,6 +14,7 @@ export const ROUTES = {
   SIGNIN: `${ENDPOINTS.AUTH}/signin`,
   SIGNUP: `${ENDPOINTS.AUTH}/signup`,
   FORGOT_PASSWORD: `${ENDPOINTS.AUTH}/forgot`,
+  RESET_PASSWORD: `${ENDPOINTS.AUTH}/reset-password/:${PARAMS.RESET_TOKEN}`,
   SHORT: `${ENDPOINTS.SHORTS}/:${PARAMS.SHORTEN_ID}`,
   SHORTS: ENDPOINTS.SHORTS,
   REDIRECT: `/:${PARAMS.SHORTEN_ID}`,
