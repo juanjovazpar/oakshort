@@ -1,5 +1,9 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  redirect,
+  RouterProvider,
+} from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
@@ -19,6 +23,8 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import ROUTES from './routes';
 import NotFound from './views/layout/components/NotFound/NotFound';
 import FadeIn from './animations/fadein';
+import ShortForm from './components/ShortForm/ShortForm';
+import { SHORT_MOCKS } from './mocks/shorts.mocks';
 
 export const VEIL_COMPONENTS = [
   {
@@ -65,6 +71,17 @@ const router = createBrowserRouter([
         path: ROUTES.MAIN,
         element: <Main />,
         loader: shortsLoader,
+        children: [
+          {
+            path: '',
+            element: <ShortForm short={SHORT_MOCKS[0]} />,
+            loader: ({ request }) => {
+              const url = new URL(request.url);
+              const hasShortParam = url.searchParams.has('short');
+              return hasShortParam ? {} : redirect(ROUTES.MAIN);
+            },
+          },
+        ],
       },
       {
         path: '*',

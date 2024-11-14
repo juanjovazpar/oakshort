@@ -2,10 +2,7 @@ import React, { useState, useEffect, MouseEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
 import './Layout.css';
-import {
-  toggleCollapseSide,
-  setRecentlyCreatedShort,
-} from '../../store/layout/layout.slice';
+import { setRecentlyCreatedShort } from '../../store/layout/layout.slice';
 import { VEIL_COMPONENTS } from '../../index';
 import ROUTES from '../../routes';
 import ShortInput from '../../components/ShortInput/ShortInput';
@@ -16,26 +13,27 @@ const Layout: React.FC = () => {
   const location = useLocation();
   const dispatch: Function = useDispatch();
   const [isVeilActive, setIsVeilActive] = useState(true);
-  const { isCollapsedSide, recentlyCreatedShort } = useSelector(
-    (state: any) => state.layout
-  );
+  const [isCollapsedSide, setIsCollapsedSide] = useState(false);
+  const { recentlyCreatedShort } = useSelector((state: any) => state.layout);
 
   useEffect(() => {
     const veilRoutes = VEIL_COMPONENTS.map(({ path }) => path);
     setIsVeilActive(veilRoutes.includes(location.pathname));
+
+    if (location.search) {
+      const params = new URLSearchParams(location.search);
+      const short = params.get('short');
+
+      if (short) {
+        setIsCollapsedSide(true);
+      }
+    }
   }, [location]);
 
   const onDashboardClick: MouseEventHandler<HTMLElement> = (): void => {
+    console.log('clicked main', isCollapsedSide);
     if (isCollapsedSide) {
-      dispatch(toggleCollapseSide());
-    }
-  };
-
-  const onSidebarClick: MouseEventHandler<HTMLElement> = (e: any): void => {
-    e.stopPropagation();
-
-    if (!isCollapsedSide) {
-      dispatch(toggleCollapseSide());
+      setIsCollapsedSide(false);
     }
   };
 
@@ -75,7 +73,6 @@ const Layout: React.FC = () => {
 
         <section
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}
-          onClick={onSidebarClick}
         >
           {location.pathname.startsWith(ROUTES.SHORT_DETAILS) && <Outlet />}
         </section>
