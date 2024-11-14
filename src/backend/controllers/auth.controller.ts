@@ -22,11 +22,10 @@ export const signup = async (
   try {
     const { email, password } = req.body;
 
-    if (!isValidPassword(password)) {
+    if (!password || !isValidPassword(password)) {
       res.status(400).send({
         message: `This is not a valid password format. ${PASSWORD_RULES}`,
       });
-      return;
     }
 
     const hashedPassword = await hashPassword(password);
@@ -39,7 +38,7 @@ export const signup = async (
 
     res.send({ message: 'User created successfully' });
   } catch (error: any) {
-    res.send(error);
+    res.send(400).send(error);
   }
 };
 

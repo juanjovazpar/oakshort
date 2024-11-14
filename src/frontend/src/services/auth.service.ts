@@ -1,11 +1,11 @@
 import axiosInstance from './axios';
 
-import { ROUTES } from '../../../shared/routes';
-
 const service = {
-  signin: async () => await axiosInstance.post(ROUTES.SIGNIN),
-  signup: async () => await axiosInstance.post(ROUTES.SIGNUP),
-  forgotPassword: async () => await axiosInstance.post(ROUTES.FORGOT_PASSWORD),
+  signin: async () => axiosInstance.post('http://localhost:4000/signin'),
+  signup: async (user: any) =>
+    axiosInstance.post('http://localhost:4000/auth/signup', user),
+  forgotPassword: async () =>
+    axiosInstance.post('http://localhost:4000/auth/forgot'),
 };
 
 export default service;

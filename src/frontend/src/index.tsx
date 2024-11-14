@@ -25,6 +25,7 @@ import NotFound from './views/layout/components/NotFound/NotFound';
 import FadeIn from './animations/fadein';
 import ShortForm from './components/ShortForm/ShortForm';
 import { SHORT_MOCKS } from './mocks/shorts.mocks';
+import Verify from './components/Verify/Verify';
 
 export const VEIL_COMPONENTS = [
   {
@@ -50,6 +51,10 @@ export const VEIL_COMPONENTS = [
   {
     path: ROUTES.RESET_PASSWORD,
     component: <ResetPassword />,
+  },
+  {
+    path: ROUTES.VERIFY,
+    component: <Verify />,
   },
 ];
 

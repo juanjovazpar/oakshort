@@ -41,11 +41,16 @@
   },
   "SIGNUP_SECTION": {
     "MAIN_BUTTON": "Create account",
-    "EMAIL_PLACEHOLDER": "Your email"
+    "EMAIL_PLACEHOLDER": "Your email",
+    "PASSWORD_PLACEHOLDER": "Your password"
   },
   "FORGOTTEN": {
     "EMAIL_PLACEHOLDER": "Your email",
     "MAIN_BUTTON": "Recover password"
+  },
+  "VERIFY": {
+    "TOKEN_PLACEHOLDER": "Verification token",
+    "MAIN_BUTTON": "VERIFY ACCOUNT"
   },
   "RESET_PASSWORD": {
     "PASSWORD_PLACEHOLDER": "New password",
