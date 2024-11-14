@@ -6,6 +6,8 @@ const service = {
     axiosInstance.post('http://localhost:4000/auth/signup', user),
   forgotPassword: async () =>
     axiosInstance.post('http://localhost:4000/auth/forgot'),
+  verify: async (token: string) =>
+    axiosInstance.get(`http://localhost:4000/auth/verify/${token}`),
 };
 
 export default service;

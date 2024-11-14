@@ -9,6 +9,7 @@ import {
   PASSWORD_RULES,
 } from '../../shared/utils/password.util';
 import { getJWToken } from '../../shared/utils/token.util';
+import { PARAMS } from '../../shared/routes';
 
 interface SignupBody {
   email: string;
@@ -78,5 +79,29 @@ export const signin = async (
     res.send({ token });
   } catch (error) {
     res.send(error);
+  }
+};
+
+export const verify = async (req: FastifyRequest, res: FastifyReply) => {
+  try {
+    const { [PARAMS.VERIFICATION_TOKEN]: verificationToken } = req.params as {
+      [PARAMS.VERIFICATION_TOKEN]: string;
+    };
+    const user: IUser | null = await User.findOneAndUpdate(
+      { verificationToken },
+      {
+        $set: { isVerified: true },
+        $unset: { verificationToken: null },
+      },
+      { new: true }
+    );
+
+    if (!user) {
+      res.status(400).send({ message: 'Wrong verification token' });
+    }
+
+    res.status(200).send({ message: 'Account verified successfully' });
+  } catch (error) {
+    res.status(400).send({ message: 'Error verifying account' });
   }
 };

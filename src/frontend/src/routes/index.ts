@@ -10,4 +10,8 @@ const ROUTES = {
   SHORT_DETAILS: `/short`,
 };
 
+export const PARAMS = {
+  VERIFICATION_TOKEN: `token`,
+};
+
 export default ROUTES;
