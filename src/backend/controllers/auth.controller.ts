@@ -110,7 +110,7 @@ export const verify = async (req: FastifyRequest, res: FastifyReply) => {
 
     res.status(200).send({ message: 'Account verified successfully' });
   } catch (error) {
-    res.status(400).send({ message: 'Error verifying account' });
+    res.status(400).send(error);
   }
 };
 

@@ -32,7 +32,6 @@ const schema: Schema<IUser> = new Schema(
     },
     verificationToken: {
       type: String,
-      unique: true,
     },
     resetPasswordToken: {
       type: String,

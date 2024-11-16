@@ -22,9 +22,10 @@ export default function Verify() {
       setLoading(true);
       setErrorMsg('');
 
-      await service.verify(token);
-
-      navigate(ROUTES.SIGNIN);
+      if (token) {
+        await service.verify(token);
+        navigate(ROUTES.SIGNIN);
+      }
     } catch (e) {
       console.log(e);
       setErrorMsg(t('VERIFY.VERIFICATION_ERROR'));
