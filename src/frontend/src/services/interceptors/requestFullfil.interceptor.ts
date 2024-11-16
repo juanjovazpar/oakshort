@@ -1,6 +1,7 @@
 import { getFingerPrint } from '../../utils/fingerprint.util';
+import * as browserStorage from '../../utils/sessionStorage.util';
 
-const token = localStorage.getItem('token');
+const token = browserStorage.getAuthToken();
 const fingerPrint: number = getFingerPrint();
 
 const interceptor = (config: any) => {

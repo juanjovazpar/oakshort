@@ -80,11 +80,11 @@ const router = createBrowserRouter([
           {
             path: '',
             element: <ShortForm short={SHORT_MOCKS[0]} />,
-            loader: ({ request }) => {
+            /* loader: ({ request }) => {
               const url = new URL(request.url);
               const hasShortParam = url.searchParams.has('short');
               return hasShortParam ? {} : redirect(ROUTES.MAIN);
-            },
+            }, */
           },
         ],
       },

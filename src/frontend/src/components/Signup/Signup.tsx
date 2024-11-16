@@ -16,7 +16,7 @@ export default function Signup() {
     setErrorMsg('');
 
     try {
-      await service.signup(user);
+      await service.signUp(user);
 
       navigate(ROUTES.VERIFY);
     } catch (e) {
@@ -40,12 +40,14 @@ export default function Signup() {
         type="text"
         name="email"
         disabled={loading}
+        required
         placeholder={t('SIGNUP_SECTION.EMAIL_PLACEHOLDER')}
       />
       <input
         type="text"
         name="password"
         disabled={loading}
+        required
         placeholder={t('SIGNUP_SECTION.PASSWORD_PLACEHOLDER')}
       />
       {errorMsg && <p>{errorMsg}</p>}
