@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Shake from '../../animations/shake';
 import FadeInOut from '../../animations/fadeinout';
+import InputMessage from '../InputMessage/InputMessage';
 
 export interface IInputProps {
   className?: string;
@@ -58,7 +59,7 @@ const Input: React.FC<IInputProps> = ({
         {children}
       </Shake>
       <FadeInOut isVisible={!!error}>
-        <p className="text-red-500 capitalize">{error}</p>
+        {error && <InputMessage label={error} />}
       </FadeInOut>
     </>
   );
