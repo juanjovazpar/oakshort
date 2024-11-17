@@ -1,9 +1,8 @@
 import React from 'react';
 import { IShort } from '../../../../shared/interfaces/short.interface';
 import './Short.css';
-import Ping from '../../elements/Ping/Ping';
 import Loading from '../../elements/Loading/Loading';
-import Shake from '../../animations/shake';
+import Input from '../../elements/Input/Input';
 
 interface ShortProps {
   short: IShort;
@@ -52,18 +51,13 @@ const Short: React.FC<ShortProps> = ({
       <section className={`mt-auto ${loading && !disabled && 'opacity-30'}`}>
         <h4 className="text-xl font-black truncate">{short.name}</h4>
         <p className="text-sm font-medium truncate">{short.short}</p>
-        <a
-          href="short.target"
-          target="_blank"
-          rel="noreferrer"
-          className="font-thin text-sm text-blue-500 transition duration-100 hover:underline hover:text-blue-700 truncate"
-        >
+        <span className="font-thin text-sm text-blue-500 transition duration-100 hover:underline hover:text-blue-700 truncate">
           {short.target}
-        </a>
+        </span>
 
         {!simplified && short.protected && (
           <div className="relative mt-1">
-            <input
+            <Input
               id="target"
               className="w-full h-7 border-2"
               name="target"

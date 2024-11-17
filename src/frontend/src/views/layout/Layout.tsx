@@ -31,7 +31,6 @@ const Layout: React.FC = () => {
   }, [location]);
 
   const onDashboardClick: MouseEventHandler<HTMLElement> = (): void => {
-    console.log('clicked main', isCollapsedSide);
     if (isCollapsedSide) {
       setIsCollapsedSide(false);
     }

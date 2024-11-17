@@ -17,7 +17,6 @@
     "SIGNUP": "Create account"
   },
   "SHORT_INPUT": {
-    "MAIN_BUTTON": "Cut",
     "TARGET_INPUT_PLACEHOLDER": "URL to cut!",
     "CREATION_ERROR": "Error creating short"
   },

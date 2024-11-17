@@ -60,13 +60,15 @@ const ShortsList: React.FC<IShortsListProps> = ({ shorts }) => {
         </p>
       </div>
 
-      {shorts.map((item: IShort, i: number) => (
+      {shorts && (
         <>
-          <Link to={`${ROUTES.MAIN}?short=${item.short}`}>
-            <Short short={item} key={i} />
-          </Link>
+          {shorts.slice(0, 4).map((item: IShort, i: number) => (
+            <Link to={`${ROUTES.MAIN}?short=${item.short}`} key={i}>
+              <Short short={item} />
+            </Link>
+          ))}
 
-          {i === 3 && shorts.length > 10 && (
+          {shorts.length > 10 && (
             <div className="col-end-7 col-start-6">
               <p className="font-thin uppercase justify-normal">
                 {t('FILTERS.TITLE')}
@@ -87,8 +89,14 @@ const ShortsList: React.FC<IShortsListProps> = ({ shorts }) => {
               </span>
             </div>
           )}
+
+          {shorts.slice(4).map((item: IShort, i: number) => (
+            <Link to={`${ROUTES.MAIN}?short=${item.short}`} key={i}>
+              <Short short={item} />
+            </Link>
+          ))}
         </>
-      ))}
+      )}
     </section>
   );
 };

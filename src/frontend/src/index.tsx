@@ -22,10 +22,11 @@ import Signup from './components/Signup/Signup';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import ROUTES from './routes';
 import NotFound from './views/layout/components/NotFound/NotFound';
-import FadeIn from './animations/fadein';
 import ShortForm from './components/ShortForm/ShortForm';
 import { SHORT_MOCKS } from './mocks/shorts.mocks';
 import Verify from './components/Verify/Verify';
+import { AnimatePresence } from 'framer-motion';
+import FadeInOut from './animations/fadeinout';
 
 export const VEIL_COMPONENTS = [
   {
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
         loader: initLoader,
         children: VEIL_COMPONENTS.map(({ path, component }, key) => ({
           path,
-          element: <FadeIn>{component}</FadeIn>,
+          element: component,
           key,
         })),
       },

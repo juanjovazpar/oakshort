@@ -5,9 +5,10 @@ import ROUTES from '../../routes';
 
 import './ShortInput.css';
 import service from '../../services/shorts.service';
-import Shake from '../../animations/shake';
 import { setRecentlyCreatedShort } from '../../store/layout/layout.slice';
 import { useDispatch } from 'react-redux';
+import Input from '../../elements/Input/Input';
+import { isValidURL } from '../../utils/url-validator';
 
 const ShortInput = () => {
   const { t } = useTranslation();
@@ -45,23 +46,38 @@ const ShortInput = () => {
     createShort(data);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrorMsg('');
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="short-input" autoComplete="off">
-      <Shake shaking={!!errorMsg}>
-        <>
-          <input
-            id="target"
-            name="target"
-            type="text"
-            placeholder={t('SHORT_INPUT.TARGET_INPUT_PLACEHOLDER')}
-            disabled={loading}
-            required
-          />
-          <button type="submit" disabled={loading}>
-            {t('SHORT_INPUT.MAIN_BUTTON')}
-          </button>
-        </>
-      </Shake>
+    <form onSubmit={handleSubmit} autoComplete="off">
+      <Input
+        id="target"
+        name="target"
+        type="text"
+        error={errorMsg}
+        placeholder={t('SHORT_INPUT.TARGET_INPUT_PLACEHOLDER')}
+        disabled={loading}
+        validator={isValidURL}
+        onChange={handleInputChange}
+        required
+      >
+        <button
+          type="submit"
+          disabled={loading}
+          className="absolute
+          right-2.5
+          inset-y-2
+          aspect-square
+          rounded-full
+          bg-white/75
+        hover:bg-white
+          transition-colors
+          duration-300
+          ease-in-out"
+        />
+      </Input>
     </form>
   );
 };

@@ -5,6 +5,7 @@ import './ResetPassword.css';
 import service from '../../services/auth.service';
 import ROUTES, { PARAMS } from '../../routes';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import Input from '../../elements/Input/Input';
 
 export default function ResetPassword() {
   const { t } = useTranslation();
@@ -40,14 +41,14 @@ export default function ResetPassword() {
 
   return (
     <form onSubmit={handleSubmit} className="reset-password">
-      <input
+      <Input
         type="text"
         name="password"
         disabled={loading}
         required
         placeholder={t('RESET_PASSWORD.PASSWORD_PLACEHOLDER')}
       />
-      <input
+      <Input
         type="text"
         name="passwordConfirmation"
         disabled={loading}

@@ -15,22 +15,26 @@ const Veil: React.FC = () => {
   return (
     <>
       <section className="veil-content">
-        <h2 className="font-thin">{t('VEIL_SECTION.TITLE_1')}</h2>
-        <h2 className="font-thin">{t('VEIL_SECTION.TITLE_2')}</h2>
-        <h1 className="mb-4 font-bold">{t('VEIL_SECTION.NAME')}</h1>
+        <FadeInOut isVisible>
+          <h2 className="font-thin">{t('VEIL_SECTION.TITLE_1')}</h2>
+          <h2 className="font-thin">{t('VEIL_SECTION.TITLE_2')}</h2>
+          <h1 className="mb-4 font-bold">{t('VEIL_SECTION.NAME')}</h1>
 
-        <Outlet />
+          <FadeInOut isVisible={true}>
+            <Outlet />
+          </FadeInOut>
 
-        <div className="mt-3 veil-links">
-          {VEIL_COMPONENTS.map(
-            ({ path, label }, key) =>
-              location.pathname !== path && (
-                <Link key={key} to={path}>
-                  {t(label as string)}
-                </Link>
-              )
-          )}
-        </div>
+          <div className="mt-3 veil-links">
+            {VEIL_COMPONENTS.map(
+              ({ path, label }, key) =>
+                location.pathname !== path && (
+                  <Link key={key} to={path}>
+                    {t(label as string)}
+                  </Link>
+                )
+            )}
+          </div>
+        </FadeInOut>
       </section>
 
       <FadeInOut

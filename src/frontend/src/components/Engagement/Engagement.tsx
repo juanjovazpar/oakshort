@@ -3,13 +3,22 @@ import { useTranslation } from 'react-i18next';
 
 export interface SidebarComponentProps {
   metrics: any;
+  className: string;
+  [key: string]: unknown;
 }
 
-const Engagement: React.FC<SidebarComponentProps> = ({ metrics }) => {
+const Engagement: React.FC<SidebarComponentProps> = ({
+  className = '',
+  metrics,
+  ...props
+}) => {
   const { t } = useTranslation();
 
   return (
-    <section>
+    <section
+      className={`bg-white rounded-lg py-4 px-6 ${className}`}
+      {...props}
+    >
       <p>{t('METRICS.TITLE')}</p>
     </section>
   );

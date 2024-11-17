@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface ICheckDotProps {
   className?: string;
+  checked?: boolean;
   [key: string]: unknown;
 }
 

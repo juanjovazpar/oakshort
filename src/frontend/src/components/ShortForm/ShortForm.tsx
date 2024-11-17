@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import './ShortForm.css';
 import { IShort } from '../../../../shared/interfaces/short.interface';
+import Input from '../../elements/Input/Input';
 
 interface ShortFormProps {
   short: IShort;
@@ -36,7 +37,7 @@ const ShortForm: React.FC<ShortFormProps> = ({ short }) => {
       </h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="target">{t('SHORT_FORM.TARGET_INPUT_LABEL')}:</label>
-        <input
+        <Input
           name="target"
           id="target"
           type="text"
@@ -49,7 +50,7 @@ const ShortForm: React.FC<ShortFormProps> = ({ short }) => {
           {t('SHORT_FORM.NAME_INPUT_LABEL')}
           <small>({t('GENERAL.OPTIONAL')})</small>:
         </label>
-        <input
+        <Input
           name="name"
           id="name"
           type="text"

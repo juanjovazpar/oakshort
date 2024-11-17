@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import ROUTES, { PARAMS } from '../../routes';
 import service from '../../services/auth.service';
 import './Verify.css';
+import Input from '../../elements/Input/Input';
 
 export default function Verify() {
   const { t } = useTranslation();
@@ -48,7 +49,7 @@ export default function Verify() {
 
   return !loading ? (
     <form onSubmit={handleSubmit} className="verify-account">
-      <input
+      <Input
         type="text"
         name="token"
         disabled={loading}

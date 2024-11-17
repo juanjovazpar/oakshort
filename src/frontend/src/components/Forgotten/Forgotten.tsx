@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import './Forgotten.css';
 import service from '../../services/auth.service';
+import Input from '../../elements/Input/Input';
 
 export default function Forgotten() {
   const { t } = useTranslation();
@@ -31,7 +32,7 @@ export default function Forgotten() {
 
   return (
     <form onSubmit={handleSubmit} className="forgotten">
-      <input
+      <Input
         type="text"
         name="email"
         disabled={loading}

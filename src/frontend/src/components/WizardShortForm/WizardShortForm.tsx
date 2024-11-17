@@ -78,7 +78,7 @@ const WizardShortForm: React.FC<WizardShortFormProps> = ({ short }) => {
       </header>
 
       <form onSubmit={handleSubmit}>
-        <FadeInOut isVisible={activeStep === 0}>
+        <FadeInOut isVisible={activeStep === 0} key="0">
           <fieldset>
             <div className="py-2">
               <label htmlFor="target">
@@ -111,7 +111,7 @@ const WizardShortForm: React.FC<WizardShortFormProps> = ({ short }) => {
           </fieldset>
         </FadeInOut>
 
-        <FadeInOut isVisible={activeStep === 1}>
+        <FadeInOut isVisible={activeStep === 1} key="1">
           <fieldset>
             <div className="py-2">
               <label htmlFor="target">Step 2</label>
@@ -119,7 +119,7 @@ const WizardShortForm: React.FC<WizardShortFormProps> = ({ short }) => {
           </fieldset>
         </FadeInOut>
 
-        <FadeInOut isVisible={activeStep === 2}>
+        <FadeInOut isVisible={activeStep === 2} key="2">
           <fieldset>
             <div className="py-2">
               <label htmlFor="target">Step 3</label>
@@ -127,7 +127,7 @@ const WizardShortForm: React.FC<WizardShortFormProps> = ({ short }) => {
           </fieldset>
         </FadeInOut>
 
-        <FadeInOut isVisible={activeStep !== 0}>
+        <FadeInOut isVisible={activeStep !== 0} key="back">
           <button
             onClick={handleBack}
             type="button"

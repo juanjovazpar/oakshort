@@ -4,5 +4,5 @@ import shortService from '../services/shorts.service';
 
 export const shortsLoader: LoaderFunction = async (): Promise<IShort[]> => {
   const response = await shortService.getShorts();
-  return [];
+  return response.data.payload;
 };

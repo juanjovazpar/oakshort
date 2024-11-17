@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../routes';
 import service from '../../services/auth.service';
 import * as browserStorage from '../../utils/sessionStorage.util';
+import Shake from '../../animations/shake';
+import Input from '../../elements/Input/Input';
 
 export default function Signin() {
   const { t } = useTranslation();
@@ -21,8 +23,9 @@ export default function Signin() {
       const response = await service.signIn(user);
       browserStorage.setAuthToken(response.data.token);
       navigate(ROUTES.MAIN);
-    } catch (e) {
+    } catch (e: any) {
       console.log(e);
+      setErrorMsg(e.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -37,24 +40,29 @@ export default function Signin() {
 
   return (
     <form onSubmit={handleSubmit} className="signin">
-      <input
+      <Input
         type="text"
         name="email"
         disabled={loading}
+        error={errorMsg}
         required
         placeholder={t('SIGNIN_SECTION.EMAIL_PLACEHOLDER')}
       />
-      <input
-        type="text"
+      <Input
+        type="password"
         name="password"
         disabled={loading}
         required
         placeholder={t('SIGNIN_SECTION.PASSWORD_PLACEHOLDER')}
       />
+
       {errorMsg && <p>{errorMsg}</p>}
-      <button type="submit" disabled={loading}>
-        {t('SIGNIN_SECTION.MAIN_BUTTON')}
-      </button>
+
+      <Shake shaking={!!errorMsg}>
+        <button type="submit" disabled={loading}>
+          {t('SIGNIN_SECTION.MAIN_BUTTON')}
+        </button>
+      </Shake>
     </form>
   );
 }

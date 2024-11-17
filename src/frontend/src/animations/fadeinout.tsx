@@ -1,20 +1,32 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface FadeInOutProps {
   children: any;
   isVisible: boolean;
+  key?: any;
+  duration?: number;
 }
 
-const FadeInOut: React.FC<FadeInOutProps> = ({ children, isVisible }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: isVisible ? 1 : 0 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.2 }}
-    style={{ display: isVisible ? 'block' : 'none' }}
-  >
-    {children}
-  </motion.div>
+const FadeInOut: React.FC<FadeInOutProps> = ({
+  children,
+  isVisible,
+  key,
+  duration = 0.3,
+}) => (
+  <AnimatePresence mode="wait">
+    {isVisible && (
+      <motion.div
+        key={key}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration }}
+        style={{ display: 'block' }}
+      >
+        {children}
+      </motion.div>
+    )}
+  </AnimatePresence>
 );
 
 export default FadeInOut;

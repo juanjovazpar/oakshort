@@ -4,6 +4,8 @@ import './Signup.css';
 import service from '../../services/auth.service';
 import ROUTES from '../../routes';
 import { useNavigate } from 'react-router-dom';
+import Shake from '../../animations/shake';
+import Input from '../../elements/Input/Input';
 
 export default function Signup() {
   const { t } = useTranslation();
@@ -36,24 +38,28 @@ export default function Signup() {
 
   return (
     <form onSubmit={handleSubmit} className="signup" autoComplete="off">
-      <input
+      <Input
         type="text"
         name="email"
         disabled={loading}
         required
         placeholder={t('SIGNUP_SECTION.EMAIL_PLACEHOLDER')}
       />
-      <input
+      <Input
         type="text"
         name="password"
         disabled={loading}
         required
         placeholder={t('SIGNUP_SECTION.PASSWORD_PLACEHOLDER')}
       />
+
       {errorMsg && <p>{errorMsg}</p>}
-      <button type="submit" disabled={loading}>
-        {t('SIGNUP_SECTION.MAIN_BUTTON')}
-      </button>
+
+      <Shake shaking={!!errorMsg}>
+        <button type="submit" disabled={loading}>
+          {t('SIGNUP_SECTION.MAIN_BUTTON')}
+        </button>
+      </Shake>
     </form>
   );
 }
