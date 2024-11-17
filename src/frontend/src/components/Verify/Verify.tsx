@@ -5,6 +5,9 @@ import ROUTES, { PARAMS } from '../../routes';
 import service from '../../services/auth.service';
 import './Verify.css';
 import Input from '../../elements/Input/Input';
+import Loading from '../../elements/Loading/Loading';
+import InputMessage from '../../elements/InputMessage/InputMessage';
+import FadeInOut from '../../animations/fadeinout';
 
 export default function Verify() {
   const { t } = useTranslation();
@@ -42,26 +45,55 @@ export default function Verify() {
     verify(data.token as string);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrorMsg('');
+  };
+
   if (!initialized) {
     setInitialized(true);
     verify();
   }
 
-  return !loading ? (
+  return (
     <form onSubmit={handleSubmit} className="verify-account">
       <Input
+        id="token"
         type="text"
         name="token"
         disabled={loading}
+        onChange={handleInputChange}
         required
         placeholder={t('VERIFY.TOKEN_PLACEHOLDER')}
-      />
-      {errorMsg && <p>{errorMsg}</p>}
-      <button type="submit" disabled={loading}>
-        {t('VERIFY.MAIN_BUTTON')}
-      </button>
+      >
+        <button
+          type="submit"
+          disabled={loading}
+          className="
+          absolute
+          right-2.5
+          inset-y-2
+          aspect-square
+        text-white
+          px-6
+          py-5
+          rounded-full
+          text-3xl
+          font-thin
+          capitalize
+        hover:bg-gray-700
+          transition-all
+          duration-300
+          ease-in-out
+          bg-gray-600
+          "
+        >
+          {loading && <Loading />}
+        </button>
+      </Input>
+
+      <FadeInOut isVisible={!!errorMsg}>
+        {errorMsg && <InputMessage label={errorMsg} />}
+      </FadeInOut>
     </form>
-  ) : (
-    <p>Loading</p>
   );
 }

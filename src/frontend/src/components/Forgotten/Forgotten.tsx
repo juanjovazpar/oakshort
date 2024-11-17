@@ -4,6 +4,10 @@ import { useTranslation } from 'react-i18next';
 import './Forgotten.css';
 import service from '../../services/auth.service';
 import Input from '../../elements/Input/Input';
+import Loading from '../../elements/Loading/Loading';
+import FadeInOut from '../../animations/fadeinout';
+import InputMessage from '../../elements/InputMessage/InputMessage';
+import { isValidEmail } from '../../utils/email.util';
 
 export default function Forgotten() {
   const { t } = useTranslation();
@@ -30,19 +34,50 @@ export default function Forgotten() {
     verify(data);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrorMsg('');
+  };
+
   return (
     <form onSubmit={handleSubmit} className="forgotten">
       <Input
-        type="text"
+        id="email"
+        type="email"
         name="email"
         disabled={loading}
+        validator={isValidEmail}
+        onChange={handleInputChange}
         required
         placeholder={t('FORGOTTEN.EMAIL_PLACEHOLDER')}
-      />
-      {errorMsg && <p>{errorMsg}</p>}
-      <button type="submit" disabled={loading}>
-        {t('FORGOTTEN.MAIN_BUTTON')}
-      </button>
+      >
+        <button
+          type="submit"
+          disabled={loading}
+          className="absolute
+          right-2.5
+          inset-y-2
+          aspect-square
+        text-white
+          px-6
+          py-5
+          rounded-full
+          text-3xl
+          font-thin
+          capitalize
+        hover:bg-gray-700
+          transition-all
+          duration-300
+          ease-in-out
+        bg-gray-600
+          "
+        >
+          {loading && <Loading />}
+        </button>
+      </Input>
+
+      <FadeInOut isVisible={!!errorMsg}>
+        {errorMsg && <InputMessage label={errorMsg} />}
+      </FadeInOut>
     </form>
   );
 }

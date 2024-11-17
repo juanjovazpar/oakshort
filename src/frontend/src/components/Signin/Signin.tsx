@@ -8,6 +8,11 @@ import service from '../../services/auth.service';
 import * as browserStorage from '../../utils/sessionStorage.util';
 import Shake from '../../animations/shake';
 import Input from '../../elements/Input/Input';
+import FadeInOut from '../../animations/fadeinout';
+import Loading from '../../elements/Loading/Loading';
+import InputMessage from '../../elements/InputMessage/InputMessage';
+import { isValidEmail } from '../../utils/email.util';
+import { isValidPassword } from '../../utils/password.util';
 
 export default function Signin() {
   const { t } = useTranslation();
@@ -38,31 +43,61 @@ export default function Signin() {
     signIn(data);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrorMsg('');
+  };
+
   return (
     <form onSubmit={handleSubmit} className="signin">
       <Input
+        id="email"
         type="text"
         name="email"
         disabled={loading}
         error={errorMsg}
+        onChange={handleInputChange}
+        validator={isValidEmail}
         required
         placeholder={t('SIGNIN_SECTION.EMAIL_PLACEHOLDER')}
       />
       <Input
+        id="password"
         type="password"
         name="password"
         disabled={loading}
+        onChange={handleInputChange}
+        validator={isValidPassword}
         required
         placeholder={t('SIGNIN_SECTION.PASSWORD_PLACEHOLDER')}
-      />
-
-      {errorMsg && <p>{errorMsg}</p>}
-
-      <Shake shaking={!!errorMsg}>
-        <button type="submit" disabled={loading}>
-          {t('SIGNIN_SECTION.MAIN_BUTTON')}
+      >
+        <button
+          type="submit"
+          disabled={loading}
+          className="absolute
+          right-2.5
+          inset-y-2
+          aspect-square
+        text-white
+          px-6
+          py-5
+          rounded-full
+          text-3xl
+          font-thin
+          capitalize
+        hover:bg-gray-700
+          transition-all
+          duration-300
+          ease-in-out
+        bg-gray-600
+          "
+        >
+          {loading && <Loading />}
         </button>
-      </Shake>
+      </Input>
+
+      <FadeInOut isVisible={!!errorMsg}>
+        {errorMsg && <InputMessage label={errorMsg} />}
+      </FadeInOut>
     </form>
   );
 }

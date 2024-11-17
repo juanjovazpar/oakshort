@@ -8,7 +8,8 @@ import service from '../../services/shorts.service';
 import { setRecentlyCreatedShort } from '../../store/layout/layout.slice';
 import { useDispatch } from 'react-redux';
 import Input from '../../elements/Input/Input';
-import { isValidURL } from '../../utils/url-validator';
+import { isValidURL } from '../../utils/url.util';
+import Loading from '../../elements/Loading/Loading';
 
 const ShortInput = () => {
   const { t } = useTranslation();
@@ -58,7 +59,7 @@ const ShortInput = () => {
         type="text"
         error={errorMsg}
         placeholder={t('SHORT_INPUT.TARGET_INPUT_PLACEHOLDER')}
-        disabled={loading}
+        loading={loading}
         validator={isValidURL}
         onChange={handleInputChange}
         required
@@ -66,17 +67,27 @@ const ShortInput = () => {
         <button
           type="submit"
           disabled={loading}
-          className="absolute
+          className="
+          absolute
           right-2.5
           inset-y-2
           aspect-square
+        text-white
+          px-6
+          py-5
           rounded-full
-          bg-white/75
-        hover:bg-white
-          transition-colors
+          text-3xl
+          font-thin
+          capitalize
+        hover:bg-gray-700
+          transition-all
           duration-300
-          ease-in-out"
-        />
+          ease-in-out
+          bg-gray-600
+          "
+        >
+          {loading && <Loading />}
+        </button>
       </Input>
     </form>
   );

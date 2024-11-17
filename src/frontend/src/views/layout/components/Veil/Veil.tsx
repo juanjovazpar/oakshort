@@ -28,7 +28,11 @@ const Veil: React.FC = () => {
             {VEIL_COMPONENTS.map(
               ({ path, label }, key) =>
                 location.pathname !== path && (
-                  <Link key={key} to={path}>
+                  <Link
+                    key={key}
+                    to={path}
+                    className="opacity-80 hover:opacity-100 hover:underline transition-all duration-300 ease-in-out"
+                  >
                     {t(label as string)}
                   </Link>
                 )

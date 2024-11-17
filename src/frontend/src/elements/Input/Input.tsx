@@ -8,6 +8,7 @@ export interface IInputProps {
   error?: string;
   valid?: boolean;
   disabled?: boolean;
+  loading?: boolean;
   validator?: (value: any) => boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [key: string]: unknown;
@@ -18,6 +19,7 @@ const Input: React.FC<IInputProps> = ({
   error,
   disabled,
   children,
+  loading,
   validator,
   ...props
 }) => {
@@ -44,15 +46,16 @@ const Input: React.FC<IInputProps> = ({
           py-5
           rounded-full
           text-3xl
-          transition-colors
+          transition-all
           duration-300
           ease-in-out
           ${className}
           ${error && 'border-red-500'}
           ${valid && 'border-green-500'}
+          ${loading && 'border-blue-500 animate-pulse'}
           ${disabled && 'cursor-not-allowed text-gray-400'}
         `}
-          disabled={disabled}
+          disabled={disabled || loading}
           onChange={onChangeValidator}
           {...restProps}
         />
