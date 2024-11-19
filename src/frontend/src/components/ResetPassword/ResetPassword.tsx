@@ -9,7 +9,6 @@ import Input from '../../elements/Input/Input';
 import FadeInOut from '../../animations/fadeinout';
 import Loading from '../../elements/Loading/Loading';
 import InputMessage from '../../elements/InputMessage/InputMessage';
-import { isValid } from 'shortid';
 import { isValidPassword } from '../../utils/password.util';
 
 export default function ResetPassword() {

@@ -8,6 +8,8 @@
     flex-direction: column;
     margin-top: 15%;
     text-align: left;
+    max-width: 490px;
+    width: 490px;
 
     .veil-links {
       display: flex;

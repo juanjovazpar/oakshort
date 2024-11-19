@@ -4,31 +4,31 @@ import './Signup.css';
 import service from '../../services/auth.service';
 import ROUTES from '../../routes';
 import { useNavigate } from 'react-router-dom';
-import Shake from '../../animations/shake';
 import Input from '../../elements/Input/Input';
 import FadeInOut from '../../animations/fadeinout';
 import InputMessage from '../../elements/InputMessage/InputMessage';
 import Loading from '../../elements/Loading/Loading';
 import { isValidEmail } from '../../utils/email.util';
 import { isValidPassword } from '../../utils/password.util';
+import { IFormError } from '../../../../shared/interfaces/response.interface';
 
 export default function Signup() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState<string | undefined>();
+  const [errorForm, setErrorForm] = useState<IFormError>({});
   const [loading, setLoading] = useState(false);
 
   const createUser = async (user: any) => {
     setLoading(true);
-    setErrorMsg('');
+    setErrorMsg(undefined);
 
     try {
       await service.signUp(user);
-
       navigate(ROUTES.VERIFY);
-    } catch (e) {
-      console.log(e);
-      setErrorMsg(t('SHORT_INPUT.CREATION_ERROR'));
+    } catch (e: any) {
+      setErrorForm(e.error);
+      setErrorMsg(e.message);
     } finally {
       setLoading(false);
     }
@@ -42,7 +42,8 @@ export default function Signup() {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setErrorMsg('');
+    setErrorMsg(undefined);
+    setErrorForm({});
   };
 
   return (
@@ -55,6 +56,7 @@ export default function Signup() {
         validator={isValidEmail}
         onChange={handleInputChange}
         required
+        error={errorForm['email']}
         placeholder={t('SIGNUP_SECTION.EMAIL_PLACEHOLDER')}
       />
 
@@ -66,11 +68,12 @@ export default function Signup() {
         validator={isValidPassword}
         onChange={handleInputChange}
         required
+        error={errorForm['password']}
         placeholder={t('SIGNUP_SECTION.PASSWORD_PLACEHOLDER')}
       >
         <button
           type="submit"
-          disabled={loading}
+          disabled={!!errorMsg || loading}
           className="absolute
           right-2.5
           inset-y-2

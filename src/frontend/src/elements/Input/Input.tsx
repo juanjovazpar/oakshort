@@ -37,24 +37,30 @@ const Input: React.FC<IInputProps> = ({
       <Shake shaking={!!error} className="relative">
         <input
           className={`
-          w-full
-          border-2
-          border-gray-${disabled ? '400' : '500'}
-          bg-white/30
-          outline-none
-          px-6
-          py-5
-          rounded-full
-          text-3xl
-          transition-all
-          duration-300
-          ease-in-out
-          ${className}
-          ${error && 'border-red-500'}
-          ${valid && 'border-green-500'}
-          ${loading && 'border-blue-500 animate-pulse'}
-          ${disabled && 'cursor-not-allowed text-gray-400'}
-        `}
+            w-full
+            border-2
+            bg-white/30
+            outline-none
+            px-6
+            py-5
+            rounded-full
+            text-3xl
+            transition-all
+            duration-300
+            ease-in-out
+            ${
+              disabled
+                ? 'cursor-not-allowed text-gray-400 border-gray-400'
+                : loading
+                  ? 'border-blue-500 animate-pulse'
+                  : error
+                    ? 'border-red-500'
+                    : valid
+                      ? 'border-blue-500'
+                      : 'border-gray-500'
+            }
+            ${className}
+          `}
           disabled={disabled || loading}
           onChange={onChangeValidator}
           {...restProps}

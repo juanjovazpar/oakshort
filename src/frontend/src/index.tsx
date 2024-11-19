@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  createBrowserRouter,
-  redirect,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
@@ -25,8 +21,6 @@ import NotFound from './views/layout/components/NotFound/NotFound';
 import ShortForm from './components/ShortForm/ShortForm';
 import { SHORT_MOCKS } from './mocks/shorts.mocks';
 import Verify from './components/Verify/Verify';
-import { AnimatePresence } from 'framer-motion';
-import FadeInOut from './animations/fadeinout';
 
 export const VEIL_COMPONENTS = [
   {

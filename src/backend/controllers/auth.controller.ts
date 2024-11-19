@@ -10,6 +10,7 @@ import {
 } from '../../shared/utils/password.util';
 import { getJWToken } from '../../shared/utils/token.util';
 import { PARAMS } from '../../shared/routes';
+import { IResponse } from '../../shared/interfaces/response.interface';
 
 interface SignupBody {
   email: string;
@@ -27,13 +28,18 @@ interface ResetPasswordBody {
 export const signup = async (
   req: FastifyRequest<{ Body: SignupBody }>,
   res: FastifyReply
-): Promise<Response | void> => {
+): Promise<IResponse | void> => {
   try {
     const { email, password } = req.body;
 
     if (!password || !isValidPassword(password)) {
+      const message = `This is not a valid password format. ${PASSWORD_RULES}`;
+
       res.status(400).send({
-        message: `This is not a valid password format. ${PASSWORD_RULES}`,
+        error: {
+          password: message,
+        },
+        message,
       });
     }
 
@@ -45,9 +51,9 @@ export const signup = async (
 
     await newUser.save();
 
-    res.send({ message: 'User created successfully' });
+    res.status(200).send({ message: 'User created successfully' });
   } catch (error: any) {
-    res.send(400).send(error);
+    res.status(400).send({ error, message: 'Error creating user' });
   }
 };
 
@@ -146,5 +152,22 @@ export const resetPassword = async (
     res.status(200).send({ message: 'Reset password token sent successfully' });
   } catch (error) {
     res.status(400).send({ message: 'Error reseting password' });
+  }
+};
+
+export const whoami = async (req: FastifyRequest, res: FastifyReply) => {
+  try {
+    const user: IUser | null = await User.findOne({ _id: req.user });
+
+    if (!user) {
+      res
+        .status(401)
+        .send({ message: 'Authentication failed. User not found.' });
+      return;
+    }
+
+    res.send(user);
+  } catch (error) {
+    res.status(400).send(error);
   }
 };

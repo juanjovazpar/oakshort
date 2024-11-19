@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../routes';
 import service from '../../services/auth.service';
 import * as browserStorage from '../../utils/sessionStorage.util';
-import Shake from '../../animations/shake';
 import Input from '../../elements/Input/Input';
 import FadeInOut from '../../animations/fadeinout';
 import Loading from '../../elements/Loading/Loading';
