@@ -6,7 +6,7 @@ import Short from '../Short/Short';
 import CheckDot from '../../elements/CheckDot/CheckDot';
 import Range from '../../elements/Range/Range';
 import { Link } from 'react-router-dom';
-import ROUTES from '../../routes';
+import ROUTES from '../../router/routes';
 
 interface IShortsListProps {
   shorts: IShort[];

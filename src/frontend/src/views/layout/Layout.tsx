@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
 import './Layout.css';
 import { setRecentlyCreatedShort } from '../../store/layout/layout.slice';
-import { VEIL_COMPONENTS } from '../../index';
-import ROUTES from '../../routes';
+import ROUTES from '../../router/routes';
 import ShortInput from '../../components/ShortInput/ShortInput';
 import WizardShortForm from '../../components/WizardShortForm/WizardShortForm';
 import FadeInOut from '../../animations/fadeinout';
+import { VEIL_COMPONENTS } from '../../router/router';
 
 const Layout: React.FC = () => {
   const location = useLocation();

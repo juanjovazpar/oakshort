@@ -1,10 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
-interface FadeInProps {
+interface IFadeInProps {
   children: any;
 }
 
-const FadeIn: React.FC<FadeInProps> = ({ children }) => (
+const FadeIn: React.FC<IFadeInProps> = ({ children }) => (
   <AnimatePresence mode="wait">
     <motion.div
       initial={{ opacity: 0 }}

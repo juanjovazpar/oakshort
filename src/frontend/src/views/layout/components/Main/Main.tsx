@@ -5,9 +5,9 @@ import ShortsList from '../../../../components/ShortsList/ShortsList';
 import './Main.css';
 import { IShort } from '../../../../../../shared/interfaces/short.interface';
 
-export interface MainProps {}
+export interface IMainProps {}
 
-const Main: React.FC<MainProps> = () => {
+const Main: React.FC<IMainProps> = () => {
   const shorts: IShort[] = useLoaderData() as IShort[];
 
   return (

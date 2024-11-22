@@ -67,6 +67,7 @@ const Input: React.FC<IInputProps> = ({
         />
         {children}
       </Shake>
+
       <FadeInOut isVisible={!!error}>
         {error && <InputMessage label={error} />}
       </FadeInOut>

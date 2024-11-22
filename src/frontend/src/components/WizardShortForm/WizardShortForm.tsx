@@ -6,15 +6,15 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IShort } from '../../../../shared/interfaces/short.interface';
-import Stepper, { StepperStep } from '../Stepper/Stepper';
+import Stepper, { IStepperStep } from '../Stepper/Stepper';
 import './WizardShortForm.css';
 import FadeInOut from '../../animations/fadeinout';
 
-interface WizardShortFormProps {
+interface IWizardShortFormProps {
   short: IShort;
 }
 
-const WizardShortForm: React.FC<WizardShortFormProps> = ({ short }) => {
+const WizardShortForm: React.FC<IWizardShortFormProps> = ({ short }) => {
   const maxStepIndex = 3;
   const { t } = useTranslation();
   const [formValues, setFormValues] = useState(short);
@@ -44,7 +44,7 @@ const WizardShortForm: React.FC<WizardShortFormProps> = ({ short }) => {
     });
   };
 
-  const steps: StepperStep[] = [
+  const steps: IStepperStep[] = [
     {
       label: 'string1',
     },

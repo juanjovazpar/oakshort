@@ -2,23 +2,23 @@ import React from 'react';
 
 import './Stepper.css';
 
-export interface StepperStep {
+export interface IStepperStep {
   label: string;
 }
 
-export interface StepperProps {
-  steps: StepperStep[];
+export interface IStepperProps {
+  steps: IStepperStep[];
   activeStep: number;
   onClickStep?: Function;
 }
 
-const Stepper: React.FC<StepperProps> = ({
+const Stepper: React.FC<IStepperProps> = ({
   steps,
   activeStep,
   onClickStep,
 }) => (
   <ol className="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
-    {steps?.map((step: StepperStep, key: number) => (
+    {steps?.map((step: IStepperStep, key: number) => (
       <li
         key={key}
         className={`

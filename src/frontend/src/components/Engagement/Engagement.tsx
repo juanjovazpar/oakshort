@@ -1,13 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-export interface SidebarComponentProps {
+export interface ISidebarComponentProps {
   metrics: any;
   className: string;
   [key: string]: unknown;
 }
 
-const Engagement: React.FC<SidebarComponentProps> = ({
+const Engagement: React.FC<ISidebarComponentProps> = ({
   className = '',
   metrics,
   ...props

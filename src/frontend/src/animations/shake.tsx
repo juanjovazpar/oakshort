@@ -11,13 +11,17 @@ const shakeAnimation = {
   },
 };
 
-interface ShakeProps {
+interface IShakeProps {
   children: any;
   shaking: boolean;
   className?: string;
 }
 
-const Shake: React.FC<ShakeProps> = ({ children, shaking, className = '' }) => (
+const Shake: React.FC<IShakeProps> = ({
+  children,
+  shaking,
+  className = '',
+}) => (
   <AnimatePresence mode="wait">
     <motion.div
       initial="initial"

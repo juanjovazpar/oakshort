@@ -4,7 +4,7 @@ import './Short.css';
 import Loading from '../../elements/Loading/Loading';
 import Input from '../../elements/Input/Input';
 
-interface ShortProps {
+interface IShortProps {
   short: IShort;
   loading?: boolean;
   disabled?: boolean;
@@ -13,7 +13,7 @@ interface ShortProps {
   simplified?: boolean;
 }
 
-const Short: React.FC<ShortProps> = ({
+const Short: React.FC<IShortProps> = ({
   short,
   loading = false,
   disabled = false,

@@ -1,19 +1,19 @@
 import axiosInstance from './axios';
 
 const service = {
-  signIn: async (user: any) =>
+  signIn: async (user: any): Promise<any> =>
     axiosInstance.post('http://localhost:4000/auth/signin', user),
 
-  signUp: async (user: any) =>
+  signUp: async (user: any): Promise<any> =>
     axiosInstance.post('http://localhost:4000/auth/signup', user),
 
-  forgotPassword: async (user: any) =>
+  forgotPassword: async (user: any): Promise<any> =>
     axiosInstance.post('http://localhost:4000/auth/forgot', user),
 
-  verify: async (token: string) =>
+  verify: async (token: string): Promise<any> =>
     axiosInstance.get(`http://localhost:4000/auth/verify/${token}`),
 
-  resetPassword: async (token: string, password: any) =>
+  resetPassword: async (token: string, password: any): Promise<any> =>
     axiosInstance.post(
       `http://localhost:4000/auth/reset-password/${token}`,
       password

@@ -1,8 +1,10 @@
-import { LoaderFunction } from 'react-router-dom';
+import { LoaderFunction, LoaderFunctionArgs } from 'react-router-dom';
 import { IShort } from '../../../shared/interfaces/short.interface';
 import shortService from '../services/shorts.service';
 
-export const shortsLoader: LoaderFunction = async (): Promise<IShort[]> => {
+export const shortsLoader: LoaderFunction = async (
+  args: LoaderFunctionArgs
+): Promise<IShort[] | null> => {
   const response = await shortService.getShorts();
   return response.data.payload;
 };

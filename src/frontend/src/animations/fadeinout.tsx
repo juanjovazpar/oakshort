@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
-interface FadeInOutProps {
+interface IFadeInOutProps {
   children: any;
   isVisible: boolean;
   key?: any;
   duration?: number;
 }
 
-const FadeInOut: React.FC<FadeInOutProps> = ({
+const FadeInOut: React.FC<IFadeInOutProps> = ({
   children,
   isVisible,
   key,

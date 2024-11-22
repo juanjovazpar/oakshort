@@ -5,11 +5,11 @@ import './ShortForm.css';
 import { IShort } from '../../../../shared/interfaces/short.interface';
 import Input from '../../elements/Input/Input';
 
-interface ShortFormProps {
+interface IShortFormProps {
   short: IShort;
 }
 
-const ShortForm: React.FC<ShortFormProps> = ({ short }) => {
+const ShortForm: React.FC<IShortFormProps> = ({ short }) => {
   const { t } = useTranslation();
   const [formValues, setFormValues] = useState(short);
 
