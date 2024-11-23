@@ -13,6 +13,9 @@ const forbiddenFieldsToUpdate = ['owner', 'created', 'short'];
 
 const schema: Schema<IShort> = new mongoose.Schema(
   {
+    fingerprint: {
+      type: String,
+    },
     owner: {
       type: String,
     },

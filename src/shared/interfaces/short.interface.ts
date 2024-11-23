@@ -19,6 +19,7 @@ interface IShort {
   protected?: boolean;
   accessLimit?: number;
   name?: string;
+  fingerprint?: string;
 }
 
 interface IShortUpdate extends Omit<IShort, 'owner' | 'created' | 'short'> {}

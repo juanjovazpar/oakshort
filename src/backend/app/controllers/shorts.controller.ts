@@ -1,37 +1,35 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyReply } from 'fastify';
 
 import { hashPassword } from '../../../shared/utils/password.util';
 import Short from '../models/short.model';
+import { CODES } from '../../../shared/constants/http.codes';
+import { requestErrorHandler } from '../../../shared/utils/requestErrorHandler.util';
 
-interface CreateShortBody {
-  short: string;
-  target: string;
-  expires: string;
-  activation: string;
-  password: string;
-  accessLimit: number;
-}
-
-export const getShorts = async (_: FastifyRequest, res: FastifyReply) => {
+export const getShorts = async (req: any, res: FastifyReply) => {
+  const errorMessage: string = 'Error getting shorts';
   try {
-    const documents = await Short.find({ deleted: false }).select([
+    const { fingerprint } = req as { fingerprint: string };
+    const documents = await Short.find({ deleted: false, fingerprint }).select([
       '-deleted',
       '-_id',
     ]);
 
-    res.send({
+    res.status(CODES.OK).send({
       payload: documents,
     });
   } catch (error: any) {
-    res.send(error);
+    return res.status(CODES.BadRequest).send({
+      error: requestErrorHandler(error),
+      message: errorMessage,
+    });
   }
 };
 
-export const createShort = async (
-  req: FastifyRequest<{ Body: CreateShortBody }>,
-  res: FastifyReply
-) => {
+export const createShort = async (req: any, res: FastifyReply) => {
+  const errorMessage: string = 'Error creating new short';
+
   try {
+    const { fingerprint } = req as { fingerprint: string };
     const { short, target, expires, activation, accessLimit } = req.body;
     let { password } = req.body;
 
@@ -46,6 +44,7 @@ export const createShort = async (
       activation,
       accessLimit,
       password,
+      fingerprint,
     });
 
     await newshort.save();
@@ -56,8 +55,11 @@ export const createShort = async (
     delete newshort._id;
     delete newshort.password;
 
-    res.send({ payload: newshort });
+    res.status(CODES.Created).send({ payload: newshort });
   } catch (error: any) {
-    res.send(error);
+    return res.status(CODES.BadRequest).send({
+      error: requestErrorHandler(error),
+      message: errorMessage,
+    });
   }
 };
