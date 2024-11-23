@@ -1,9 +1,8 @@
-import { FastifyInstance } from 'fastify';
 import { ROUTES } from '../../../shared/routes';
 import { createShort, getShorts } from '../controllers/shorts.controller';
 import { METHODS } from '../../../shared/constants/http.methods';
 
-async function routes(fastify: FastifyInstance) {
+async function routes(fastify: any) {
   fastify.route({
     method: METHODS.GET,
     url: ROUTES.SHORTS,

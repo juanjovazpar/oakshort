@@ -38,7 +38,7 @@
 			"response": []
 		},
 		{
-			"name": "Sign up",
+			"name": "Register",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -52,14 +52,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{API_host}}/auth/signup",
+					"raw": "http://{{API_host}}/auth/register",
 					"protocol": "http",
 					"host": [
 						"{{API_host}}"
 					],
 					"path": [
 						"auth",
-						"signup"
+						"register"
 					]
 				}
 			},
@@ -338,7 +338,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWQiOiI2NjkzZjlkOTUzYTE0MjYxNTI2MjlkMmQiLCJpYXQiOjE3MjA5NzM4NTgsImV4cCI6MTcyMDk3NzQ1OH0.UCTiigslHhCcMfpCNeUVPTGM9bjdPNQteJGel4ekdBY",
 							"type": "string"
 						}
 					]
@@ -381,10 +381,17 @@
 					]
 				},
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "fingerprint",
+						"value": "3164132469",
+						"type": "text",
+						"disabled": true
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"target\": \"www.google.com\"\n}\n",
+					"raw": "{\n    \"target\": \"www.mashable.com\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -392,14 +399,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{API_host}}/shorts/W7-r6dL70X",
+					"raw": "http://{{API_host}}/shorts/MBndOik6nm",
 					"protocol": "http",
 					"host": [
 						"{{API_host}}"
 					],
 					"path": [
 						"shorts",
-						"W7-r6dL70X"
+						"MBndOik6nm"
 					]
 				}
 			},
@@ -430,14 +437,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{API_host}}/shorts/E9xTEbuw59",
+					"raw": "http://{{API_host}}/shorts/MBndOik6nm",
 					"protocol": "http",
 					"host": [
 						"{{API_host}}"
 					],
 					"path": [
 						"shorts",
-						"E9xTEbuw59"
+						"MBndOik6nm"
 					]
 				}
 			},

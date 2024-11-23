@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLoaderData, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Veil.css';
-import { SHORT_MOCKS } from '../../../../mocks/shorts.mocks';
 import Short from '../../../../components/Short/Short';
 import ROUTES from '../../../../router/routes';
 import FadeInOut from '../../../../animations/fadeinout';
@@ -10,13 +9,14 @@ import { VEIL_COMPONENTS } from '../../../../router/router';
 import { IShort } from '../../../../../../shared/interfaces/short.interface';
 
 const Veil: React.FC = () => {
+  const { shorts } = useLoaderData() as { shorts: IShort[] };
   const location = useLocation();
   const { t } = useTranslation();
 
   return (
     <>
       <section className="veil-content">
-        <FadeInOut isVisible>
+        <FadeInOut isVisible duration={2}>
           <h2 className="font-thin">{t('VEIL_SECTION.TITLE_1')}</h2>
           <h2 className="font-thin">{t('VEIL_SECTION.TITLE_2')}</h2>
           <h1 className="mb-4 font-bold">{t('VEIL_SECTION.NAME')}</h1>
@@ -43,7 +43,8 @@ const Veil: React.FC = () => {
       </section>
 
       <FadeInOut
-        isVisible={location.pathname === ROUTES.HOME && SHORT_MOCKS?.length > 0}
+        isVisible={location.pathname === ROUTES.HOME && shorts?.length > 0}
+        duration={1}
       >
         <section className="shorts-summary grid grid-cols-3 gap-2">
           <div className="col-span-3">
@@ -55,7 +56,7 @@ const Veil: React.FC = () => {
             </h3>
           </div>
 
-          {SHORT_MOCKS.slice(0, 3).map((item: IShort, i: number) => (
+          {shorts?.slice(0, 3).map((item: IShort, i: number) => (
             <Link to={`${ROUTES.MAIN}?short=${item.short}`} key={i}>
               <Short short={item} simplified />
             </Link>

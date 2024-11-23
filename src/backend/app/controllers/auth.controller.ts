@@ -1,4 +1,4 @@
-import fastify, { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyRequest, FastifyReply } from 'fastify';
 
 import User from '../models/user.model';
 import { IUser } from '../../../shared/interfaces/user.interface';
@@ -48,10 +48,14 @@ export const register = async (
       .status(CODES.Created)
       .send({ message: 'User created successfully' });
   } catch (error: any) {
-    return res.status(CODES.BadRequest).send({
-      error: requestErrorHandler(error),
-      message: errorMessage,
-    });
+    return res
+      .status(
+        error.isOperational ? CODES.BadRequest : CODES.InternalServerError
+      )
+      .send({
+        error: requestErrorHandler(error),
+        message: errorMessage,
+      });
   }
 };
 
@@ -60,7 +64,6 @@ export const signin = async function (
   res: FastifyReply
 ): Promise<IResponse> {
   const errorMessage: string = 'Error authenticating user';
-
   try {
     const { email, password } = req.body;
     const user: IUser | null = await User.findOne({ email });
@@ -95,16 +98,22 @@ export const signin = async function (
 
     return res.status(CODES.Accepted).send({ token });
   } catch (error: any) {
-    return res.status(CODES.BadRequest).send({
-      error: requestErrorHandler(error),
-      message: errorMessage,
-    });
+    return res
+      .status(
+        error.isOperational ? CODES.BadRequest : CODES.InternalServerError
+      )
+      .send({
+        error: requestErrorHandler(error),
+        message: errorMessage,
+      });
   }
 };
 
-export const verify = async (req: FastifyRequest, res: FastifyReply) => {
+export const verify = async (
+  req: FastifyRequest,
+  res: FastifyReply
+): Promise<IResponse> => {
   const errorMessage: string = 'Error verifying user';
-
   try {
     const { [PARAMS.VERIFICATION_TOKEN]: verificationToken } = req.params as {
       [PARAMS.VERIFICATION_TOKEN]: string;
@@ -128,7 +137,7 @@ export const verify = async (req: FastifyRequest, res: FastifyReply) => {
       .status(CODES.Accepted)
       .send({ message: 'Account verified successfully' });
   } catch (error) {
-    return res.status(CODES.BadRequest).send({
+    return res.send({
       error: requestErrorHandler(error),
       message: errorMessage,
     });
@@ -138,9 +147,8 @@ export const verify = async (req: FastifyRequest, res: FastifyReply) => {
 export const forgotPassword = async (
   req: FastifyRequest<{ Body: IForgotPasswordBody }>,
   res: FastifyReply
-) => {
+): Promise<IResponse> => {
   const errorMessage: string = 'Error requestion no reset password';
-
   try {
     const { email } = req.body;
     const resetPasswordToken = await getHashedToken(60 * 60 * 1000);
@@ -162,7 +170,7 @@ export const forgotPassword = async (
       .status(CODES.Accepted)
       .send({ message: 'Reset password token sent successfully' });
   } catch (error) {
-    return res.status(CODES.BadRequest).send({
+    return res.send({
       error: requestErrorHandler(error),
       message: errorMessage,
     });
@@ -172,9 +180,8 @@ export const forgotPassword = async (
 export const resetPassword = async (
   req: FastifyRequest<{ Body: IResetPasswordBody }>,
   res: FastifyReply
-) => {
+): Promise<IResponse> => {
   const errorMessage: string = 'Error reseting password';
-
   try {
     const { [PARAMS.RESET_TOKEN]: resetPasswordToken } = req.params as {
       [PARAMS.RESET_TOKEN]: string;
@@ -198,21 +205,25 @@ export const resetPassword = async (
         .send({ message: 'Wrong reset password token' });
     }
 
-    res.status(CODES.Accepted).send({ message: 'Password reset successfully' });
+    return res
+      .status(CODES.Accepted)
+      .send({ message: 'Password reset successfully' });
   } catch (error) {
-    return res.status(CODES.BadRequest).send({
+    return res.send({
       error: requestErrorHandler(error),
       message: errorMessage,
     });
   }
 };
 
-export const whoami = async (req: any, res: FastifyReply) => {
+export const whoami = async (
+  req: any,
+  res: FastifyReply
+): Promise<IResponse> => {
   const errorMessage: string = 'Error reseting password';
-
   try {
-    const { sub } = req.user as { sub: string };
-    const user: IUser | null = await User.findById(sub)
+    const owner = req.user?.sub;
+    const user: IUser | null = await User.findById(owner)
       .select(['name', 'email', 'createdAt', 'updatedAt', 'last_login', '-_id'])
       .lean();
 
@@ -224,7 +235,7 @@ export const whoami = async (req: any, res: FastifyReply) => {
 
     return res.status(CODES.Accepted).send({ user });
   } catch (error) {
-    return res.status(CODES.BadRequest).send({
+    return res.send({
       error: requestErrorHandler(error),
       message: errorMessage,
     });
