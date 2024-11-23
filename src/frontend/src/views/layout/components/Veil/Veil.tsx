@@ -7,6 +7,7 @@ import Short from '../../../../components/Short/Short';
 import ROUTES from '../../../../router/routes';
 import FadeInOut from '../../../../animations/fadeinout';
 import { VEIL_COMPONENTS } from '../../../../router/router';
+import { IShort } from '../../../../../../shared/interfaces/short.interface';
 
 const Veil: React.FC = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const Veil: React.FC = () => {
           <h2 className="font-thin">{t('VEIL_SECTION.TITLE_2')}</h2>
           <h1 className="mb-4 font-bold">{t('VEIL_SECTION.NAME')}</h1>
 
-          <FadeInOut isVisible={true} key={location.pathname}>
+          <FadeInOut isVisible key={location.pathname} duration={1}>
             <Outlet />
           </FadeInOut>
 
@@ -54,8 +55,10 @@ const Veil: React.FC = () => {
             </h3>
           </div>
 
-          {SHORT_MOCKS.slice(0, 3).map((short) => (
-            <Short short={short} key={short._id} simplified />
+          {SHORT_MOCKS.slice(0, 3).map((item: IShort, i: number) => (
+            <Link to={`${ROUTES.MAIN}?short=${item.short}`} key={i}>
+              <Short short={item} simplified />
+            </Link>
           ))}
         </section>
       </FadeInOut>
