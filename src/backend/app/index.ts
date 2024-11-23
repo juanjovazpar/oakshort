@@ -7,7 +7,6 @@ export interface AppOptions {}
 
 export async function app(fastify: FastifyInstance, opts: AppOptions) {
   // TODO: Use fastify.env to set environment variables
-
   // This loads all plugins defined in plugins folder
   // define your plugins in one of these
   fastify.register(AutoLoad, {

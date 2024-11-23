@@ -15,7 +15,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
-    await service.signUp(data);
+    await service.register(data);
     navigate(ROUTES.VERIFY);
   };
 

@@ -1,10 +1,13 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
+import mongoose, { Schema, Model } from 'mongoose';
 
-import { idGenerator } from '../../shared/utils/idGenerator';
-import { isValidURL } from '../../shared/utils/url.utils';
-import { isFutureDate } from '../../shared/utils/dates.utils';
-import { isPositiveInteger } from '../../shared/utils/number.utils';
-import { IShort, IShortUpdate } from '../../shared/interfaces/short.interface';
+import { idGenerator } from '../../../shared/utils/idGenerator';
+import { isValidURL } from '../../../shared/utils/url.utils';
+import { isFutureDate } from '../../../shared/utils/dates.utils';
+import { isPositiveInteger } from '../../../shared/utils/number.utils';
+import {
+  IShort,
+  IShortUpdate,
+} from '../../../shared/interfaces/short.interface';
 
 const forbiddenFieldsToUpdate = ['owner', 'created', 'short'];
 

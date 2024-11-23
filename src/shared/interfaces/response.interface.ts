@@ -1,9 +1,9 @@
 export interface IResponse {
   payload?: any;
-  error?: string | IFormError;
+  error?: string | IResponseError;
   message: string;
 }
 
-export interface IFormError {
+export interface IResponseError {
   [key: string]: string;
 }

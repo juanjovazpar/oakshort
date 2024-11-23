@@ -1,7 +1,7 @@
 import React, { cloneElement, useState } from 'react';
 import FadeInOut from '../../animations/fadeinout';
 import InputMessage from '../../elements/InputMessage/InputMessage';
-import { IFormError } from '../../../../shared/interfaces/response.interface';
+import { IResponseError } from '../../../../shared/interfaces/response.interface';
 
 interface IFormProps {
   onSubmit: (data: any) => Promise<void>;
@@ -17,7 +17,7 @@ const Form: React.FC<IFormProps> = ({
   ...props
 }) => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>();
-  const [errorForm, setErrorForm] = useState<IFormError>({});
+  const [errorForm, setErrorForm] = useState<IResponseError>({});
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

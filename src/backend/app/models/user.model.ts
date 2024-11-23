@@ -1,8 +1,8 @@
-import mongoose, { Document, Schema, Model, CallbackError } from 'mongoose';
+import mongoose, { Schema, Model, CallbackError } from 'mongoose';
 
-import { isValidEmail } from '../../shared/utils/email';
-import { getHashedToken } from '../../shared/utils/token.util';
-import { IUser } from '../../shared/interfaces/user.interface';
+import { isValidEmail } from '../../../shared/utils/email.util';
+import { getHashedToken } from '../../../shared/utils/token.util';
+import { IUser } from '../../../shared/interfaces/user.interface';
 
 const schema: Schema<IUser> = new Schema(
   {
@@ -19,7 +19,7 @@ const schema: Schema<IUser> = new Schema(
     },
     password: {
       type: String,
-      required: [true, 'User is required'],
+      required: [true, 'Password is required'],
     },
     name: {
       type: String,
@@ -32,6 +32,8 @@ const schema: Schema<IUser> = new Schema(
     },
     verificationToken: {
       type: String,
+      unique: true,
+      sparse: true,
     },
     resetPasswordToken: {
       type: String,

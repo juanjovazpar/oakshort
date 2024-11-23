@@ -10,6 +10,7 @@ export const isValidPassword = (password: string): boolean => {
   const specialCharOrNumberPattern = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?0-9]/;
 
   return (
+    !!password &&
     password.length >= MIN_LENGTH &&
     password.length <= MAX_LENGTH &&
     uppercasePattern.test(password) &&

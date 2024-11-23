@@ -1,238 +1,447 @@
 {
-  "info": {
-    "_postman_id": "30f0de62-1e6d-4e8a-9844-c70d38f25096",
-    "name": "OAKshort",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "31187681"
-  },
-  "item": [
-    {
-      "name": "Sign up",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"email\": \"test@email.org\",\n    \"password\": \"Passwordpassword@11\"\n}\n",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/auth/signup",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["auth", "signup"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Sign in",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"email\": \"test@email.org\",\n    \"password\": \"Passwordpassword@11\"\n}\n",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/auth/signin",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["auth", "signin"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Redirect Short",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/_XBBb7cfCX",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["_XBBb7cfCX"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Redirect Short",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"password\": \"pass\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/JU3YNysFg4",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["JU3YNysFg4"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Shorts",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwub3JnIiwiaWQiOiI2NjkzYWE1MjlhOTU0ZWE1ZDBkNTFjYWEiLCJpYXQiOjE3MjA5NTgyOTYsImV4cCI6MTcyMDk2MTg5Nn0.PWdW9qd0wY29u7UWaV1POfUgYhCy-wloCGrLj92o17Y",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/shorts",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["shorts"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Create Short",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"target\": \"http://expires.com\",\n    \"accessLimit\": 2\n}\n",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/shorts",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["shorts"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Patch Short",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwub3JnIiwiaWQiOiI2NjkzYWE1MjlhOTU0ZWE1ZDBkNTFjYWEiLCJpYXQiOjE3MjA5NTM0MzIsImV4cCI6MTcyMDk1NzAzMn0.GF6JEJE5hxWh8N37FNV6mXGqXsZ9WwjChLP7_SUveI8",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"target\": \"www.google.com\"\n}\n",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/shorts/E9xTEbuw59",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["shorts", "E9xTEbuw59"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Delete Short",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwub3JnIiwiaWQiOiI2NjkzYWE1MjlhOTU0ZWE1ZDBkNTFjYWEiLCJpYXQiOjE3MjA5NTM0MzIsImV4cCI6MTcyMDk1NzAzMn0.GF6JEJE5hxWh8N37FNV6mXGqXsZ9WwjChLP7_SUveI8",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "DELETE",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/shorts/vy3Q1SwcBb",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["shorts", "vy3Q1SwcBb"]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "30f0de62-1e6d-4e8a-9844-c70d38f25096",
+		"name": "OAKshort",
+		"description": "Bitly, but better",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31187681"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/health",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"juan3@gmail.com\",\n    \"password\": \"ChangeMe123!\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/auth/signup",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"juan3@gmail.com\",\n    \"password\": \"ChangeMe123!\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/auth/signin",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/auth/verify/Wdr9T8Z4R67nNdgXB-QQtj8Y-8X6xU6mosRD2Gnv8lk.1732467756816",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"auth",
+						"verify",
+						"Wdr9T8Z4R67nNdgXB-QQtj8Y-8X6xU6mosRD2Gnv8lk.1732467756816"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Passord",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"juan@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/auth/forgot",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"auth",
+						"forgot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"ChangeMe123!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/auth/reset-password/X3y3neALVHx5pG2H7ovKj1iXzOksZ2jZ756we_v8LFQ.1732385859247",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"auth",
+						"reset-password",
+						"X3y3neALVHx5pG2H7ovKj1iXzOksZ2jZ756we_v8LFQ.1732385859247"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Who Am I",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzQyMGFhYzVhZGNjOTM4NDEwOWIxNGEiLCJyb2xlIjpbXSwiaWF0IjoxNzMyMzg2MDQyLCJleHAiOjE3MzIzOTMyNDJ9.oawTGLlwQqSyksQ6Rzmpz0T3tcAoaAgKUtM8ZwAdO5g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"ChangeMe123!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/auth/whoami",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"auth",
+						"whoami"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect Short",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/Z3TITVxLow",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"Z3TITVxLow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect Short",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"pass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/_XBBb7cfCX",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"_XBBb7cfCX"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Shorts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWQiOiI2NjkzZjlkOTUzYTE0MjYxNTI2MjlkMmQiLCJpYXQiOjE3MjA5NzM4NTgsImV4cCI6MTcyMDk3NzQ1OH0.UCTiigslHhCcMfpCNeUVPTGM9bjdPNQteJGel4ekdBY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/shorts",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"shorts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Short",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"target\": \"http://expires.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/shorts",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"shorts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Short",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWQiOiI2NjkzZjlkOTUzYTE0MjYxNTI2MjlkMmQiLCJpYXQiOjE3MjA5NzM4NTgsImV4cCI6MTcyMDk3NzQ1OH0.UCTiigslHhCcMfpCNeUVPTGM9bjdPNQteJGel4ekdBY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"target\": \"www.google.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/shorts/W7-r6dL70X",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"shorts",
+						"W7-r6dL70X"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Short",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWQiOiI2NjkzZjlkOTUzYTE0MjYxNTI2MjlkMmQiLCJpYXQiOjE3MjA5NzM4NTgsImV4cCI6MTcyMDk3NzQ1OH0.UCTiigslHhCcMfpCNeUVPTGM9bjdPNQteJGel4ekdBY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{API_host}}/shorts/E9xTEbuw59",
+					"protocol": "http",
+					"host": [
+						"{{API_host}}"
+					],
+					"path": [
+						"shorts",
+						"E9xTEbuw59"
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }

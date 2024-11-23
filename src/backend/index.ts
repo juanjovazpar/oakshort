@@ -4,7 +4,7 @@ import { app } from './app';
 const host = process.env.HOST ?? '0.0.0.0';
 const port = process.env.API_AUTH_PORT
   ? Number(process.env.API_AUTH_PORT)
-  : 3000;
+  : 4000;
 
 const server = Fastify({
   logger: true,

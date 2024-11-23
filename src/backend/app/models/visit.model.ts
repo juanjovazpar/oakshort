@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model } from 'mongoose';
-import { IVisit } from '../../shared/interfaces/visit.model';
+import { IVisit } from '../../../shared/interfaces/visit.interface';
 
 const schema: Schema<IVisit> = new mongoose.Schema(
   {

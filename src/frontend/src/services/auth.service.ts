@@ -4,8 +4,8 @@ const service = {
   signIn: async (user: any): Promise<any> =>
     axiosInstance.post('http://localhost:4000/auth/signin', user),
 
-  signUp: async (user: any): Promise<any> =>
-    axiosInstance.post('http://localhost:4000/auth/signup', user),
+  register: async (user: any): Promise<any> =>
+    axiosInstance.post('http://localhost:4000/auth/register', user),
 
   forgotPassword: async (user: any): Promise<any> =>
     axiosInstance.post('http://localhost:4000/auth/forgot', user),
