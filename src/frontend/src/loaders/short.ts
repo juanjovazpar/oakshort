@@ -1,20 +1,16 @@
 import { LoaderFunction, redirect } from 'react-router-dom';
 import shortService from '../services/shorts.service';
 import { IShort } from '../../../shared/interfaces/short.interface';
-import ROUTES from '../router/routes';
+import ROUTES, { PARAMS } from '../router/routes';
 
 export const shortLoader: LoaderFunction = async ({
-  request,
-}: {
-  request: Request;
+  params,
 }): Promise<Response | IShort> => {
-  const url = new URL(request.url);
-  const hasShortParam = url.searchParams.has('short');
-  const id = url.searchParams.get('short');
-  let short;
+  const { [PARAMS.SHORT_ID]: short_id } = params;
+  let short = null;
 
-  if (hasShortParam && id) {
-    const response = await shortService.getShort(id);
+  if (short_id) {
+    const response = await shortService.getShort(short_id);
     short = response?.data?.payload;
   }
 

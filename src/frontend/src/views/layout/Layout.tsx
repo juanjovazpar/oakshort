@@ -1,16 +1,19 @@
 import React, { useState, useEffect, MouseEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams, useNavigate } from 'react-router-dom';
 import './Layout.css';
 import { setRecentlyCreatedShort } from '../../store/layout/layout.slice';
-import ROUTES from '../../router/routes';
+import ROUTES, { PARAMS } from '../../router/routes';
 import ShortInput from '../../components/ShortInput/ShortInput';
 import WizardShortForm from '../../components/WizardShortForm/WizardShortForm';
 import FadeInOut from '../../animations/fadeinout';
 import { VEIL_COMPONENTS } from '../../router/router';
+import ShortForm from '../../components/ShortForm/ShortForm';
 
 const Layout: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { [PARAMS.SHORT_ID]: short_id } = useParams();
   const dispatch: Function = useDispatch();
   const [isVeilActive, setIsVeilActive] = useState(true);
   const [isCollapsedSide, setIsCollapsedSide] = useState(false);
@@ -19,20 +22,12 @@ const Layout: React.FC = () => {
   useEffect(() => {
     const veilRoutes = VEIL_COMPONENTS.map(({ path }) => path);
     setIsVeilActive(veilRoutes.includes(location.pathname));
-
-    if (location.search) {
-      const params = new URLSearchParams(location.search);
-      const short = params.get('short');
-
-      if (short) {
-        setIsCollapsedSide(true);
-      }
-    }
-  }, [location]);
+    setIsCollapsedSide(!!short_id);
+  }, [location, short_id]);
 
   const onDashboardClick: MouseEventHandler<HTMLElement> = (): void => {
     if (isCollapsedSide) {
-      setIsCollapsedSide(false);
+      navigate(ROUTES.MAIN);
     }
   };
 
@@ -73,7 +68,9 @@ const Layout: React.FC = () => {
         <section
           className={`side-section ${isCollapsedSide ? 'collapsed-side' : ''}`}
         >
-          {location.pathname.startsWith(ROUTES.SHORT_DETAILS) && <Outlet />}
+          {location.pathname.startsWith(ROUTES.MAIN) && short_id && (
+            <ShortForm />
+          )}
         </section>
       </section>
     </section>

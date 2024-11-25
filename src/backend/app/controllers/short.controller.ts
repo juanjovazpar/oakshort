@@ -4,6 +4,31 @@ import { CODES } from '../../../shared/constants/http.codes';
 import { requestErrorHandler } from '../../../shared/utils/requestErrorHandler.util';
 import { IResponse } from '../../../shared/interfaces/response.interface';
 
+export const getShort = async (
+  req: FastifyRequest,
+  res: FastifyReply
+): Promise<IResponse> => {
+  const errorMessage: string = 'Error getting short';
+  try {
+    // @ts-ignore
+    const _id = req.short?._id;
+    const short = await Short.findById(_id)
+      .select(['-deleted', '-_id', '-fingerprint'])
+      .lean();
+
+    if (!short) {
+      return res.status(CODES.NotFound).send({ message: 'Short not found' });
+    }
+
+    return res.status(CODES.OK).send({ payload: short });
+  } catch (error) {
+    return res.send({
+      error: requestErrorHandler(error),
+      message: errorMessage,
+    });
+  }
+};
+
 export const updateShort = async (
   req: FastifyRequest,
   res: FastifyReply

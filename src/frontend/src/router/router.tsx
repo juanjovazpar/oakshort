@@ -11,10 +11,11 @@ import Signup from '../components/Signup/Signup';
 import ResetPassword from '../components/ResetPassword/ResetPassword';
 import NotFound from '../views/layout/components/NotFound/NotFound';
 import ShortForm from '../components/ShortForm/ShortForm';
-import { SHORT_MOCKS } from '../mocks/shorts.mocks';
 import Verify from '../components/Verify/Verify';
 import { mainLoader } from '../loaders/main';
-import ROUTES from './routes';
+import ROUTES, { PARAMS } from './routes';
+import { shortLoader } from '../loaders/short';
+import ErrorPage from '../views/layout/components/ErrorPage/ErrorPage';
 
 export const VEIL_COMPONENTS = [
   {
@@ -51,6 +52,7 @@ const ROUTER = createBrowserRouter([
   {
     path: ROUTES.HOME,
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         element: <Veil />,
@@ -67,21 +69,17 @@ const ROUTER = createBrowserRouter([
         loader: mainLoader,
         children: [
           {
-            path: '',
-            element: <ShortForm short={SHORT_MOCKS[0]} />,
-            /* loader: ({ request }) => {
-              const url = new URL(request.url);
-              const hasShortParam = url.searchParams.has('short');
-              return hasShortParam ? {} : redirect(ROUTES.MAIN);
-            }, */
+            path: `:${PARAMS.SHORT_ID}`,
+            element: <ShortForm />,
+            loader: shortLoader,
           },
         ],
       },
-      {
-        path: '*',
-        element: <NotFound />,
-      },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ]);
 

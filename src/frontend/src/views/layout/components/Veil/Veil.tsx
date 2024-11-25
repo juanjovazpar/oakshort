@@ -57,7 +57,7 @@ const Veil: React.FC = () => {
           </div>
 
           {shorts?.slice(0, 3).map((item: IShort, i: number) => (
-            <Link to={`${ROUTES.MAIN}?short=${item.short}`} key={i}>
+            <Link to={`${ROUTES.MAIN}/${item.short}`} key={i}>
               <Short short={item} simplified />
             </Link>
           ))}

@@ -63,7 +63,7 @@ const ShortsList: React.FC<IShortsListProps> = ({ shorts }) => {
       {shorts && (
         <>
           {shorts.slice(0, 4).map((item: IShort, i: number) => (
-            <Link to={`${ROUTES.MAIN}?short=${item.short}`} key={i}>
+            <Link to={`${ROUTES.MAIN}/${item.short}`} key={i}>
               <Short short={item} />
             </Link>
           ))}
@@ -91,7 +91,7 @@ const ShortsList: React.FC<IShortsListProps> = ({ shorts }) => {
           )}
 
           {shorts.slice(4).map((item: IShort, i: number) => (
-            <Link to={`${ROUTES.MAIN}?short=${item.short}`} key={i}>
+            <Link to={`${ROUTES.MAIN}/${item.short}`} key={i}>
               <Short short={item} />
             </Link>
           ))}

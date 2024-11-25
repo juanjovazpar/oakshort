@@ -4,7 +4,7 @@ import RequestInterceptor from './interceptors/requestFullfil.interceptor';
 import ResponseInterceptor from './interceptors/responseFail.interceptor';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://api.example.com',
+  baseURL: process.env.REACT_APP_API_URL || 'https://localhost:4000',
   timeout: 10000,
 });
 
