@@ -30,7 +30,7 @@ Bitly is great — but often bloated, slow, and not developer-friendly enough. O
 
 - Tailwind CSS for minimal styling
 
-- Storybook to catalog deisng system
+- Storybook to catalog design system
 
 - WebSocket-based event layer for live feedback
 
